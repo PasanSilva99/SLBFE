@@ -95,7 +95,23 @@ namespace SLBFE.Models
                         "Affiliation TEXT, " +
                         "Qualifications TEXT, " +
                         "FilePathCV TEXT, " +
-                        "FilePathQualifications TEXT );";
+                        "FilePathQualifications TEXT );" +
+                    "CREATE TABLE IF NOT EXISTS " +
+                    "Company (" +
+                        "BRNumber TEXT, " +
+                        "FilePathBR TEXT, " +
+                        "BusinessName TEXT, " +
+                        "BusinessCategory TEXT, " +
+                        "Email TEXT, " +
+                        "PhoneNumber TEXT, " +
+                        "BirthDate TEXT, " +
+                        "Password TEXT, " +
+                        "AddressL1 TEXT, " +
+                        "AddressL2 TEXT, " +
+                        "StateProvince TEXT, " +
+                        "City TEXT, " +
+                        "ZipCode TEXT );";
+
 
                     SQLiteCommand initCommand = new SQLiteCommand(dbScript, con);
                     initCommand.ExecuteNonQuery();
