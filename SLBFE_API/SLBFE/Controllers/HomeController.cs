@@ -11,10 +11,6 @@ namespace SLBFE.Controllers
     /// </summary>
     public class HomeController : Controller
     {
-        /// <summary>
-        /// Start point
-        /// </summary>
-        /// <returns>The view of the home page</returns>
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
