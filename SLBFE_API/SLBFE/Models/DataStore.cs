@@ -1,0 +1,296 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data.SQLite;
+using System.Diagnostics;
+using System.IO;
+
+namespace SLBFE.Models
+{
+    /// <summary>
+    /// Database Related Functions
+    /// </summary>
+    public static class DataStore
+
+    {
+        /// <summary>
+        /// Database File Name
+        /// </summary>
+        public static string DatabaseName = "SLBFE.db";
+
+        /// <summary>
+        /// Path of the database
+        /// </summary>
+        public static string DatabasePath = Path.Combine("SLBFE_Data", DatabaseName);
+
+
+        /// <summary>
+        /// Physical log to the API requests and actions
+        /// </summary>
+        public static string LogFilePath = Path.Combine("SLBFE_Data", "api_log.txt");
+
+        /// <summary>
+        /// Logs the input into debug and to text file
+        /// </summary>
+        /// <param name="val"></param>
+        public static void Log(string val)
+        {
+
+            var logString = $"[{DateTime.Now.ToString("G")}] >> {val}";
+            // log the request to the file
+            File.AppendAllText(LogFilePath, logString + "\n");
+
+
+            Debug.WriteLine(logString);
+
+        }
+
+        /// <summary>
+        /// This initialize the database
+        /// </summary>
+        public static void InitializeDatabase()
+        {
+
+            Directory.CreateDirectory("SLBFE_Data");
+
+            if (!File.Exists(DatabasePath))
+                File.Create(DatabasePath);
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    string dbScript = "CREATE TABLE IF NOT EXISTS " +
+                    "Officer (" +
+                        "NationalID TEXT, " +
+                        "FirstName TEXT, " +
+                        "LastName TEXT, " +
+                        "Email TEXT, " +
+                        "PhoneNumber TEXT, " +
+                        "BirthDate TEXT, " +
+                        "Password TEXT, " +
+                        "AddressL1 TEXT, " +
+                        "AddressL2 TEXT, " +
+                        "City TEXT, " +
+                        "ZipCode TEXT, " +
+                        "EmployeeID TEXT, " +
+                        "FilePathEmolyeeIDPhoto TEXT );" +
+                    "CREATE TABLE IF NOT EXISTS " +
+                    "Citizen (" +
+                        "NationalID TEXT, " +
+                        "FirstName TEXT, " +
+                        "LastName TEXT, " +
+                        "Email TEXT, " +
+                        "PhoneNumber TEXT, " +
+                        "BirthDate TEXT, " +
+                        "Password TEXT, " +
+                        "AddressL1 TEXT, " +
+                        "AddressL2 TEXT, " +
+                        "City TEXT, " +
+                        "ZipCode TEXT, " +
+                        "MapLocation TEXT, " +
+                        "CurrentProfession TEXT, " +
+                        "Affiliation TEXT, " +
+                        "Qualifications TEXT, " +
+                        "FilePathCV TEXT, " +
+                        "FilePathQualifications TEXT );";
+
+                    SQLiteCommand initCommand = new SQLiteCommand(dbScript, con);
+                    initCommand.ExecuteNonQuery();
+
+
+                    con.Close();
+
+                    Log("Database Intilized!");
+
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+
+                    Log("Database Intilized Failed!");
+                    Log(ex.ToString());
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Get all Bureau Officers from the database
+        /// </summary>
+        /// <returns> Return all users as a list of Bureau Officers</returns>
+        public static List<Bureau> GetBureaus()
+        {
+            var bureauList = new List<Bureau>();
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand selectCommand = new SQLiteCommand();
+                    selectCommand.CommandText = "SELECT * FROM Officer";
+                    selectCommand.Connection = con;
+
+                    var reader = selectCommand.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        bureauList.Add(
+                            new Bureau()
+                            {
+                                NationalID = reader.GetString(0),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2),
+                                Email = reader.GetString(3),
+                                PhoneNumber = reader.GetString(4),
+                                BirthDate = DateTime.Parse(reader.GetString(5)),
+                                Password = reader.GetString(6),
+                                AddressL1 = reader.GetString(7),
+                                AddressL2 = reader.GetString(8),
+                                City = reader.GetString(9),
+                                ZipCode = reader.GetString(10),
+                                EmployeeID = reader.GetString(11),
+                                FilePathEmolyeeIDPhoto = reader.GetString(12),
+                            });
+                    }
+
+
+                    return bureauList;
+
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    Log("Bureau Get Request Failed! (Database)");
+                    Log(ex.ToString());
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Registers a new Bureau Officer to the System
+        /// </summary>
+        /// <param name="officer">Office details as an object</param>
+        /// <returns>Number of rows affected or -1 if there an error with the data -2 if there is an error on the database</returns>
+        public static int RegisterOfficer(Bureau officer)
+        {
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand insertCommand = new SQLiteCommand();
+                    insertCommand.CommandText = "INSERT INTO" +
+                        " Officer " +
+                        "VALUES(" +
+                        "@nationalID," +
+                        "@firstName," +
+                        "@lastName," +
+                        "@email," +
+                        "@phoneNumber, " +
+                        "@birthDate, " +
+                        "@password, " +
+                        "@addressL1, " +
+                        "@addressL2, " +
+                        "@city, " +
+                        "@zipCode, " +
+                        "@employeeID, " +
+                        "@filePathEmployeeIDPhoto)";
+                    insertCommand.Connection = con;
+
+                    insertCommand.Parameters.AddWithValue("@nationalID", officer.NationalID);
+                    insertCommand.Parameters.AddWithValue("@firstName", officer.FirstName);
+                    insertCommand.Parameters.AddWithValue("@lastName", officer.LastName);
+                    insertCommand.Parameters.AddWithValue("@email", officer.Email);
+                    insertCommand.Parameters.AddWithValue("@phoneNumber", officer.PhoneNumber);
+                    insertCommand.Parameters.AddWithValue("@birthDate", officer.BirthDate.ToString("G"));
+                    insertCommand.Parameters.AddWithValue("@password", officer.Password);
+                    insertCommand.Parameters.AddWithValue("@addressL1", officer.AddressL1);
+                    insertCommand.Parameters.AddWithValue("@addressL2", officer.AddressL2);
+                    insertCommand.Parameters.AddWithValue("@city", officer.City);
+                    insertCommand.Parameters.AddWithValue("@zipCode", officer.ZipCode);
+                    insertCommand.Parameters.AddWithValue("@employeeID", officer.EmployeeID);
+                    insertCommand.Parameters.AddWithValue("@filePathEmployeeIDPhoto", officer.FilePathEmolyeeIDPhoto);
+
+                    var affRows = insertCommand.ExecuteNonQuery();
+
+                    if (affRows > 0)
+                    {
+                        Log($"Successfully Registered User {officer.Email}");
+                    }
+
+
+                    return affRows > 0 ? affRows : -1; // if affected rows is larger than 0 return the affected rows number else return -1 in indicate it is an error 
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    Log("Bureau Officer Registration Failed! (Database)");
+                    Log(ex.ToString());
+                }
+            }
+
+            return -1;
+        }
+
+
+        /// <summary>
+        /// Deletes the bureau officer profile from the database
+        /// </summary>
+        /// <param name="nationalID">National ID of the User</param>
+        /// <param name="requestedBy">Employee ID of the Officer that os requested this</param>
+        /// <returns></returns>
+        public static int DeleteOfficer(string nationalID, string requestedBy)
+        {
+
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand deleteCommand = new SQLiteCommand();
+                    deleteCommand.CommandText = "DELETE FROM Officer WHERE NationalID = @nationalID";
+                    deleteCommand.Connection = con;
+                    deleteCommand.Parameters.AddWithValue("@nationalId", nationalID);
+
+
+
+                    var affRows = deleteCommand.ExecuteNonQuery();
+
+
+                    if (affRows > 0)
+                    {
+                        Log($"Bureau Officer Successfully Deleted! {nationalID} for the requested by {requestedBy}");
+                    }
+
+                    return affRows > 0 ? affRows : -1;
+
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    Log("Bureau Officer Deletion Failed! (Database)");
+                    Log(ex.ToString());
+                }
+
+
+                return -2;
+            }
+        }
+
+    }
+}
