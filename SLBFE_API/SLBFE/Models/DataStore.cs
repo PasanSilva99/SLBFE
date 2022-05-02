@@ -88,6 +88,7 @@ namespace SLBFE.Models
                         "Password TEXT, " +
                         "AddressL1 TEXT, " +
                         "AddressL2 TEXT, " +
+                        "StateProvince TEXT, " +
                         "City TEXT, " +
                         "ZipCode TEXT, " +
                         "MapLocation TEXT, " +
@@ -328,13 +329,13 @@ namespace SLBFE.Models
                     var reader = selectCommand.ExecuteReader();
                     while (reader.Read())
                     {
-                        var locationString = reader.GetString(11);
+                        var locationString = reader.GetString(12);
                         var locationData = locationString.Split(',');
 
-                        var qualificationString = reader.GetString(14);
+                        var qualificationString = reader.GetString(15);
                         var qualificationData = qualificationString.Split(',');
 
-                        var qualificationFilesString = reader.GetString(16);
+                        var qualificationFilesString = reader.GetString(17);
                         var qualificationFilesData = qualificationFilesString.Split(',');
 
                         citizenList.Add(
@@ -349,13 +350,14 @@ namespace SLBFE.Models
                                 Password = reader.GetString(6),
                                 AddressL1 = reader.GetString(7),
                                 AddressL2 = reader.GetString(8),
-                                City = reader.GetString(9),
-                                ZipCode = reader.GetString(10),
+                                StateProvince = reader.GetString(9),
+                                City = reader.GetString(10),
+                                ZipCode = reader.GetString(11),
                                 MapLocation = new Location(float.Parse(locationData[0]), float.Parse(locationData[1])),
-                                CurrentProfession = reader.GetString(12),
-                                Affiliation = reader.GetString(13),
+                                CurrentProfession = reader.GetString(13),
+                                Affiliation = reader.GetString(14),
                                 Qualifications = qualificationData.ToList(),
-                                FilePathCV = reader.GetString(15),
+                                FilePathCV = reader.GetString(16),
                                 FilePathQualifications = qualificationFilesData.ToList()
                             }); ;
                     }
@@ -403,6 +405,7 @@ namespace SLBFE.Models
                                 "@password, " +
                                 "@addressL1, " +
                                 "@addressL2, " +
+                                "@stateProvince, " +
                                 "@city, " +
                                 "@zipCode, " +
                                 "@mapLocation, " +
@@ -438,7 +441,7 @@ namespace SLBFE.Models
                     var qualificationFileBuilder = new StringBuilder();
                     if (citizen.Qualifications.Count > 1)
                     {
-                        foreach (var qualification in citizen.Qualifications)
+                        foreach (var qualification in citizen.FilePathQualifications)
                         {
                             qualificationFileBuilder.Append(qualification + ",");
                         }
@@ -462,6 +465,7 @@ namespace SLBFE.Models
                     insertCommand.Parameters.AddWithValue("@password", citizen.Password);
                     insertCommand.Parameters.AddWithValue("@addressL1", citizen.AddressL1);
                     insertCommand.Parameters.AddWithValue("@addressL2", citizen.AddressL2);
+                    insertCommand.Parameters.AddWithValue("@stateProvince", citizen.StateProvince);
                     insertCommand.Parameters.AddWithValue("@city", citizen.City);
                     insertCommand.Parameters.AddWithValue("@zipCode", citizen.ZipCode);
                     insertCommand.Parameters.AddWithValue("@mapLocation", mapDataBuilder.ToString());

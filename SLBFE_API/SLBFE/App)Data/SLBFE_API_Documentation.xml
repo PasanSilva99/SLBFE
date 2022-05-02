@@ -777,6 +777,11 @@
             Adress Line 2 of the user
             </summary>
         </member>
+        <member name="P:SLBFE.Models.User.StateProvince">
+            <summary>
+            State or Province of the user
+            </summary>
+        </member>
         <member name="P:SLBFE.Models.User.City">
             <summary>
             city of the user
