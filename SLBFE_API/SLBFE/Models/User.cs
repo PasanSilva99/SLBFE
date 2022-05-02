@@ -47,6 +47,10 @@ namespace SLBFE.Models
         /// </summary>
         public string AddressL2 { get; set; }
         /// <summary>
+        /// State or Province of the user
+        /// </summary>
+        public string StateProvince { get; set; }
+        /// <summary>
         /// city of the user
         /// </summary>
         public string City { get; set; }
