@@ -544,6 +544,32 @@
             <param name="nationalID">National ID of the officer that need to deleted</param>
             <param name="requestedBy">The officer that deleted the account</param>
         </member>
+        <member name="T:SLBFE.Controllers.CitizenController">
+            <summary>
+            This Controller contains the functions for the Citizens. 
+            </summary>
+        </member>
+        <member name="M:SLBFE.Controllers.CitizenController.Get">
+            <summary>
+            Gets a list of available Citizens
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLBFE.Controllers.CitizenController.Post(SLBFE.Models.Citizen)">
+            <summary>
+            POST Request 
+            Register new Citizen
+            </summary>
+            <param name="value">Citizen Data as an Single Citizen Object</param>
+        </member>
+        <member name="M:SLBFE.Controllers.CitizenController.Delete(System.String,System.String)">
+            <summary>
+            DELETE Requst
+            Delete a Citizen from the database
+            </summary>
+            <param name="nationalID">National ID of the Citizen that needs to be deleted</param>
+            <param name="requestedBy">The Officer that deleted the account</param>
+        </member>
         <member name="T:SLBFE.Controllers.HomeController">
             <summary>
             Start point
@@ -569,6 +595,41 @@
         <member name="P:SLBFE.Models.Bureau.FilePathEmolyeeIDPhoto">
             <summary>
             File Path of the EmployeeID photo
+            </summary>
+        </member>
+        <member name="T:SLBFE.Models.Citizen">
+            <summary>
+            This is the Object Model For citizen
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Citizen.MapLocation">
+            <summary>
+            Location of the map as Location{Latitudes, Longitudes}
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Citizen.CurrentProfession">
+            <summary>
+            Current profession if exisist Default is Empty String
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Citizen.Affiliation">
+            <summary>
+            Current Affiliation if exisist Default is Empty String
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Citizen.Qualifications">
+            <summary>
+            Qialification list of the users
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Citizen.FilePathCV">
+            <summary>
+            File path of the users CV
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Citizen.FilePathQualifications">
+            <summary>
+            File Path of the users other qualification documents Default is an Empty List of String
             </summary>
         </member>
         <member name="T:SLBFE.Models.DataStore">
@@ -622,6 +683,49 @@
             <param name="nationalID">National ID of the User</param>
             <param name="requestedBy">Employee ID of the Officer that os requested this</param>
             <returns></returns>
+        </member>
+        <member name="M:SLBFE.Models.DataStore.GetCitizens">
+            <summary>
+            Get all Citizens from the database
+            </summary>
+            <returns>Retuns all the users as a list of Citizens</returns>
+        </member>
+        <member name="M:SLBFE.Models.DataStore.RegisterCitizen(SLBFE.Models.Citizen)">
+            <summary>
+            Registers a new Cizien to the system
+            </summary>
+            <param name="citizen">Citizens details as an object</param>
+            <returns>Number of rows affected or -1 if there is an error with the data -2 if there is an error on the database</returns>
+        </member>
+        <member name="M:SLBFE.Models.DataStore.DeleteCitizen(System.String,System.String)">
+            <summary>
+            Deletes the citizen profile from the database
+            </summary>
+            <param name="nationalID">National ID of the User</param>
+            <param name="requestedBy">Employee ID of the Officer that os requested this</param>
+            <returns></returns>
+        </member>
+        <member name="T:SLBFE.Models.Location">
+            <summary>
+            This is for storing the location as Latlng
+            </summary>
+        </member>
+        <member name="M:SLBFE.Models.Location.#ctor(System.Single,System.Single)">
+            <summary>
+            Creates new location data with values
+            </summary>
+            <param name="lat">Latitude as float</param>
+            <param name="lng">Longitude as float</param>
+        </member>
+        <member name="P:SLBFE.Models.Location.Latitude">
+            <summary>
+            Latitude Value as float
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Location.Longitude">
+            <summary>
+            Longitude Value as float
+            </summary>
         </member>
         <member name="T:SLBFE.Models.User">
             <summary>
