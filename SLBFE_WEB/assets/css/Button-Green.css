@@ -1,0 +1,23 @@
+.register-btn {
+  background: linear-gradient(261.5deg, #36C486 0%, #00A1BA 100%);
+  border-radius: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-width: 0px;
+}
+
+.register-btn:hover {
+  box-shadow: -5px 5px 20px .25rem rgba(0, 0, 0, 0.1);
+}
+
+.register-btn:focus {
+  border-color: #36C486;
+  box-shadow: -5px 5px 20px .25rem rgba(17, 255, 188, 0.2);
+}
+
+@media screen and (max-width: 820px) {
+  .register-btn {
+    width: 80vw;
+  }
+}
+
