@@ -73,6 +73,7 @@ namespace SLBFE.Models
                         "Password TEXT, " +
                         "AddressL1 TEXT, " +
                         "AddressL2 TEXT, " +
+                        "StateProvince TEXT, " +
                         "City TEXT, " +
                         "ZipCode TEXT, " +
                         "EmployeeID TEXT, " +
@@ -151,10 +152,11 @@ namespace SLBFE.Models
                                 Password = reader.GetString(6),
                                 AddressL1 = reader.GetString(7),
                                 AddressL2 = reader.GetString(8),
-                                City = reader.GetString(9),
-                                ZipCode = reader.GetString(10),
-                                EmployeeID = reader.GetString(11),
-                                FilePathEmolyeeIDPhoto = reader.GetString(12),
+                                StateProvince = reader.GetString(9),
+                                City = reader.GetString(10),
+                                ZipCode = reader.GetString(11),
+                                EmployeeID = reader.GetString(12),
+                                FilePathEmolyeeIDPhoto = reader.GetString(13),
                             });
                     }
 
@@ -201,6 +203,7 @@ namespace SLBFE.Models
                         "@password, " +
                         "@addressL1, " +
                         "@addressL2, " +
+                        "@stateProvince, " +
                         "@city, " +
                         "@zipCode, " +
                         "@employeeID, " +
@@ -216,6 +219,7 @@ namespace SLBFE.Models
                     insertCommand.Parameters.AddWithValue("@password", officer.Password);
                     insertCommand.Parameters.AddWithValue("@addressL1", officer.AddressL1);
                     insertCommand.Parameters.AddWithValue("@addressL2", officer.AddressL2);
+                    insertCommand.Parameters.AddWithValue("@stateProvince", officer.StateProvince);
                     insertCommand.Parameters.AddWithValue("@city", officer.City);
                     insertCommand.Parameters.AddWithValue("@zipCode", officer.ZipCode);
                     insertCommand.Parameters.AddWithValue("@employeeID", officer.EmployeeID);
