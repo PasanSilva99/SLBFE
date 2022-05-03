@@ -97,7 +97,9 @@ namespace SLBFE.Models
                         "Affiliation TEXT, " +
                         "Qualifications TEXT, " +
                         "FilePathCV TEXT, " +
-                        "FilePathQualifications TEXT );" +
+                        "FilePathQualifications TEXT, " +
+                        "FilePathBirthCertificate TEXT, " +
+                        "FilePathPassport TEXT );" +
                     "CREATE TABLE IF NOT EXISTS " +
                     "Company (" +
                         "BRNumber TEXT, " +
@@ -266,7 +268,7 @@ namespace SLBFE.Models
             Log("Uncaught Error on Officer Registration!");
             return -2;
         }
-        
+
         /// <summary>
         /// Update the officer in the system
         /// </summary>
@@ -439,7 +441,9 @@ namespace SLBFE.Models
                                 Affiliation = reader.GetString(14),
                                 Qualifications = qualificationData.ToList(),
                                 FilePathCV = reader.GetString(16),
-                                FilePathQualifications = qualificationFilesData.ToList()
+                                FilePathQualifications = qualificationFilesData.ToList(),
+                                FilePathBirthCertificate = reader.GetString(17),
+                                FilePathPassport = reader.GetString(18),
                             }); ;
                     }
 
@@ -494,7 +498,9 @@ namespace SLBFE.Models
                                 "@affiliation, " +
                                 "@qualifications, " +
                                 "@filePathCV, " +
-                                "@filePathQualifications)";
+                                "@filePathQualifications, " +
+                                "@FilePathBirthCertificate, " +
+                                "@FilePathPassport)";
                     insertCommand.Connection = con;
 
                     var mapDataBuilder = new StringBuilder();
@@ -555,6 +561,8 @@ namespace SLBFE.Models
                     insertCommand.Parameters.AddWithValue("@qualifications", qualificationBuilder.ToString());
                     insertCommand.Parameters.AddWithValue("@filePathCV", citizen.FilePathCV);
                     insertCommand.Parameters.AddWithValue("@filePathQualifications", qualificationFileBuilder.ToString());
+                    insertCommand.Parameters.AddWithValue("@FilePathBirthCertificate", citizen.FilePathBirthCertificate);
+                    insertCommand.Parameters.AddWithValue("@FilePathPassport", citizen.FilePathPassport);
 
                     var affRows = insertCommand.ExecuteNonQuery();
 
@@ -615,6 +623,8 @@ namespace SLBFE.Models
                                 "Qualifications=@qualifications, " +
                                 "FilePathCV=@filePathCV, " +
                                 "FilePathQualifications=@filePathQualifications " +
+                                "FilePathBirthCertificate=@filePathBirthCertificate " +
+                                "FilePathPassport=@filePathPassport " +
                              "WHERE " +
                                 "NationalID=@nationalID ";
                     updateCommand.Connection = con;
@@ -677,6 +687,8 @@ namespace SLBFE.Models
                     updateCommand.Parameters.AddWithValue("@qualifications", qualificationBuilder.ToString());
                     updateCommand.Parameters.AddWithValue("@filePathCV", citizen.FilePathCV);
                     updateCommand.Parameters.AddWithValue("@filePathQualifications", qualificationFileBuilder.ToString());
+                    updateCommand.Parameters.AddWithValue("@FilePathBirthCertificate", citizen.FilePathBirthCertificate);
+                    updateCommand.Parameters.AddWithValue("@FilePathPassport", citizen.FilePathPassport);
 
                     var affRows = updateCommand.ExecuteNonQuery();
 
