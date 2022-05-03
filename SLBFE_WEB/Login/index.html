@@ -1,46 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>SLBFE - Login</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Artifika&amp;display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/css/intlTelInput.css"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>SLBFE Common Login</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Artifika&amp;display=swap">
-    <link rel="stylesheet" href="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/css/intlTelInput.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-
-<body>
+  <body>
     <div class="about-section">
-        <div class="top-nav"><a class="top-nav-link" href="#">Home</a><a class="top-nav-link" href="#">Contact Us</a><a class="top-nav-link" href="#">Help</a></div>
-        <div class="body-section-content">
-            <div class="about-logo"><img class="img-fluid" src="assets/img/SLBFE%20logo-long.png"></div>
-            <div class="login-container">
-                <form>
-                    <div><span style="font-family: artifika;font-size: 49px;">Log In</span>
-                        <div class="login-underline"></div>
-                    </div>
-                    <div class="login-description"><span style="font-family: Artifika, serif;">Welcome Back!</span><span style="font-family: Artifika, serif;">Did you&nbsp;<a id="forget-password-btn" href="#">forget your password?</a></span></div>
-                    <div class="login-input-fields">
-                        <div><input class="form-control login-email" type="email" id="email" placeholder="Email"></div>
-                        <div><input class="form-control" type="password" placeholder="Password"></div>
-                    </div>
-                    <div><button class="btn btn-primary login-btn" type="button">Log In</button></div>
-                    <div class="new-user-registration"><a id="new-account-btn" onclick="window.location = &#39;AccountSelection.html&#39;;">Don't you have an account?</a></div>
-                </form>
-            </div>
-            <div class="social-links"><span class="social-link-label">Follow us on</span>
-                <div class="social-buttons"><a href="#"><img src="assets/img/facebook.png"></a><a href="#"><img src="assets/img/youtue.png"></a></div>
-            </div>
+      <div class="top-nav">
+        <a class="top-nav-link" href="#">Home</a
+        ><a class="top-nav-link" href="#">Contact Us</a
+        ><a class="top-nav-link" href="#">Help</a>
+      </div>
+      <div class="body-section-content">
+        <div class="about-logo">
+          <img class="img-fluid" src="assets/img/SLBFE%20logo-long.png" />
         </div>
+        <div class="login-container">
+          <form>
+            <div>
+              <span style="font-family: artifika; font-size: 49px">Log In</span>
+              <div class="login-underline"></div>
+            </div>
+            <div class="login-description">
+              <span style="font-family: Artifika, serif">Welcome Back!</span
+              ><span style="font-family: Artifika, serif"
+                >Did you&nbsp;<a id="forget-password-btn" href="#"
+                  >forget your password?</a
+                ></span
+              >
+            </div>
+            <div class="login-input-fields">
+              <div>
+                <input
+                  class="form-control login-email"
+                  type="email"
+                  id="email"
+                  placeholder="Email"
+                />
+              </div>
+              <div>
+                <input
+                  class="form-control"
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                />
+              </div>
+            </div>
+            <div>
+              <button
+                class="btn btn-primary login-btn"
+                type="button"
+                onclick="LoginUser();"
+              >
+                Log In
+              </button>
+            </div>
+            <div class="new-user-registration">
+              <a
+                id="new-account-btn"
+                onclick="window.location = &#39;AccountSelection.html&#39;;"
+                >Don't you have an account?</a
+              >
+            </div>
+          </form>
+        </div>
+        <div class="social-links">
+          <span class="social-link-label">Follow us on</span>
+          <div class="social-buttons">
+            <a href="#"><img src="assets/img/facebook.png" /></a
+            ><a href="#"><img src="assets/img/youtue.png" /></a>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="top-nav-container">
-        <div class="top-nav"><a class="top-nav-link nav-active" href="#">Log In</a><a class="top-nav-link" href="#">Sign Up</a></div>
+      <div class="top-nav">
+        <a class="top-nav-link nav-active" href="#">Log In</a
+        ><a class="top-nav-link" href="#">Sign Up</a>
+      </div>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/intlTelInput.min.js"></script>
-    <script src="assets/js/Register.js"></script>
-</body>
-
+    <script src="assets/js/Login.js"></script>
+  </body>
 </html>
