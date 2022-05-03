@@ -23,11 +23,11 @@ namespace SLBFE.Models
         /// <summary>
         /// IP address of the user
         /// </summary>
-        public bool IPAddress { get; set; }
+        public string IPAddress { get; set; }
 
         /// <summary>
         /// Detected country of the user
         /// </summary>
-        public bool Country { get; set; }
+        public string Country { get; set; }
     }
 }
