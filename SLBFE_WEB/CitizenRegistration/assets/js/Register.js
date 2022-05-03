@@ -3,7 +3,7 @@ window.intlTelInput(input, {
   separateDialCode: true
 });
 
-function Registeruser() {
+function RegisterUser() {
   var Firstname = document.getElementById("firstName").value;
   var Lastname = document.getElementById("lastName").value;
   var NationalID = document.getElementById("firstName").value;
@@ -27,6 +27,10 @@ function Registeruser() {
   var Passport = document.getElementById("filePassport").file;
   var FilesQualifications = document.getElementById("filesQualifications").files;
 
-  
+  var newCitizen = new Object();
+
+  newCitizen.name = "weeeee";
+
+  console.log(newCitizen.name);
 
 }
