@@ -31,6 +31,14 @@ namespace SLBFE.Models
         /// </summary>
         public string FilePathCV { get; set; }
         /// <summary>
+        /// File path of the users CV
+        /// </summary>
+        public string FilePathBirthCertificate { get; set; }
+        /// <summary>
+        /// File path of the users CV
+        /// </summary>
+        public string FilePathPassport { get; set; }
+        /// <summary>
         /// File Path of the users other qualification documents Default is an Empty List of String
         /// </summary>
         public List<string> FilePathQualifications { get; set; } = new List<string>();
