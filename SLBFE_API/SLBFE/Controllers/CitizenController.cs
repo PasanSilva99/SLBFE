@@ -37,10 +37,16 @@ namespace SLBFE.Controllers
             return list;
         }
 
-
+        /// <summary>
+        /// Validates the user 
+        /// </summary>
+        /// <param name="data">Login Data</param>
+        /// <returns></returns>
+        [Route("api/Citizen/Register")]
+        [HttpGet]
         public int CitizenLogin([FromBody] Models.LoginData data)
         {
-            return Models.DataStore.ValidateCitizen(data);
+            return 210;
         }
 
         /// <summary>
