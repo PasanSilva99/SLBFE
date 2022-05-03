@@ -49,6 +49,18 @@ namespace SLBFE.Controllers
             Models.DataStore.RegisterOfficer(value);
         }
 
+        /// <summary>
+        /// POST Request
+        /// </summary>
+        /// <param name="value">Officer data as an single Officer object</param>
+        /// <param name="employeeID">Officer data as an single Officer object</param>
+
+        // POST: api/Bureau
+        public void Post(string employeeID, [FromBody] Models.Bureau value)
+        {
+            Models.DataStore.UpdateOfficer(employeeID, value);
+        }
+
 
         /// <summary>
         /// DELETE Request

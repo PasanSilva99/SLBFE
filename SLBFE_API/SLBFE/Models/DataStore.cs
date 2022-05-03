@@ -77,7 +77,7 @@ namespace SLBFE.Models
                         "City TEXT, " +
                         "ZipCode TEXT, " +
                         "EmployeeID TEXT, " +
-                        "FilePathEmolyeeIDPhoto TEXT );" +
+                        "FilePathEmployeeIDPhoto TEXT );" +
                     "CREATE TABLE IF NOT EXISTS " +
                     "Citizen (" +
                         "NationalID TEXT, " +
@@ -156,7 +156,7 @@ namespace SLBFE.Models
                                 City = reader.GetString(10),
                                 ZipCode = reader.GetString(11),
                                 EmployeeID = reader.GetString(12),
-                                FilePathEmolyeeIDPhoto = reader.GetString(13),
+                                FilePathEmployeeIDPhoto = reader.GetString(13),
                             });
                     }
 
@@ -173,6 +173,7 @@ namespace SLBFE.Models
                     Log(ex.ToString());
                 }
 
+                Log("Uncaught Error on Fetching Officers!");
                 return null;
             }
         }
@@ -223,7 +224,7 @@ namespace SLBFE.Models
                     insertCommand.Parameters.AddWithValue("@city", officer.City);
                     insertCommand.Parameters.AddWithValue("@zipCode", officer.ZipCode);
                     insertCommand.Parameters.AddWithValue("@employeeID", officer.EmployeeID);
-                    insertCommand.Parameters.AddWithValue("@filePathEmployeeIDPhoto", officer.FilePathEmolyeeIDPhoto);
+                    insertCommand.Parameters.AddWithValue("@filePathEmployeeIDPhoto", officer.FilePathEmployeeIDPhoto);
 
                     var affRows = insertCommand.ExecuteNonQuery();
 
@@ -245,7 +246,8 @@ namespace SLBFE.Models
                 }
             }
 
-            return -1;
+            Log("Uncaught Error on Officer Registration!");
+            return -2;
         }
 
 
@@ -292,9 +294,326 @@ namespace SLBFE.Models
                 }
 
 
+                Log("Uncaught Error on Office Deletion!");
                 return -2;
             }
         }
 
+<<<<<<< Updated upstream
+=======
+        /// <summary>
+        /// Get all Citizens from the database
+        /// </summary>
+        /// <returns>Retuns all the users as a list of Citizens</returns>
+        public static List<Citizen> GetCitizens()
+        {
+            var citizenList = new List<Citizen>();
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand selectCommand = new SQLiteCommand();
+                    selectCommand.CommandText = "SELECT * FROM Citizen";
+                    selectCommand.Connection = con;
+
+                    var reader = selectCommand.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var locationString = reader.GetString(12);
+                        var locationData = locationString.Split(',');
+
+                        var qualificationString = reader.GetString(15);
+                        var qualificationData = qualificationString.Split(',');
+
+                        var qualificationFilesString = reader.GetString(17);
+                        var qualificationFilesData = qualificationFilesString.Split(',');
+
+                        citizenList.Add(
+                            new Citizen()
+                            {
+                                NationalID = reader.GetString(0),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2),
+                                Email = reader.GetString(3),
+                                PhoneNumber = reader.GetString(4),
+                                BirthDate = DateTime.Parse(reader.GetString(5)),
+                                Password = reader.GetString(6),
+                                AddressL1 = reader.GetString(7),
+                                AddressL2 = reader.GetString(8),
+                                StateProvince = reader.GetString(9),
+                                City = reader.GetString(10),
+                                ZipCode = reader.GetString(11),
+                                MapLocation = new Location(float.Parse(locationData[0]), float.Parse(locationData[1])),
+                                CurrentProfession = reader.GetString(13),
+                                Affiliation = reader.GetString(14),
+                                Qualifications = qualificationData.ToList(),
+                                FilePathCV = reader.GetString(16),
+                                FilePathQualifications = qualificationFilesData.ToList()
+                            }); ;
+                    }
+
+                    return citizenList;
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    // Log the error to the API log
+                    Log("Citizen Get Request Failed (Database)");
+                    Log(ex.ToString());
+                }
+            }
+
+            // Log the error to the API log
+            Log("Uncaught Error on Citizen Get Request (Database)");
+
+            return null;
+        }
+
+        /// <summary>
+        /// Registers a new Cizien to the system
+        /// </summary>
+        /// <param name="citizen">Citizens details as an object</param>
+        /// <returns>Number of rows affected or -1 if there is an error with the data -2 if there is an error on the database</returns>
+        public static int RegisterCitizen(Citizen citizen)
+        {
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand insertCommand = new SQLiteCommand();
+                    insertCommand.CommandText = "INSERT INTO " +
+                        "Citizen " +
+                            "VALUES(" +
+                                "@nationalID, " +
+                                "@firstName, " +
+                                "@lastName, " +
+                                "@email, " +
+                                "@phoneNumber, " +
+                                "@birthDate, " +
+                                "@password, " +
+                                "@addressL1, " +
+                                "@addressL2, " +
+                                "@stateProvince, " +
+                                "@city, " +
+                                "@zipCode, " +
+                                "@mapLocation, " +
+                                "@currentProfession, " +
+                                "@affiliation, " +
+                                "@qualifications, " +
+                                "@filePathCV, " +
+                                "@filePathQualifications)";
+                    insertCommand.Connection = con;
+
+                    var mapDataBuilder = new StringBuilder();
+                    mapDataBuilder.Append(citizen.MapLocation.Latitude.ToString() + ",");
+                    mapDataBuilder.Append(citizen.MapLocation.Longitude.ToString());
+
+                    var qualificationBuilder = new StringBuilder();
+                    if (citizen.Qualifications.Count > 1)
+                    {
+                        foreach (var qualification in citizen.Qualifications)
+                        {
+                            qualificationBuilder.Append(qualification + ",");
+                        }
+                        qualificationBuilder = qualificationBuilder.Remove(qualificationBuilder.Length - 1, 1);
+                    }
+                    else if (citizen.Qualifications.Count == 1)
+                    {
+                        qualificationBuilder.Append(citizen.Qualifications.ToArray()[0]);
+                    }
+                    else
+                    {
+                        qualificationBuilder.Append("");
+                    }
+
+                    var qualificationFileBuilder = new StringBuilder();
+                    if (citizen.Qualifications.Count > 1)
+                    {
+                        foreach (var qualification in citizen.FilePathQualifications)
+                        {
+                            qualificationFileBuilder.Append(qualification + ",");
+                        }
+                        qualificationFileBuilder = qualificationFileBuilder.Remove(qualificationFileBuilder.Length - 1, 1);
+                    }
+                    else if (citizen.Qualifications.Count == 1)
+                    {
+                        qualificationFileBuilder.Append(citizen.Qualifications.ToArray()[0]);
+                    }
+                    else
+                    {
+                        qualificationFileBuilder.Append("");
+                    }
+
+                    insertCommand.Parameters.AddWithValue("@nationalID", citizen.NationalID);
+                    insertCommand.Parameters.AddWithValue("@firstName", citizen.FirstName);
+                    insertCommand.Parameters.AddWithValue("@lastName", citizen.LastName);
+                    insertCommand.Parameters.AddWithValue("@email", citizen.Email);
+                    insertCommand.Parameters.AddWithValue("@phoneNumber", citizen.PhoneNumber);
+                    insertCommand.Parameters.AddWithValue("@birthDate", citizen.BirthDate.ToString("G"));
+                    insertCommand.Parameters.AddWithValue("@password", citizen.Password);
+                    insertCommand.Parameters.AddWithValue("@addressL1", citizen.AddressL1);
+                    insertCommand.Parameters.AddWithValue("@addressL2", citizen.AddressL2);
+                    insertCommand.Parameters.AddWithValue("@stateProvince", citizen.StateProvince);
+                    insertCommand.Parameters.AddWithValue("@city", citizen.City);
+                    insertCommand.Parameters.AddWithValue("@zipCode", citizen.ZipCode);
+                    insertCommand.Parameters.AddWithValue("@mapLocation", mapDataBuilder.ToString());
+                    insertCommand.Parameters.AddWithValue("@currentProfession", citizen.CurrentProfession);
+                    insertCommand.Parameters.AddWithValue("@affiliation", citizen.Affiliation);
+                    insertCommand.Parameters.AddWithValue("@qualifications", qualificationBuilder.ToString());
+                    insertCommand.Parameters.AddWithValue("@filePathCV", citizen.FilePathCV);
+                    insertCommand.Parameters.AddWithValue("@filePathQualifications", qualificationFileBuilder.ToString());
+
+                    var affRows = insertCommand.ExecuteNonQuery();
+
+                    if (affRows > 0)  // if it is an successfull registration
+                    {
+                        Log($"Successfully Registred User {citizen.Email}");
+                    }
+
+                    return affRows > 0 ? affRows : -1;  // if affected rows is larger than 0 return the affected rows number else return -1 in indicate it is an error
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    // Log the error to the API log
+                    Log("Citizen Registration Failed (Database)");
+                    Log(ex.ToString());
+                }
+            }
+
+            // Log the error to the API log
+            Log("Uncaught Error on Citizen Registration (Database)");
+            return -2;
+        }
+
+        /// <summary>
+        /// Deletes the citizen profile from the database
+        /// </summary>
+        /// <param name="nationalID">National ID of the User</param>
+        /// <param name="requestedBy">Employee ID of the Officer that os requested this</param>
+        /// <returns></returns>
+        public static int DeleteCitizen(string nationalID, string requestedBy)
+        {
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand deleteCommand = new SQLiteCommand();
+                    deleteCommand.CommandText = "DELETE FROM Citizen WHERE NationalID=@nationalID";
+                    deleteCommand.Connection = con;
+                    deleteCommand.Parameters.AddWithValue("@nationalID", nationalID);
+
+
+
+                    var affRows = deleteCommand.ExecuteNonQuery();
+
+                    if (affRows > 0)  // if it is an successfull deletion
+                    {
+                        Log($"Successfully Deleted User {nationalID} for the Request by {requestedBy}");
+                    }
+
+                    return affRows > 0 ? affRows : -1;
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    // Log the error to the API log
+                    Log("Citizen deletion Failed (Database)");
+                    Log(ex.ToString());
+
+                }
+            }
+
+            // Log the error to the API log
+            Log("Uncaught Error on Citizen deletion (Database)");
+            return -2;
+        }
+
+
+        /// <summary>
+        /// Update the officer in the system
+        /// </summary>
+        /// <param name="employeeID"> Officer details as an object</param> 
+        /// <param name="officer">Number of rows affected or -1 if there is an error with the data -2 if there is an error on the database </param>
+        /// <returns></returns>
+        public static int UpdateOfficer(string employeeID, Bureau officer)
+        {
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand updateCommand = new SQLiteCommand();
+                    updateCommand.CommandText = "UPDATE " +
+                        " Officer " +
+                        " SET " +
+                            "NationalID=@nationalID," +
+                            "FirstName=@firstName," +
+                            "LastName=@lastName," +
+                            "Email=@email," +
+                            "PhoneNumber=@phoneNumber, " +
+                            "BirthDate=@birthDate, " +
+                            "Password=@password, " +
+                            "AddressL1=@addressL1, " +
+                            "AddressL2=@addressL2, " +
+                            "StateProvince=@stateProvince, " +
+                            "City=@city, " +
+                            "ZipCode=@zipCode, " +
+                            "EmployeeID=@employeeID, " +
+                            "FilePathEmployeeIDPhoto=@filePathEmployeeIDPhoto " +
+                         "WHERE " +
+                            "EmployeeID=@employeeID";
+                    updateCommand.Connection = con;
+
+                    updateCommand.Parameters.AddWithValue("@nationalID", officer.NationalID);
+                    updateCommand.Parameters.AddWithValue("@firstName", officer.FirstName);
+                    updateCommand.Parameters.AddWithValue("@lastName", officer.LastName);
+                    updateCommand.Parameters.AddWithValue("@email", officer.Email);
+                    updateCommand.Parameters.AddWithValue("@phoneNumber", officer.PhoneNumber);
+                    updateCommand.Parameters.AddWithValue("@birthDate", officer.BirthDate.ToString("G"));
+                    updateCommand.Parameters.AddWithValue("@password", officer.Password);
+                    updateCommand.Parameters.AddWithValue("@addressL1", officer.AddressL1);
+                    updateCommand.Parameters.AddWithValue("@addressL2", officer.AddressL2);
+                    updateCommand.Parameters.AddWithValue("@stateProvince", officer.StateProvince);
+                    updateCommand.Parameters.AddWithValue("@city", officer.City);
+                    updateCommand.Parameters.AddWithValue("@zipCode", officer.ZipCode);
+                    updateCommand.Parameters.AddWithValue("@employeeID", officer.EmployeeID);
+                    updateCommand.Parameters.AddWithValue("@filePathEmployeeIDPhoto", officer.FilePathEmployeeIDPhoto);
+
+                    var affRows = updateCommand.ExecuteNonQuery();
+
+                    if (affRows > 0)
+                    {
+                        Log($"Successfully Updated the User {officer.Email}");
+                    }
+
+
+                    return affRows > 0 ? affRows : -1; // if affected rows is larger than 0 return the affected rows number else return -1 in indicate it is an error 
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    Log("Bureau Officer Updated Failed! (Database)");
+                    Log(ex.ToString());
+                }
+            }
+
+            Log("Uncaught Error on Office Update!");
+            return -2;
+        }
+
+>>>>>>> Stashed changes
     }
 }
