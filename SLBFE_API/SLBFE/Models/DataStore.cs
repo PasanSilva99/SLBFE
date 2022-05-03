@@ -891,6 +891,119 @@ namespace SLBFE.Models
         }
         #endregion
 
+        #region Company Detail Update
+        public static int UpdateCompany(string BRNumber, Commpany company)
+        {
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand updateCommand = new SQLiteCommand();
+                    updateCommand.CommandText = "UPDATE " +
+                        "Company " +
+                            "SET " +
+                                "FilePathBR=@filePathBR, " +
+                                "BusinessName=@businessName, " +
+                                "BusinessCategory=@businessCategory, " +
+                                "Email=@email, " +
+                                "PhoneNumber=@phoneNumber, " +
+                                "Password=@password, " +
+                                "AddressL1=@addressL1, " +
+                                "AddressL2=@addressL2, " +
+                                "StateProvince=@stateProvince, " +
+                                "City=@city, " +
+                                "ZipCode=@zipCode " +
+
+                             "WHERE " +
+                                "BRNumber=@brNumber";
+                    updateCommand.Connection = con;
+
+
+
+                    updateCommand.Parameters.AddWithValue("@filePathBR", company.FilePathBR);
+                    updateCommand.Parameters.AddWithValue("@businessName", company.BusinessName);
+                    updateCommand.Parameters.AddWithValue("@brNumber", company.BRNumber);
+                    updateCommand.Parameters.AddWithValue("@businessCategory", company.BusinessCategory);
+                    updateCommand.Parameters.AddWithValue("@email", company.Email);
+                    updateCommand.Parameters.AddWithValue("@phoneNumber", company.PhoneNumber);
+                    updateCommand.Parameters.AddWithValue("@password", company.Password);
+                    updateCommand.Parameters.AddWithValue("@addressL1", company.AddressL1);
+                    updateCommand.Parameters.AddWithValue("@addressL2", company.AddressL2);
+                    updateCommand.Parameters.AddWithValue("@stateProvince", company.StateProvince);
+                    updateCommand.Parameters.AddWithValue("@city", company.City);
+                    updateCommand.Parameters.AddWithValue("@zipCode", company.ZipCode);
+
+
+                    var affRows = updateCommand.ExecuteNonQuery();
+
+                    if (affRows > 0)  // if it is an successfull registration
+                    {
+                        Log($"Successfully updated company {company.Email}");
+                    }
+
+                    return affRows > 0 ? affRows : -1;  // if affected rows is larger than 0 return the affected rows number else return -1 in indicate it is an error
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    // Log the error to the API log
+                    Log("company Updated Failed (Database)");
+                    Log(ex.ToString());
+                }
+            }
+
+            // Log the error to the API log
+            Log("Uncaught Error on company Updated");
+            return -2;
+        }
+        #endregion
+
+        #region Company Data Delete
+        public static int DeleteCompany(string BRNumber, string requestedBy)
+        {
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand deleteCommand = new SQLiteCommand();
+                    deleteCommand.CommandText = "DELETE FROM Company WHERE BRNumber=@brNumber";
+                    deleteCommand.Connection = con;
+                    deleteCommand.Parameters.AddWithValue("@brNumber", BRNumber);
+
+
+
+                    var affRows = deleteCommand.ExecuteNonQuery();
+
+                    if (affRows > 0)  // if it is an successfull deletion
+                    {
+                        Log($"Successfully Deleted company {BRNumber} for the Request by {requestedBy}");
+                    }
+
+                    return affRows > 0 ? affRows : -1;
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    // Log the error to the API log
+                    Log("Company deletion Failed (Database)");
+                    Log(ex.ToString());
+
+                }
+            }
+
+            // Log the error to the API log
+            Log("Uncaught Error on company deletion");
+            return -2;
+        }
+        #endregion
+
         #endregion
 
 

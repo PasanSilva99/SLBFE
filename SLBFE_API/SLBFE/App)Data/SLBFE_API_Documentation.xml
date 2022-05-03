@@ -562,6 +562,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SLBFE.Controllers.CitizenController.CitizenLogin(SLBFE.Models.LoginData)">
+            <summary>
+            Validates the user 
+            </summary>
+            <param name="data">Login Data</param>
+            <returns></returns>
+        </member>
         <member name="M:SLBFE.Controllers.CitizenController.Post(SLBFE.Models.Citizen)">
             <summary>
             POST Request 
@@ -595,7 +602,21 @@
             <summary>
             POST Request
             </summary>
-            <param name="value">Officer data as an single Officer object</param>
+            <param name="value">commpany data as an single commpany object</param>
+        </member>
+        <member name="M:SLBFE.Controllers.CommpanyController.Post(System.String,SLBFE.Models.Commpany)">
+            <summary>
+            POST Request
+            </summary>
+            <param name="value">commpany data as an single commpany object</param>
+            <param name="BRNumber">commpany data as an single commpany object</param>
+        </member>
+        <member name="M:SLBFE.Controllers.CommpanyController.Delete(System.String,System.String)">
+            <summary>
+            DELETE Request
+            </summary>
+            <param name="BRNumber">Commpany of the officer that need to deleted</param>
+            <param name="requestedBY">The Commpany that deleted the account</param>
         </member>
         <member name="T:SLBFE.Controllers.HomeController">
             <summary>
@@ -861,6 +882,31 @@
         <member name="P:SLBFE.Models.Location.Longitude">
             <summary>
             Longitude Value as float
+            </summary>
+        </member>
+        <member name="T:SLBFE.Models.LoginData">
+            <summary>
+            This handles tha data from the login page
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.LoginData.Username">
+            <summary>
+            Username of the user
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.LoginData.Passwordhash">
+            <summary>
+            Password has of the user entered
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.LoginData.IPAddress">
+            <summary>
+            IP address of the user
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.LoginData.Country">
+            <summary>
+            Detected country of the user
             </summary>
         </member>
         <member name="T:SLBFE.Models.User">
