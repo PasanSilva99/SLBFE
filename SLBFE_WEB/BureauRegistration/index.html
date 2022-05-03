@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>SLBFE Bureau Registration</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/css/intlTelInput.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div class="about-section">
+        <div class="top-nav"><a class="top-nav-link" href="#">Home</a><a class="top-nav-link" href="#">Contact Us</a><a class="top-nav-link" href="#">Help</a></div>
+        <div class="about-content">
+            <div class="about-logo"><img class="img-fluid" src="assets/img/SLBFE%20Logo.svg"></div>
+            <div class="about-description">
+                <h3>Lets get you registered as a Bureau Officer. Make sure your employee ID is valid.<br></h3>
+            </div>
+            <div class="redirection-link"><span>Already Registred? Sign In from&nbsp;</span><a href="#">&nbsp;Here</a></div>
+            <div class="social-links"><span class="social-link-label">Follow us on</span>
+                <div class="social-buttons"><a href="#"><img src="assets/img/facebook.png"></a><a href="#"><img src="assets/img/youtue.png"></a></div>
+            </div><a class="btn btn-primary register-btn scroll-btn" role="button" href="#login-register">Register Now&nbsp; 🔽</a>
+        </div>
+    </div>
+    <div id="login-register" class="user-input-section">
+        <div class="top-nav"><a class="top-nav-link" href="#">Log In</a><a class="top-nav-link nav-active" href="#">Sign Up</a></div>
+        <div class="input-section">
+            <form id="registration-form">
+                <div class="registration-name">
+                    <div class="firstName"><span class="input-header">First Name</span><input class="form-control" type="text" id="firstName" placeholder="Eg. John" required=""></div>
+                    <div class="lastName"><span class="input-header">Last Name</span><input class="form-control" type="text" id="lastName" placeholder="Eg. Smith" required=""></div>
+                </div>
+                <div><span class="input-header">National ID</span><input class="form-control" type="text" id="nationalId" placeholder="Eg. 12345678900/ 12345678901V" required=""></div>
+                <div><span class="input-header">Email Address</span><input class="form-control" type="email" placeholder="Eg. someone@example.com" required=""></div>
+                <div><span class="input-header">Employee ID</span><input class="form-control" type="email" placeholder="Eg. someone@example.com" required=""></div>
+                <div style="margin-top: 1em;"><span class="input-header">Upload photo of your employee ID card<br></span><input class="form-control" type="file" accept="image/*"></div>
+                <div class="d-flex d-xl-flex flex-column justify-content-xl-start"><span class="input-header">Phone Number</span><input class="form-control" type="text" id="phone" placeholder="Eg. 12 489 3456" style="overflow: hidden;" required=""></div>
+                <div style="margin-top: 1.5em;"><span class="input-header">Birthdate</span><input class="form-control" type="date" required="" placeholder="Enter Your Birthday"></div>
+                <div class=".input-group"><span class="input-header">Create a new password</span><input class="form-control" type="password" placeholder="Create a new Password" required=""></div>
+                <div class=".input-group"><span class="input-header">Retype your password</span><input class="form-control" type="password" placeholder="Retype Your Password" required=""></div>
+                <div class="eos"></div><span class="input-header">Address</span>
+                <div style="margin-top: 1em;"><span class="input-header">Address Line 1<br></span><input class="form-control" type="text" placeholder="Eg. No.110, Oak Road" required=""></div>
+                <div style="margin-top: 1em;"><span class="input-header">Address Line 2<br></span><input class="form-control" type="text" placeholder="Eg. Maple Street" required=""></div>
+                <div style="margin-top: 1em;"><span class="input-header">State/ Province<br></span><input class="form-control" type="text" placeholder="Eg. Western Province/ Missouri" required=""></div>
+                <div class="registration-name">
+                    <div class="firstName"><span class="input-header">City</span><input class="form-control" type="text" id="firstName-2" placeholder="AAA City" required=""></div>
+                    <div class="lastName"><span class="input-header">Zip/ Postal Code</span><input class="form-control" type="text" id="lastName-2" placeholder="12345" required=""></div>
+                </div><span class="input-header">Select Your Location</span>
+                <div id="map"></div>
+                <div style="background: rgba(255,255,255,0.38);border-radius: 0 0 20px 20px;margin-top: -1.5em;padding-top: 1.5em;margin-bottom: 1.5em;">
+                    <p id="error_geoLocation" style="display: none;">* Failed to detect your location. Please use the map to select your location.<br></p><button class="btn btn-primary" id="updateMap" type="button" style="width: 95%;margin-bottom: 10px;">Pan to my location</button>
+                </div>
+                <div class="btn-section"><button class="btn btn-primary register-btn" type="submit" style="margin-top: 1em;">Register</button></div>
+            </form>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/ASelectLocation.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdpLV8mBOzYfllyjkE_egd7p9DKh85ZFw&amp;callback=initMap&amp;v=weekly"></script>
+    <script src="assets/js/intlTelInput.min.js"></script>
+    <script src="assets/js/Register.js"></script>
+</body>
+
+</html>
