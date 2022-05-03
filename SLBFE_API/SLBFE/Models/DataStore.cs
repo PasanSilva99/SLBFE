@@ -382,7 +382,7 @@ namespace SLBFE.Models
             }
 
             // Log the error to the API log
-            Log("Uncaught Error on Citizen Get Request (Database)");
+            Log("Uncaught Error on Citizen Get Request");
 
             return null;
         }
@@ -503,7 +503,129 @@ namespace SLBFE.Models
             }
 
             // Log the error to the API log
-            Log("Uncaught Error on Citizen Registration (Database)");
+            Log("Uncaught Error on Citizen Registration");
+            return -2;
+        }
+
+        /// <summary>
+        /// Updates a Cizien in the system
+        /// </summary>
+        /// <param name="citizen">Citizens details as an object</param>
+        /// <param name="nationalID">National ID number of the Citizen that needs to be updated</param>
+        /// <returns>Number of rows affected or -1 if there is an error with the data -2 if there is an error on the database</returns>
+        public static int UpdateCitizen(string nationalID, Citizen citizen)
+        {
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand updateCommand = new SQLiteCommand();
+                    updateCommand.CommandText = "UPDATE " +
+                        "Citizen " +
+                            "SET " +
+                                "FirstName=@firstName, " +
+                                "LastName=@lastName, " +
+                                "Email=@email, " +
+                                "PhoneNumber=@phoneNumber, " +
+                                "BirthDate=@birthDate, " +
+                                "Password=@password, " +
+                                "AddressL1=@addressL1, " +
+                                "AddressL2=@addressL2, " +
+                                "StateProvince=@stateProvince, " +
+                                "City=@city, " +
+                                "ZipCode=@zipCode, " +
+                                "MapLocation=@mapLocation, " +
+                                "CurrentProfession=@currentProfession, " +
+                                "Affiliation=@affiliation, " +
+                                "Qualifications=@qualifications, " +
+                                "FilePathCV=@filePathCV, " +
+                                "FilePathQualifications=@filePathQualifications " +
+                             "WHERE " +
+                                "NationalID=@nationalID ";
+                    updateCommand.Connection = con;
+
+                    var mapDataBuilder = new StringBuilder();
+                    mapDataBuilder.Append(citizen.MapLocation.Latitude.ToString() + ",");
+                    mapDataBuilder.Append(citizen.MapLocation.Longitude.ToString());
+
+                    var qualificationBuilder = new StringBuilder();
+                    if (citizen.Qualifications.Count > 1)
+                    {
+                        foreach (var qualification in citizen.Qualifications)
+                        {
+                            qualificationBuilder.Append(qualification + ",");
+                        }
+                        qualificationBuilder = qualificationBuilder.Remove(qualificationBuilder.Length - 1, 1);
+                    }
+                    else if (citizen.Qualifications.Count == 1)
+                    {
+                        qualificationBuilder.Append(citizen.Qualifications.ToArray()[0]);
+                    }
+                    else
+                    {
+                        qualificationBuilder.Append("");
+                    }
+
+                    var qualificationFileBuilder = new StringBuilder();
+                    if (citizen.Qualifications.Count > 1)
+                    {
+                        foreach (var qualification in citizen.FilePathQualifications)
+                        {
+                            qualificationFileBuilder.Append(qualification + ",");
+                        }
+                        qualificationFileBuilder = qualificationFileBuilder.Remove(qualificationFileBuilder.Length - 1, 1);
+                    }
+                    else if (citizen.Qualifications.Count == 1)
+                    {
+                        qualificationFileBuilder.Append(citizen.Qualifications.ToArray()[0]);
+                    }
+                    else
+                    {
+                        qualificationFileBuilder.Append("");
+                    }
+
+                    updateCommand.Parameters.AddWithValue("@nationalID", nationalID);
+                    updateCommand.Parameters.AddWithValue("@firstName", citizen.FirstName);
+                    updateCommand.Parameters.AddWithValue("@lastName", citizen.LastName);
+                    updateCommand.Parameters.AddWithValue("@email", citizen.Email);
+                    updateCommand.Parameters.AddWithValue("@phoneNumber", citizen.PhoneNumber);
+                    updateCommand.Parameters.AddWithValue("@birthDate", citizen.BirthDate.ToString("G"));
+                    updateCommand.Parameters.AddWithValue("@password", citizen.Password);
+                    updateCommand.Parameters.AddWithValue("@addressL1", citizen.AddressL1);
+                    updateCommand.Parameters.AddWithValue("@addressL2", citizen.AddressL2);
+                    updateCommand.Parameters.AddWithValue("@stateProvince", citizen.StateProvince);
+                    updateCommand.Parameters.AddWithValue("@city", citizen.City);
+                    updateCommand.Parameters.AddWithValue("@zipCode", citizen.ZipCode);
+                    updateCommand.Parameters.AddWithValue("@mapLocation", mapDataBuilder.ToString());
+                    updateCommand.Parameters.AddWithValue("@currentProfession", citizen.CurrentProfession);
+                    updateCommand.Parameters.AddWithValue("@affiliation", citizen.Affiliation);
+                    updateCommand.Parameters.AddWithValue("@qualifications", qualificationBuilder.ToString());
+                    updateCommand.Parameters.AddWithValue("@filePathCV", citizen.FilePathCV);
+                    updateCommand.Parameters.AddWithValue("@filePathQualifications", qualificationFileBuilder.ToString());
+
+                    var affRows = updateCommand.ExecuteNonQuery();
+
+                    if (affRows > 0)  // if it is an successfull registration
+                    {
+                        Log($"Successfully Updated User {citizen.Email}");
+                    }
+
+                    return affRows > 0 ? affRows : -1;  // if affected rows is larger than 0 return the affected rows number else return -1 in indicate it is an error
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    // Log the error to the API log
+                    Log("Citizen Updated Failed (Database)");
+                    Log(ex.ToString());
+                }
+            }
+
+            // Log the error to the API log
+            Log("Uncaught Error on Citizen Updated");
             return -2;
         }
 
@@ -549,82 +671,7 @@ namespace SLBFE.Models
             }
 
             // Log the error to the API log
-            Log("Uncaught Error on Citizen deletion (Database)");
-            return -2;
-        }
-
-        /// <summary>
-        /// Update the officer in the system
-        /// </summary>
-        /// <param name="employeeID"> Officer details as an object</param> 
-        /// <param name="officer">Number of rows affected or -1 if there is an error with the data -2 if there is an error on the database </param>
-        /// <returns></returns>
-        public static int UpdateOfficer(string employeeID, Bureau officer)
-        {
-
-            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
-            {
-                try
-                {
-                    con.Open();
-                    SQLiteCommand updateCommand = new SQLiteCommand();
-                    updateCommand.CommandText = "UPDATE " +
-                        " Officer " +
-                        " SET " +
-                            "NationalID=@nationalID," +
-                            "FirstName=@firstName," +
-                            "LastName=@lastName," +
-                            "Email=@email," +
-                            "PhoneNumber=@phoneNumber, " +
-                            "BirthDate=@birthDate, " +
-                            "Password=@password, " +
-                            "AddressL1=@addressL1, " +
-                            "AddressL2=@addressL2, " +
-                            "StateProvince=@stateProvince, " +
-                            "City=@city, " +
-                            "ZipCode=@zipCode, " +
-                            "EmployeeID=@employeeID, " +
-                            "FilePathEmployeeIDPhoto=@filePathEmployeeIDPhoto " +
-                         "WHERE " +
-                            "EmployeeID=@employeeID";
-                    updateCommand.Connection = con;
-
-                    updateCommand.Parameters.AddWithValue("@nationalID", officer.NationalID);
-                    updateCommand.Parameters.AddWithValue("@firstName", officer.FirstName);
-                    updateCommand.Parameters.AddWithValue("@lastName", officer.LastName);
-                    updateCommand.Parameters.AddWithValue("@email", officer.Email);
-                    updateCommand.Parameters.AddWithValue("@phoneNumber", officer.PhoneNumber);
-                    updateCommand.Parameters.AddWithValue("@birthDate", officer.BirthDate.ToString("G"));
-                    updateCommand.Parameters.AddWithValue("@password", officer.Password);
-                    updateCommand.Parameters.AddWithValue("@addressL1", officer.AddressL1);
-                    updateCommand.Parameters.AddWithValue("@addressL2", officer.AddressL2);
-                    updateCommand.Parameters.AddWithValue("@stateProvince", officer.StateProvince);
-                    updateCommand.Parameters.AddWithValue("@city", officer.City);
-                    updateCommand.Parameters.AddWithValue("@zipCode", officer.ZipCode);
-                    updateCommand.Parameters.AddWithValue("@employeeID", officer.EmployeeID);
-                    updateCommand.Parameters.AddWithValue("@filePathEmployeeIDPhoto", officer.FilePathEmployeeIDPhoto);
-
-                    var affRows = updateCommand.ExecuteNonQuery();
-
-                    if (affRows > 0)
-                    {
-                        Log($"Successfully Updated the User {officer.Email}");
-                    }
-
-
-                    return affRows > 0 ? affRows : -1; // if affected rows is larger than 0 return the affected rows number else return -1 in indicate it is an error 
-
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-
-                    Log("Bureau Officer Updated Failed! (Database)");
-                    Log(ex.ToString());
-                }
-            }
-
-            Log("Uncaught Error on Office Update!");
+            Log("Uncaught Error on Citizen deletion");
             return -2;
         }
 
