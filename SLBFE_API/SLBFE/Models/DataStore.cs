@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 
 namespace SLBFE.Models
 {
@@ -41,9 +42,8 @@ namespace SLBFE.Models
             // log the request to the file
             File.AppendAllText(LogFilePath, logString + "\n");
 
-
             Debug.WriteLine(logString);
-
+            // [5/2/2022 6:53:21 PM] >> text to log 
         }
 
         /// <summary>
@@ -89,6 +89,7 @@ namespace SLBFE.Models
                         "Password TEXT, " +
                         "AddressL1 TEXT, " +
                         "AddressL2 TEXT, " +
+                        "StateProvince TEXT, " +
                         "City TEXT, " +
                         "ZipCode TEXT, " +
                         "MapLocation TEXT, " +
@@ -96,7 +97,23 @@ namespace SLBFE.Models
                         "Affiliation TEXT, " +
                         "Qualifications TEXT, " +
                         "FilePathCV TEXT, " +
-                        "FilePathQualifications TEXT );";
+                        "FilePathQualifications TEXT );" +
+                    "CREATE TABLE IF NOT EXISTS " +
+                    "Company (" +
+                        "BRNumber TEXT, " +
+                        "FilePathBR TEXT, " +
+                        "BusinessName TEXT, " +
+                        "BusinessCategory TEXT, " +
+                        "Email TEXT, " +
+                        "PhoneNumber TEXT, " +
+                        "BirthDate TEXT, " +
+                        "Password TEXT, " +
+                        "AddressL1 TEXT, " +
+                        "AddressL2 TEXT, " +
+                        "StateProvince TEXT, " +
+                        "City TEXT, " +
+                        "ZipCode TEXT );";
+
 
                     SQLiteCommand initCommand = new SQLiteCommand(dbScript, con);
                     initCommand.ExecuteNonQuery();
@@ -299,8 +316,6 @@ namespace SLBFE.Models
             }
         }
 
-<<<<<<< Updated upstream
-=======
         /// <summary>
         /// Get all Citizens from the database
         /// </summary>
@@ -538,7 +553,6 @@ namespace SLBFE.Models
             return -2;
         }
 
-
         /// <summary>
         /// Update the officer in the system
         /// </summary>
@@ -614,6 +628,5 @@ namespace SLBFE.Models
             return -2;
         }
 
->>>>>>> Stashed changes
     }
 }
