@@ -37,6 +37,12 @@ namespace SLBFE.Controllers
             return list;
         }
 
+
+        public int CitizenLogin([FromBody] Models.LoginData data)
+        {
+            return Models.DataStore.ValidateCitizen(data);
+        }
+
         /// <summary>
         /// POST Request 
         /// Register new Citizen

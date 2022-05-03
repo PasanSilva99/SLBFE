@@ -1,0 +1,24 @@
+class Citizen{
+    constructor(
+        NationalID,
+        FirstName,
+        LastName,
+        Email,
+        PhoneNumber,
+        BirthDate,
+        Password,
+        AddressL1,
+        AddressL2,
+        StateProvince,
+        City,
+        ZipCode,
+        MapLocation,
+        CurrentProfession,
+        Affiliation, 
+        Qualifications,
+        FilePathCV,
+        FilePathQualifications,
+        FilePathBirthCertificate,
+        FilePathPassport
+    )
+}
