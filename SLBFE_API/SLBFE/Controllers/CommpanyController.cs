@@ -39,7 +39,7 @@ namespace SLBFE.Controllers
         /// <summary>
         /// POST Request
         /// </summary>
-        /// <param name="value">Officer data as an single Officer object</param>
+        /// <param name="value">commpany data as an single commpany object</param>
         // POST: api/Commpany
         public void Post([FromBody] Models.Commpany value)
         {
@@ -47,14 +47,28 @@ namespace SLBFE.Controllers
         }
 
 
-        // PUT: api/Commpany/5
-        public void Put(int id, [FromBody]string value)
+        /// <summary>
+        /// POST Request
+        /// </summary>
+        /// <param name="value">commpany data as an single commpany object</param>
+        /// <param name="BRNumber">commpany data as an single commpany object</param>
+
+        // POST: api/commpany
+        public void Post(string BRNumber, [FromBody] Models.Commpany value)
         {
+            Models.DataStore.UpdateCompany(BRNumber, value);
         }
 
+
+        /// <summary>
+        /// DELETE Request
+        /// </summary>
+        /// <param name="BRNumber">Commpany of the officer that need to deleted</param>
+        /// <param name="requestedBY">The Commpany that deleted the account</param>
         // DELETE: api/Commpany/5
-        public void Delete(int id)
+        public void Delete(string BRNumber, string requestedBY)
         {
+            Models.DataStore.DeleteCompany(BRNumber, requestedBY);
         }
     }
 }
