@@ -18,6 +18,6 @@ namespace SLBFE.Models
         /// <summary>
         /// File Path of the EmployeeID photo
         /// </summary>
-        public string FilePathEmolyeeIDPhoto { get; set; }
+        public string FilePathEmployeeIDPhoto { get; set; }
     }
 }
