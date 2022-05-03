@@ -266,7 +266,81 @@ namespace SLBFE.Models
             Log("Uncaught Error on Officer Registration!");
             return -2;
         }
+        
+        /// <summary>
+        /// Update the officer in the system
+        /// </summary>
+        /// <param name="employeeID"> Officer details as an object</param> 
+        /// <param name="officer">Number of rows affected or -1 if there is an error with the data -2 if there is an error on the database </param>
+        /// <returns></returns>
+        public static int UpdateOfficer(string employeeID, Bureau officer)
+        {
 
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand updateCommand = new SQLiteCommand();
+                    updateCommand.CommandText = "UPDATE " +
+                        " Officer " +
+                        " SET " +
+                            "NationalID=@nationalID," +
+                            "FirstName=@firstName," +
+                            "LastName=@lastName," +
+                            "Email=@email," +
+                            "PhoneNumber=@phoneNumber, " +
+                            "BirthDate=@birthDate, " +
+                            "Password=@password, " +
+                            "AddressL1=@addressL1, " +
+                            "AddressL2=@addressL2, " +
+                            "StateProvince=@stateProvince, " +
+                            "City=@city, " +
+                            "ZipCode=@zipCode, " +
+                            "EmployeeID=@employeeID, " +
+                            "FilePathEmployeeIDPhoto=@filePathEmployeeIDPhoto " +
+                         "WHERE " +
+                            "EmployeeID=@employeeID";
+                    updateCommand.Connection = con;
+
+                    updateCommand.Parameters.AddWithValue("@nationalID", officer.NationalID);
+                    updateCommand.Parameters.AddWithValue("@firstName", officer.FirstName);
+                    updateCommand.Parameters.AddWithValue("@lastName", officer.LastName);
+                    updateCommand.Parameters.AddWithValue("@email", officer.Email);
+                    updateCommand.Parameters.AddWithValue("@phoneNumber", officer.PhoneNumber);
+                    updateCommand.Parameters.AddWithValue("@birthDate", officer.BirthDate.ToString("G"));
+                    updateCommand.Parameters.AddWithValue("@password", officer.Password);
+                    updateCommand.Parameters.AddWithValue("@addressL1", officer.AddressL1);
+                    updateCommand.Parameters.AddWithValue("@addressL2", officer.AddressL2);
+                    updateCommand.Parameters.AddWithValue("@stateProvince", officer.StateProvince);
+                    updateCommand.Parameters.AddWithValue("@city", officer.City);
+                    updateCommand.Parameters.AddWithValue("@zipCode", officer.ZipCode);
+                    updateCommand.Parameters.AddWithValue("@employeeID", officer.EmployeeID);
+                    updateCommand.Parameters.AddWithValue("@filePathEmployeeIDPhoto", officer.FilePathEmployeeIDPhoto);
+
+                    var affRows = updateCommand.ExecuteNonQuery();
+
+                    if (affRows > 0)
+                    {
+                        Log($"Successfully Updated the User {officer.Email}");
+                    }
+
+
+                    return affRows > 0 ? affRows : -1; // if affected rows is larger than 0 return the affected rows number else return -1 in indicate it is an error 
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    Log("Bureau Officer Updated Failed! (Database)");
+                    Log(ex.ToString());
+                }
+            }
+
+            Log("Uncaught Error on Office Update!");
+            return -2;
+        }
 
         /// <summary>
         /// Deletes the bureau officer profile from the database
