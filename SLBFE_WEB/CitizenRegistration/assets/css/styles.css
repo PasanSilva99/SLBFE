@@ -209,6 +209,12 @@ body {
   margin-bottom: 1em;
 }
 
+.error{
+  margin-top: -1em;
+  color: crimson;
+  display: block;
+}
+
 #map {
   margin-bottom: 1.5em;
   height: 200px;
