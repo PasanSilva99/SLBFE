@@ -22,20 +22,60 @@ namespace SLBFE.Controllers
         /// Gets a list of available Citizens
         /// </summary>
         /// <returns></returns>
-        // GET: api/Citizen/5
         public List<Models.Citizen> Get()
         {
             var list = new List<Models.Citizen>();
             var citizenlist = Models.DataStore.GetCitizens();
 
-            foreach (var citizen in citizenlist)
+            if (citizenlist != null)
             {
-                var cit = citizen;
-                cit.Password = "";
-                list.Add(cit);
-            }
+                foreach (var citizen in citizenlist)
+                {
+                    var cit = citizen;
+                    cit.Password = "";
+                    list.Add(cit);
+                }
 
-            return list;
+                return list;
+            }
+            else
+            {
+                return new List<Models.Citizen>();
+            }
+        }
+
+        public List<Models.Citizen> Get(string nationalID)
+        {
+            var list = new List<Models.Citizen>();
+            var citizenlist = Models.DataStore.GetCitizens();
+
+            if (citizenlist != null)
+            {
+                foreach (var citizen in citizenlist)
+                {
+                    var cit = citizen;
+                    cit.Password = "";
+                    list.Add(cit);
+                }
+
+                return list.Where(c => c.NationalID == nationalID).ToList();
+            }
+            else
+            {
+                return new List<Models.Citizen>();
+            }
+        }
+
+        /// <summary>
+        /// Validates the user 
+        /// </summary>
+        /// <param name="data">Login Data</param>
+        /// <returns></returns>
+        [Route("api/Citizen/Register")]
+        [HttpGet]
+        public int CitizenLogin([FromBody] Models.LoginData data)
+        {
+            return 210;
         }
 
         /// <summary>
@@ -43,10 +83,21 @@ namespace SLBFE.Controllers
         /// Register new Citizen
         /// </summary>
         /// <param name="value">Citizen Data as an Single Citizen Object</param>
-        // POST: api/Citizen
-        public void Post([FromBody] Models.Citizen value)
+        public int Post([FromBody] Models.Citizen value)
         {
             Models.DataStore.RegisterCitizen(value);
+            return 200;
+        }
+
+        /// <summary>
+        /// POST Request 
+        /// Register new Citizen
+        /// </summary>
+        /// <param name="value">Citizen Data as an Single Citizen Object</param>
+        /// <param name="nationalID">National ID number of the Citizen that needs to be updated</param>
+        public void Post(string nationalID, [FromBody] Models.Citizen value)
+        {
+            Models.DataStore.UpdateCitizen(nationalID, value);
         }
 
         /// <summary>
@@ -55,7 +106,6 @@ namespace SLBFE.Controllers
         /// </summary>
         /// <param name="nationalID">National ID of the Citizen that needs to be deleted</param>
         /// <param name="requestedBy">The Officer that deleted the account</param>
-        // DELETE: api/Citizen/5
         public void Delete(string nationalID, string requestedBy)
         {
             Models.DataStore.DeleteCitizen(nationalID, requestedBy);

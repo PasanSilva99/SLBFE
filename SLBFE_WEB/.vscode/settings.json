@@ -1,0 +1,9 @@
+{
+  "liveServer.settings.port": 5501,
+  "liveServer.settings.root": "/",
+  "liveServer.settings.https": {
+    "enable": true,
+    "cert": "/Users/pasan/OneDrive/Documents/GitHub/SLBFE/SLBFE_WEB/https/localhost.pem",
+    "key": "/Users/pasan/OneDrive/Documents/GitHub/SLBFE/SLBFE_WEB/https/localhost.key",
+    "passphrase": "slbfe"
+}

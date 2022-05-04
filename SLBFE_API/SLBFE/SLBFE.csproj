@@ -180,14 +180,18 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BureauController.cs" />
     <Compile Include="Controllers\CitizenController.cs" />
+    <Compile Include="Controllers\CommpanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Bureau.cs" />
     <Compile Include="Models\Citizen.cs" />
+    <Compile Include="Models\Commpany.cs" />
+    <Compile Include="Models\CommpanyD.cs" />
     <Compile Include="Models\DataStore.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
