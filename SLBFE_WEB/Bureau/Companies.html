@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>SLBFE Bureau Dashboard</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Complaint.css">
+    <link rel="stylesheet" href="assets/css/Page-Content-Interviews.css">
+    <link rel="stylesheet" href="assets/css/Profile-Page-Component.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+</head>
+
+<body style="overflow-x: hidden;overflow-y: hidden;">
+    <div style="height: 100vh;display: flex;">
+        <div class="side-nav">
+            <div class="profile-info">
+                <div class="profile-pic"><img class="img-fluid" id="profileImage" src="assets/img/LilyKi.png" style="border-radius: 100%;"></div>
+                <div class="profile-details"><span id="profileName">Lily Pichu</span><span id="profileDescription">Voice Actor</span></div>
+            </div>
+            <div class="nav-links">
+                <div class="nav-item-rest" onclick="window.location = &#39;index.html&#39;;">
+                    <div class="nav-item-indicator-rest"></div>
+                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/DashboardRest.png" tag="Dashboard"></div>
+                    <div class="nav-item-name"><span>Dashboard</span></div>
+                </div>
+                <div class="nav-item-rest" onclick="window.location = &#39;Citizens.html&#39;;">
+                    <div class="nav-item-indicator-rest"></div>
+                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/CitizenRest.png" tag="Dashboard"></div>
+                    <div class="nav-item-name"><span>Citizens</span></div>
+                </div>
+                <div class="nav-item-active" onclick="window.location = &#39;Companies.html&#39;;">
+                    <div class="nav-item-indicator-active"></div>
+                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/CompanyActive.png" tag="Dashboard"></div>
+                    <div class="nav-item-name"><span>Companies</span></div>
+                </div>
+                <div class="nav-item-rest" onclick="window.location = &#39;Complaints.html&#39;;">
+                    <div class="nav-item-indicator-rest"></div>
+                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/ComplaintsRest.png" tag="Dashboard"></div>
+                    <div class="nav-item-name"><span>Complaints</span></div>
+                </div>
+            </div>
+            <div class="logo"><img class="img-fluid" id="logo-side" src="assets/img/SLBT%20Logo.png"></div>
+        </div>
+        <div class="page-content">
+            <div class="greeting-and-settings">
+                <div class="d-flex flex-row">
+                    <h4>Search Companies</h4>
+                    <div class="hamburger">
+                        <div class="burger-layer"></div>
+                        <div class="burger-layer" onclick="openMenu()"></div>
+                        <div class="burger-layer"></div>
+                    </div>
+                    <div class="search-container"><input type="search" class="search-companies" placeholder="   🔍 Search By Company Name"><button class="btn btn-primary btn-filter" type="button">Add Filter</button></div>
+                </div>
+                <div><img class="notif-button" onmouseover="this.src=&#39;NotifActive.png&#39;" onmouseout="this.src=&#39;NotifRest.png&#39;" src="assets/img/NotifRest.png" style="width: 30px;height: 30px;"><img class="profile-button" src="assets/img/LilyKi.png"></div>
+            </div>
+            <div class="content">
+                <div class="company-list">
+                    <div class="company">
+                        <div class="company-img-container"><img class="img-fluid company-profile-img" src="assets/img/CompanyImage.png"></div>
+                        <div class="company-content">
+                            <div class="company-name-container"><a href="#"><span class="company-name">ABC 7 Chicago</span></a></div>
+                            <div class="company-info-container">
+                                <div class="company-type-container"><span>Television Station</span></div>
+                                <div class="citizen-mobile-container"><span>(312) 750-7070</span></div>
+                                <div class="citizen-city-container"><span>Chicago</span>
+                                    <div class="last-activity-container"><span class="last-actvity">Last Activity : 2 hours ago</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="company">
+                        <div class="company-img-container"><img class="img-fluid company-profile-img" src="assets/img/CompanyImage.png"></div>
+                        <div class="company-content">
+                            <div class="company-name-container"><a href="#"><span class="company-name">ABC 7 Chicago</span></a></div>
+                            <div class="company-info-container">
+                                <div class="company-type-container"><span>Television Station</span></div>
+                                <div class="citizen-mobile-container"><span>(312) 750-7070</span></div>
+                                <div class="citizen-city-container"><span>Chicago</span>
+                                    <div class="last-activity-container"><span class="last-actvity">Last Activity : 2 hours ago</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="company">
+                        <div class="company-img-container"><img class="img-fluid company-profile-img" src="assets/img/CompanyImage.png"></div>
+                        <div class="company-content">
+                            <div class="company-name-container"><a href="#"><span class="company-name">ABC 7 Chicago</span></a></div>
+                            <div class="company-info-container">
+                                <div class="company-type-container"><span>Television Station</span></div>
+                                <div class="citizen-mobile-container"><span>(312) 750-7070</span></div>
+                                <div class="citizen-city-container"><span>Chicago</span>
+                                    <div class="last-activity-container"><span class="last-actvity">Last Activity : 2 hours ago</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="company">
+                        <div class="company-img-container"><img class="img-fluid company-profile-img" src="assets/img/CompanyImage.png"></div>
+                        <div class="company-content">
+                            <div class="company-name-container"><a href="#"><span class="company-name">ABC 7 Chicago</span></a></div>
+                            <div class="company-info-container">
+                                <div class="company-type-container"><span>Television Station</span></div>
+                                <div class="citizen-mobile-container"><span>(312) 750-7070</span></div>
+                                <div class="citizen-city-container"><span>Chicago</span>
+                                    <div class="last-activity-container"><span class="last-actvity">Last Activity : 2 hours ago</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="company">
+                        <div class="company-img-container"><img class="img-fluid company-profile-img" src="assets/img/CompanyImage.png"></div>
+                        <div class="company-content">
+                            <div class="company-name-container"><a href="#"><span class="company-name">ABC 7 Chicago</span></a></div>
+                            <div class="company-info-container">
+                                <div class="company-type-container"><span>Television Station</span></div>
+                                <div class="citizen-mobile-container"><span>(312) 750-7070</span></div>
+                                <div class="citizen-city-container"><span>Chicago</span>
+                                    <div class="last-activity-container"><span class="last-actvity">Last Activity : 2 hours ago</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="company">
+                        <div class="company-img-container"><img class="img-fluid company-profile-img" src="assets/img/CompanyImage.png"></div>
+                        <div class="company-content">
+                            <div class="company-name-container"><a href="#"><span class="company-name">ABC 7 Chicago</span></a></div>
+                            <div class="company-info-container">
+                                <div class="company-type-container"><span>Television Station</span></div>
+                                <div class="citizen-mobile-container"><span>(312) 750-7070</span></div>
+                                <div class="citizen-city-container"><span>Chicago</span>
+                                    <div class="last-activity-container"><span class="last-actvity">Last Activity : 2 hours ago</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="company">
+                        <div class="company-img-container"><img class="img-fluid company-profile-img" src="assets/img/CompanyImage.png"></div>
+                        <div class="company-content">
+                            <div class="company-name-container"><a href="#"><span class="company-name">ABC 7 Chicago</span></a></div>
+                            <div class="company-info-container">
+                                <div class="company-type-container"><span>Television Station</span></div>
+                                <div class="citizen-mobile-container"><span>(312) 750-7070</span></div>
+                                <div class="citizen-city-container"><span>Chicago</span>
+                                    <div class="last-activity-container"><span class="last-actvity">Last Activity : 2 hours ago</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="assets/js/SideNav.js"></script>
+    <script src="assets/js/viwschart.js"></script>
+</body>
+
+</html>
