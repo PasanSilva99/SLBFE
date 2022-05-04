@@ -6,4 +6,5 @@
     "cert": "/SLBFE/https/localhost.pem",
     "key": "/SLBFE/https/localhost.key",
     "passphrase": "slbfe"
+  }
 }
