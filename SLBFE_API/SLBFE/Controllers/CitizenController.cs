@@ -27,14 +27,43 @@ namespace SLBFE.Controllers
             var list = new List<Models.Citizen>();
             var citizenlist = Models.DataStore.GetCitizens();
 
-            foreach (var citizen in citizenlist)
+            if (citizenlist != null)
             {
-                var cit = citizen;
-                cit.Password = "";
-                list.Add(cit);
-            }
+                foreach (var citizen in citizenlist)
+                {
+                    var cit = citizen;
+                    cit.Password = "";
+                    list.Add(cit);
+                }
 
-            return list;
+                return list;
+            }
+            else
+            {
+                return new List<Models.Citizen>();
+            }
+        }
+
+        public List<Models.Citizen> Get(string nationalID)
+        {
+            var list = new List<Models.Citizen>();
+            var citizenlist = Models.DataStore.GetCitizens();
+
+            if (citizenlist != null)
+            {
+                foreach (var citizen in citizenlist)
+                {
+                    var cit = citizen;
+                    cit.Password = "";
+                    list.Add(cit);
+                }
+
+                return list.Where(c => c.NationalID == nationalID).ToList();
+            }
+            else
+            {
+                return new List<Models.Citizen>();
+            }
         }
 
         /// <summary>
@@ -54,9 +83,10 @@ namespace SLBFE.Controllers
         /// Register new Citizen
         /// </summary>
         /// <param name="value">Citizen Data as an Single Citizen Object</param>
-        public void Post([FromBody] Models.Citizen value)
+        public int Post([FromBody] Models.Citizen value)
         {
             Models.DataStore.RegisterCitizen(value);
+            return 200;
         }
 
         /// <summary>
