@@ -1,0 +1,84 @@
+@media (max-width: 300px) {
+  .form-control {
+    border-radius: 1em;
+    margin-bottom: 1.5em;
+    width: 73vw;
+  }
+}
+
+.form-control {
+  border-radius: 1em;
+  margin-bottom: 1.5em;
+  width: 30vw;
+}
+
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #e286fe;
+  outline: 0;
+  box-shadow: -5px 5px 20px .25rem rgba(0, 0, 0, 0.1);
+}
+
+.login-underline {
+  background: linear-gradient(89.42deg, #6D327C 0%, #485DA6 25.52%, #00A1BA 51.04%, #00BF98 74.48%, #36C486 100%);
+  border-radius: 10px;
+  width: 141px;
+  height: 4px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.login-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.login-container {
+  width: 100%;
+  text-align: center;
+}
+
+.login-input-fields {
+}
+
+@media (min-width: 992px) {
+  .login-email {
+    margin-bottom: 40px;
+    width: 30vw;
+  }
+}
+
+.login-input-fields {
+  display: flex;
+  flex-direction: column;
+  margin-top: 26px;
+}
+
+.login-btn {
+  background: linear-gradient(261.5deg, #36C486 0%, #00A1BA 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  width: 10rem;
+}
+
+#forget-password-btn {
+  color: var(--bs-purple);
+}
+
+#new-account-btn {
+  color: var(--bs-purple);
+  font-family: Artifika, serif;
+  cursor: pointer;
+}
+
+.new-user-registration {
+  margin-top: 34px;
+}
+
+#new-account-btn:hover {
+  text-decoration: underline;
+}
+
