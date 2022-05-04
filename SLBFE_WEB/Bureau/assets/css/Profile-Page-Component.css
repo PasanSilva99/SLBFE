@@ -1,0 +1,248 @@
+.registration-name {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-control {
+  border-radius: 1em;
+  margin-bottom: 1.5em !important;
+}
+
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #e286fe;
+  outline: 0;
+  box-shadow: -5px 5px 20px .25rem rgba(0, 0, 0, 0.1);
+}
+
+.form-control:hover {
+  box-shadow: -5px 5px 20px .25rem rgba(0, 0, 0, 0.1);
+}
+
+.lastName {
+  margin-left: 10px;
+}
+
+.input-header {
+  color: gray;
+  font-size: 14px;
+}
+
+@media screen and (max-width: 700px) {
+  .side-nav {
+    min-height: 0 !important;
+    min-width: 0 !important;
+    width: 0px !important;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .page-content .content {
+    flex-direction: column !important;
+  }
+}
+
+.side-nav {
+  min-width: 280px;
+  background: linear-gradient( 180deg, #EBFFF6 0%, #FAE4FF 100%);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  max-width: 280px;
+}
+
+.page-content {
+  width: 100%;
+  height: 99vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  padding-left: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.profile-info {
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 10px;
+  flex-direction: row;
+}
+
+.nav-links {
+  height: 100%;
+}
+
+.logo {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.profile-pic {
+  width: 70px;
+  margin-right: 0.5rem;
+  min-width: 70px;
+}
+
+.profile-pic img {
+  height: 70px;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  max-width: 180px;
+}
+
+#profileName, #profileDescription {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#profileName {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#logo-side {
+  width: 100px;
+  height: 100px;
+}
+
+.nav-item-active, .nav-item-rest {
+  margin-bottom: 0.5rem;
+  transition: all 1s;
+}
+
+.nav-item-rest {
+  display: flex;
+  flex-direction: row;
+  background: rgba(255, 255, 255, 0.1);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  opacity: 0.7;
+}
+
+.nav-item-rest:hover, .nav-item-active:hover {
+  display: flex;
+  flex-direction: row;
+  background: rgba(244, 204, 251, 0.9);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  opacity: 1;
+}
+
+.nav-item-indicator-rest {
+  background: rgba(137, 43, 226, 0);
+  width: 0.45rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.nav-item-icon {
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  margin-right: 10px;
+}
+
+.nav-item-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.nav-item-name {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.greeting-and-settings {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.greeting-and-settings img {
+  width: 45px;
+  height: 45px;
+  margin-left: 10px;
+}
+
+.profile-button {
+  border-radius: 100%;
+}
+
+.page-content .content {
+  height: 100%;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-pic-section, .profile-details-section, .cards-section {
+  margin: 0.5em;
+  height: 90%;
+}
+
+.profile-pic-section {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-details-section {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cards-section {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-image {
+  border-radius: 20px;
+  box-shadow: -5px 6px 20px rgba(0, 0, 0, 0.1);
+  border: #ffffff00 solid 1px;
+  transition: all 2s;
+}
+
+.profile-image:hover {
+  border-radius: 20px;
+  box-shadow: -5px 6px 20px rgba(0, 0, 0, 0.2);
+  border: #FD66FF solid 1px;
+}
+
+.btn-purple {
+  border-radius: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+  background: linear-gradient(261.5deg, #7B61FF 0%, #485DA6 100%);
+  margin-top: 1em;
+  border-width: 0;
+  transition: all 1s;
+}
+
+.btn-purple:hover {
+  box-shadow: -5px 5px 20px .25rem rgba(0, 0, 0, 0.2);
+  border-width: 0;
+}
+
+.btn-purple:focus {
+  box-shadow: -5px 5px 20px .25rem rgba(255, 0, 230, 0.2);
+  border-width: 0;
+}
+

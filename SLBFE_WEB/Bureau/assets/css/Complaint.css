@@ -1,0 +1,74 @@
+.complaint {
+  background: white;
+  min-height: 100px;
+  max-height: 150px;
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  border-radius: 10px;
+  transition: all 1s;
+  margin-bottom: 20px;
+}
+
+.complaint:hover {
+  box-shadow: -5px 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.complaint-profile {
+  width: 60px;
+}
+
+.complaint-content {
+  margin-left: 10px;
+  width: 100%;
+}
+
+.complaint-profile-image {
+  width: 45px;
+  border-radius: 100%;
+  margin: 5px;
+}
+
+.complaint-username-date {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.complaint-username {
+  color: #000;
+  font-weight: bold;
+}
+
+.complaint-date {
+  margin-left: 1rem;
+  font-size: 14px;
+  color: grey;
+}
+
+.complaint-company {
+  color: #0195ff;
+}
+
+.complaint-body p {
+  max-height: 50px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin: 0;
+  margin-left: 10px;
+}
+
+.complaint-time-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  font-size: 14px;
+  color: grey;
+}
+
+a {
+  text-decoration: none;
+}
+
