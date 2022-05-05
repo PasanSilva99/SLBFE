@@ -89,6 +89,20 @@ namespace SLBFE.Controllers
         }
 
 
+
+        /// <summary>
+        /// Updates the citizen's validation
+        /// </summary>
+        /// <param name="validationData"></param>
+        /// <returns></returns>
+        // POST: api/Bureau
+        public int Post([FromBody] Models.UserValidation validationData)
+        {
+            return Models.DataStore.ValidateCitizen(validationData);
+        }
+
+
+
         /// <summary>
         /// DELETE Request
         /// </summary>
