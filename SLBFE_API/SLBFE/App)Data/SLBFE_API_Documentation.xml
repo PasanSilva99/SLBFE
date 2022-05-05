@@ -531,6 +531,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SLBFE.Controllers.BureauController.Get(System.String)">
+            <summary>
+            Returns the Officer Details According to the NationalID 
+            </summary>
+            <param name="nationalID"></param>
+            <returns></returns>
+        </member>
         <member name="M:SLBFE.Controllers.BureauController.Post(SLBFE.Models.Bureau)">
             <summary>
             POST Request
@@ -820,6 +827,20 @@
             <param name="requestedBy">Employee ID of the Officer that os requested this</param>
             <returns></returns>
         </member>
+        <member name="M:SLBFE.Models.DataStore.ValidateCitizen(SLBFE.Models.UserValidation)">
+            <summary>
+            Updates the validation request of the citizen
+            </summary>
+            <param name="validationData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SLBFE.Models.DataStore.ValidateCitizen(System.String)">
+            <summary>
+            Updates the validation request of the citizen
+            </summary>
+            <param name="validationData"></param>
+            <returns></returns>
+        </member>
         <member name="M:SLBFE.Models.DataStore.GetCitizens">
             <summary>
             Get all Citizens from the database
@@ -972,6 +993,31 @@
         <member name="P:SLBFE.Models.User.ZipCode">
             <summary>
             Zip code of the user
+            </summary>
+        </member>
+        <member name="T:SLBFE.Models.UserValidation">
+            <summary>
+            The user validation Data object
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.UserValidation.NationalID">
+            <summary>
+            National ID of the user
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.UserValidation.IsApproved">
+            <summary>
+            Is this account approoved?
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.UserValidation.Changes">
+            <summary>
+            Is there any changes to be made?
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.UserValidation.EmployeeID">
+            <summary>
+            Who checked this account
             </summary>
         </member>
     </members>
