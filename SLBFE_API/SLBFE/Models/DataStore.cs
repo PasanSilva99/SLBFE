@@ -113,7 +113,13 @@ namespace SLBFE.Models
                         "AddressL2 TEXT, " +
                         "StateProvince TEXT, " +
                         "City TEXT, " +
-                        "ZipCode TEXT );";
+                        "ZipCode TEXT );" +
+                    "CREATE TABLE IF NOT EXISTS " +
+                    "UserValidation (" +
+                        "NationalID TEXT, " +
+                        "isApproved TEXT, " +
+                        "Changes TEXT, " +
+                        "EmoployeeID TEXT );";
 
 
                     SQLiteCommand initCommand = new SQLiteCommand(dbScript, con);
@@ -137,6 +143,7 @@ namespace SLBFE.Models
             }
         }
 
+        #region Bureau Functions
 
         /// <summary>
         /// Get all Bureau Officers from the database
@@ -392,6 +399,127 @@ namespace SLBFE.Models
         }
 
         /// <summary>
+        /// Updates the validation request of the citizen
+        /// </summary>
+        /// <param name="validationData"></param>
+        /// <returns></returns>
+        public static int ValidateCitizen(UserValidation validationData)
+        {
+            Log($"Validation Request Update For {validationData.NationalID}");
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                con.Open();
+                string insertQuarry = "" +
+                    "UPDATE " +
+                        "UserValidation " +
+                    "SET " +
+                        "isApproved=@isapproved, " +
+                        "@Changes=changes, " +
+                        "EmoployeeID=@employeeID " +
+                    "WHERE " +
+                        "NationalID=@nationalID;";
+
+                SQLiteCommand insertCommand = new SQLiteCommand(insertQuarry, con);
+                insertCommand.Parameters.AddWithValue("@nationalID", validationData.NationalID);
+                insertCommand.Parameters.AddWithValue("@isapproved", validationData.IsApproved ? 1 : 0);
+                insertCommand.Parameters.AddWithValue("@changes", validationData.Changes);
+                insertCommand.Parameters.AddWithValue("@employeeID", validationData.EmployeeID);
+
+                var affRows = insertCommand.ExecuteNonQuery();
+
+                if (affRows > 0)
+                {
+                    Log($"Validation Request Update For {validationData.NationalID} Saved Successfully");
+                    return 1;
+                }
+            }
+
+
+            // The is an un identified Error
+            Log("Unrecognized Error in the user validation data");
+            return 0;
+        }
+
+        /// <summary>
+        /// Updates the validation request of the citizen
+        /// </summary>
+        /// <param name="nationalID"></param>
+        /// <returns></returns>
+        private static int ValidateCitizen(string nationalID)
+        {
+            Log($"Validation Request Update For {nationalID}");
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                con.Open();
+                string insertQuarry = "" +
+                    "UPDATE " +
+                        "UserValidation " +
+                    "SET " +
+                        "isApproved=@isapproved, " +
+                        "@Changes=changes, " +
+                        "EmoployeeID=@employeeID " +
+                    "WHERE " +
+                        "NationalID=@nationalID;";
+
+                SQLiteCommand insertCommand = new SQLiteCommand(insertQuarry, con);
+                insertCommand.Parameters.AddWithValue("@nationalID", nationalID);
+                insertCommand.Parameters.AddWithValue("@isapproved", 0);
+                insertCommand.Parameters.AddWithValue("@changes", "");
+                insertCommand.Parameters.AddWithValue("@employeeID", "");
+
+                var affRows = insertCommand.ExecuteNonQuery();
+
+                if (affRows > 0)
+                {
+                    Log($"Validation Request Update For {nationalID} Saved Successfully");
+                    return 1;
+                }
+            }
+
+
+            // The is an un identified Error
+            Log("Unrecognized Error in the user validation data");
+            return 0;
+        }
+
+        private static int DeleteValidationRequest(string nationalID, string employeeID)
+        {
+            Log($"Validate Request Data Deletion Requested for account {nationalID} by {employeeID}");
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                con.Open();
+                string insertQuarry = "" +
+                    "DELETE FROM " +
+                        "UserValidation " +
+                    "WHERE " +
+                        "NationalID=@nationalID;";
+
+                SQLiteCommand insertCommand = new SQLiteCommand(insertQuarry, con);
+                insertCommand.Parameters.AddWithValue("@nationalID", nationalID);
+
+                var affRows = insertCommand.ExecuteNonQuery();
+
+                if (affRows > 0)
+                {
+                    Log($"Successfully Deleted Validation Data for {nationalID} as requested by {employeeID}");
+                    return 1;
+                }
+            }
+
+
+            // The is an un identified Error
+            Log("Unrecognized Error in the user validation data");
+            return 0;
+        }
+
+        #endregion
+
+        #region Citizen Functions
+
+        /// <summary>
         /// Get all Citizens from the database
         /// </summary>
         /// <returns>Retuns all the users as a list of Citizens</returns>
@@ -568,6 +696,9 @@ namespace SLBFE.Models
                     if (affRows > 0)  // if it is an successfull registration
                     {
                         Log($"Successfully Registred User {citizen.Email}");
+
+                        NewValidationRequest(citizen.NationalID);
+
                     }
 
                     return affRows > 0 ? affRows : -1;  // if affected rows is larger than 0 return the affected rows number else return -1 in indicate it is an error
@@ -694,6 +825,7 @@ namespace SLBFE.Models
                     if (affRows > 0)  // if it is an successfull registration
                     {
                         Log($"Successfully Updated User {citizen.Email}");
+                        ValidateCitizen(citizen.NationalID);
                     }
 
                     return affRows > 0 ? affRows : -1;  // if affected rows is larger than 0 return the affected rows number else return -1 in indicate it is an error
@@ -739,6 +871,7 @@ namespace SLBFE.Models
                     if (affRows > 0)  // if it is an successfull deletion
                     {
                         Log($"Successfully Deleted User {nationalID} for the Request by {requestedBy}");
+                        DeleteValidationRequest(nationalID, requestedBy);
                     }
 
                     return affRows > 0 ? affRows : -1;
@@ -760,6 +893,33 @@ namespace SLBFE.Models
             return -2;
         }
 
+        private static bool NewValidationRequest(string nationalID)
+        {
+            Log($"New Validation Request For {nationalID}");
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                con.Open();
+                string insertQuarry = "INSERT INTO UserValidation VALUES(@nationalID, @isapproved, @changes, @employeeID)";
+                SQLiteCommand insertCommand = new SQLiteCommand(insertQuarry, con);
+                insertCommand.Parameters.AddWithValue("@nationalID", nationalID);
+                insertCommand.Parameters.AddWithValue("@isapproved", 0);
+                insertCommand.Parameters.AddWithValue("@changes", "");
+                insertCommand.Parameters.AddWithValue("@employeeID", "");
+
+                var affRows = insertCommand.ExecuteNonQuery();
+
+                if (affRows > 0)
+                {
+                    Log($"New Validation Request For {nationalID} Saved Successfully");
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        #endregion
 
         #region Commpany DB Functions
 
