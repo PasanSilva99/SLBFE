@@ -182,6 +182,29 @@ namespace SLBFE.Models
             }
         }
 
+        internal static int IsCitizen(string email)
+        {
+            var list = new List<Citizen>();
+            var citizenlist = GetCitizens();
+
+            if (citizenlist != null)
+            {
+                foreach (var citizen in citizenlist)
+                {
+                    var cit = citizen;
+                    cit.Password = "";
+                    list.Add(cit);
+                }
+
+                return list.Where(c => c.Email == email).ToList().Count();
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
         #region Bureau Functions
 
         /// <summary>
