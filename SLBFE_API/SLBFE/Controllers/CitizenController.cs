@@ -12,6 +12,18 @@ namespace SLBFE.Controllers
     /// </summary>
     public class CitizenController : ApiController
     {
+        /// <summary>
+        /// This is intended for debugging purposes. 
+        /// This will return the saved log of this server
+        /// </summary>
+        /// <returns>Complete Log File</returns>
+        [Route("api/ViewLog")]
+        [HttpGet]
+        public string ViewLog()
+        {
+            return Models.DataStore.GetLog();
+        }
+
         //// GET: api/Citizen
         //public IEnumerable<string> Get()
         //{

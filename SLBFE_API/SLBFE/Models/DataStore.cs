@@ -21,6 +21,15 @@ namespace SLBFE.Models
         public static string DatabaseName = "SLBFE.db";
 
         /// <summary>
+        /// This will return the saved log file
+        /// </summary>
+        /// <returns></returns>
+        internal static string GetLog()
+        {
+            return File.ReadAllText(LogFilePath);
+        }
+
+        /// <summary>
         /// Path of the database
         /// </summary>
         public static string DatabasePath = Path.Combine("SLBFE_Data", DatabaseName);
