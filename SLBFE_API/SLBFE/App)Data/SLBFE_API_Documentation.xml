@@ -930,7 +930,7 @@
             This handles tha data from the login page
             </summary>
         </member>
-        <member name="P:SLBFE.Models.LoginData.Username">
+        <member name="P:SLBFE.Models.LoginData.Email">
             <summary>
             Username of the user
             </summary>

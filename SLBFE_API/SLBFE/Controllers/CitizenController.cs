@@ -90,6 +90,13 @@ namespace SLBFE.Controllers
             return 210;
         }
 
+        [Route("api/isCitizen")]
+        [HttpGet]
+        public int isCitizen(string email)
+        {
+            return Models.DataStore.IsCitizen(email);
+        }
+
         /// <summary>
         /// POST Request 
         /// Register new Citizen
