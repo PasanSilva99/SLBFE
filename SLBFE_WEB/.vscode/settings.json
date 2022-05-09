@@ -2,7 +2,7 @@
   "liveServer.settings.port": 5501,
   "liveServer.settings.root": "/",
   "liveServer.settings.https": {
-    "enable": true,
+    "enable": false,
     "cert": "/SLBFE/https/localhost.pem",
     "key": "/SLBFE/https/localhost.key",
     "passphrase": "slbfe"

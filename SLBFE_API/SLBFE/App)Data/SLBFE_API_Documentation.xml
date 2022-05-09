@@ -551,6 +551,13 @@
             <param name="value">Officer data as an single Officer object</param>
             <param name="employeeID">Officer data as an single Officer object</param>
         </member>
+        <member name="M:SLBFE.Controllers.BureauController.Post(SLBFE.Models.UserValidation)">
+            <summary>
+            Updates the citizen's validation
+            </summary>
+            <param name="validationData"></param>
+            <returns></returns>
+        </member>
         <member name="M:SLBFE.Controllers.BureauController.Delete(System.String,System.String)">
             <summary>
             DELETE Request
@@ -838,7 +845,7 @@
             <summary>
             Updates the validation request of the citizen
             </summary>
-            <param name="validationData"></param>
+            <param name="nationalID"></param>
             <returns></returns>
         </member>
         <member name="M:SLBFE.Models.DataStore.GetCitizens">

@@ -88,8 +88,6 @@ namespace SLBFE.Controllers
             Models.DataStore.UpdateOfficer(employeeID, value);
         }
 
-
-
         /// <summary>
         /// Updates the citizen's validation
         /// </summary>
@@ -100,8 +98,6 @@ namespace SLBFE.Controllers
         {
             return Models.DataStore.ValidateCitizen(validationData);
         }
-
-
 
         /// <summary>
         /// DELETE Request
