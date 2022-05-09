@@ -24,9 +24,9 @@ namespace SLBFE.Models
         /// This will return the saved log file
         /// </summary>
         /// <returns></returns>
-        internal static string GetLog()
+        internal static string[] GetLog()
         {
-            return File.ReadAllText(LogFilePath);
+            return File.ReadAllLines(LogFilePath);
         }
 
         /// <summary>

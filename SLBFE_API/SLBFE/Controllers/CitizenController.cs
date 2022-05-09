@@ -19,7 +19,7 @@ namespace SLBFE.Controllers
         /// <returns>Complete Log File</returns>
         [Route("api/ViewLog")]
         [HttpGet]
-        public string ViewLog()
+        public string[] ViewLog()
         {
             return Models.DataStore.GetLog();
         }
