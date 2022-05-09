@@ -575,7 +575,7 @@
             This is intended for debugging purposes. 
             This will return the saved log of this server
             </summary>
-            <returns></returns>
+            <returns>Complete Log File</returns>
         </member>
         <member name="M:SLBFE.Controllers.CitizenController.Get">
             <summary>
