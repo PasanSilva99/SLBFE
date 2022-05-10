@@ -94,10 +94,13 @@ namespace SLBFE.Controllers
         /// <param name="validationData"></param>
         /// <returns></returns>
         // POST: api/Bureau
+        [Route("api/ValidateUser")]
+        [HttpPost]
         public int Post([FromBody] Models.UserValidation validationData)
         {
             return Models.DataStore.ValidateCitizen(validationData);
         }
+        
         [Route("api/isOfficer")]
         [HttpGet]
         public int isOfficer(string email)
