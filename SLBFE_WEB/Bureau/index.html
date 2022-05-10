@@ -1,328 +1,775 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
     <title>SLBFE Bureau Dashboard</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Complaint.css">
-    <link rel="stylesheet" href="assets/css/Page-Content-Interviews.css">
-    <link rel="stylesheet" href="assets/css/Profile-Page-Component.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/untitled.css">
-</head>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/Complaint.css" />
+    <link rel="stylesheet" href="assets/css/Page-Content-Interviews.css" />
+    <link rel="stylesheet" href="assets/css/Profile-Page-Component.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/untitled.css" />
+  </head>
 
-<body style="overflow-x: hidden;overflow-y: hidden;">
-    <div style="height: 100vh;display: flex;">
-        <div class="side-nav">
-            <div class="profile-info">
-                <div class="profile-pic"><img class="img-fluid" id="profileImage" src="assets/img/LilyKi.png" style="border-radius: 100%;"></div>
-                <div class="profile-details"><span id="profileName">Lily Pichu</span><span id="profileDescription">Voice Actor</span></div>
-            </div>
-            <div class="nav-links">
-                <div class="nav-item-active">
-                    <div class="nav-item-indicator-active"></div>
-                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/DashboardActive.png" tag="Dashboard"></div>
-                    <div class="nav-item-name"><span>Dashboard</span></div>
-                </div>
-                <div class="nav-item-rest" onclick="window.location = &#39;Citizens.html&#39;;">
-                    <div class="nav-item-indicator-rest"></div>
-                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/CitizenRest.png" tag="Dashboard"></div>
-                    <div class="nav-item-name"><span>Citizens</span></div>
-                </div>
-                <div class="nav-item-rest" onclick="window.location = &#39;Companies.html&#39;;">
-                    <div class="nav-item-indicator-rest"></div>
-                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/CompaniesRest.png" tag="Dashboard"></div>
-                    <div class="nav-item-name"><span>Companies</span></div>
-                </div>
-                <div class="nav-item-rest" onclick="window.location = &#39;Complaints.html&#39;;">
-                    <div class="nav-item-indicator-rest"></div>
-                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/ComplaintsRest.png" tag="Dashboard"></div>
-                    <div class="nav-item-name"><span>Complaints</span></div>
-                </div>
-            </div>
-            <div class="logo"><img class="img-fluid" id="logo-side" src="assets/img/SLBT%20Logo.png"></div>
+  <body style="overflow-x: hidden; overflow-y: hidden">
+    <div style="height: 100vh; display: flex" id="user-interface"></div>
+    <div style="height: 100vh; display: flex">
+      <div class="side-nav">
+        <div class="profile-info">
+          <div class="profile-pic">
+            <img
+              class="img-fluid"
+              id="profileImage"
+              src="assets/img/LilyKi.png"
+              style="border-radius: 100%"
+            />
+          </div>
+          <div class="profile-details">
+            <span id="profileName">Lily Pichu</span
+            ><span id="profileDescription">Voice Actor</span>
+          </div>
         </div>
-        <div class="page-content">
-            <div class="greeting-and-settings">
-                <h4>Hello, Lily Pichu</h4>
-                <div><img class="notif-button" onmouseover="this.src=&#39;NotifActive.png&#39;" onmouseout="this.src=&#39;NotifRest.png&#39;" src="assets/img/NotifRest.png" style="width: 30px;height: 30px;"><img class="profile-button" src="assets/img/LilyKi.png"></div>
+        <div class="nav-links">
+          <div class="nav-item-active">
+            <div class="nav-item-indicator-active"></div>
+            <div class="nav-item-icon">
+              <img
+                class="img-fluid img-nav-item"
+                src="assets/img/DashboardActive.png"
+                tag="Dashboard"
+              />
             </div>
-            <div class="content">
-                <div class="glance">
-                    <div class="cards">
-                        <div class="card-primary">
-                            <div class="card-content"><span class="card-title">Monthly Verification Requests<br></span><span class="card-value">153</span>
-                                <div class="progressbar-container">
-                                    <div class="progress-base">
-                                        <div class="progress-fill"></div>
-                                    </div>
-                                    <div><span class="verified-count">138 Verified</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-secondary">
-                            <div class="card-content"><span class="card-title">Monthly Recruits<br></span><span class="card-value">136</span></div>
-                        </div>
-                    </div>
-                    <div class="complaints">
-                        <h5>Recent Complaints</h5>
-                        <div class="complaints-scroll">
-                            <div class="complaint">
-                                <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                                <div class="complaint-content">
-                                    <div class="complaint-username-date">
-                                        <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a><span class="complaint-date">4/17/2022</span></div>
-                                        <div><a href="#"><span class="complaint-company">ABC Company</span></a></div>
-                                    </div>
-                                    <div class="complaint-body">
-                                        <p>The roles of employees are ambiguously-defined. They are not clear about preciese roles and responsibilities of the employees.<br></p>
-                                    </div>
-                                    <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
-                                </div>
-                            </div>
-                            <div class="complaint">
-                                <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                                <div class="complaint-content">
-                                    <div class="complaint-username-date">
-                                        <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a><span class="complaint-date">4/17/2022</span></div>
-                                        <div><a href="#"><span class="complaint-company">ABC Company</span></a></div>
-                                    </div>
-                                    <div class="complaint-body">
-                                        <p>The roles of employees are ambiguously-defined. They are not clear about preciese roles and responsibilities of the employees.<br></p>
-                                    </div>
-                                    <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
-                                </div>
-                            </div>
-                            <div class="complaint">
-                                <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                                <div class="complaint-content">
-                                    <div class="complaint-username-date">
-                                        <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a><span class="complaint-date">4/17/2022</span></div>
-                                        <div><a href="#"><span class="complaint-company">ABC Company</span></a></div>
-                                    </div>
-                                    <div class="complaint-body">
-                                        <p>The roles of employees are ambiguously-defined. They are not clear about preciese roles and responsibilities of the employees.<br></p>
-                                    </div>
-                                    <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
-                                </div>
-                            </div>
-                            <div class="complaint">
-                                <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                                <div class="complaint-content">
-                                    <div class="complaint-username-date">
-                                        <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a><span class="complaint-date">4/17/2022</span></div>
-                                        <div><a href="#"><span class="complaint-company">ABC Company</span></a></div>
-                                    </div>
-                                    <div class="complaint-body">
-                                        <p>The roles of employees are ambiguously-defined. They are not clear about preciese roles and responsibilities of the employees.<br></p>
-                                    </div>
-                                    <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
-                                </div>
-                            </div>
-                            <div class="complaint">
-                                <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                                <div class="complaint-content">
-                                    <div class="complaint-username-date">
-                                        <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a><span class="complaint-date">4/17/2022</span></div>
-                                        <div><a href="#"><span class="complaint-company">ABC Company</span></a></div>
-                                    </div>
-                                    <div class="complaint-body">
-                                        <p>The roles of employees are ambiguously-defined. They are not clear about preciese roles and responsibilities of the employees.<br></p>
-                                    </div>
-                                    <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
-                                </div>
-                            </div>
-                            <div class="complaint">
-                                <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                                <div class="complaint-content">
-                                    <div class="complaint-username-date">
-                                        <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a><span class="complaint-date">4/17/2022</span></div>
-                                        <div><a href="#"><span class="complaint-company">ABC Company</span></a></div>
-                                    </div>
-                                    <div class="complaint-body">
-                                        <p>The roles of employees are ambiguously-defined. They are not clear about preciese roles and responsibilities of the employees.<br></p>
-                                    </div>
-                                    <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
-                                </div>
-                            </div>
-                            <div class="complaint">
-                                <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                                <div class="complaint-content">
-                                    <div class="complaint-username-date">
-                                        <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a><span class="complaint-date">4/17/2022</span></div>
-                                        <div><a href="#"><span class="complaint-company">ABC Company</span></a></div>
-                                    </div>
-                                    <div class="complaint-body">
-                                        <p>The roles of employees are ambiguously-defined. They are not clear about preciese roles and responsibilities of the employees.<br></p>
-                                    </div>
-                                    <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
-                                </div>
-                            </div>
-                            <div class="complaint">
-                                <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                                <div class="complaint-content">
-                                    <div class="complaint-username-date">
-                                        <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a><span class="complaint-date">4/17/2022</span></div>
-                                        <div><a href="#"><span class="complaint-company">ABC Company</span></a></div>
-                                    </div>
-                                    <div class="complaint-body">
-                                        <p>The roles of employees are ambiguously-defined. They are not clear about preciese roles and responsibilities of the employees.<br></p>
-                                    </div>
-                                    <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
-                                </div>
-                            </div>
-                            <div class="complaint">
-                                <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                                <div class="complaint-content">
-                                    <div class="complaint-username-date">
-                                        <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a><span class="complaint-date">4/17/2022</span></div>
-                                        <div><a href="#"><span class="complaint-company">ABC Company</span></a></div>
-                                    </div>
-                                    <div class="complaint-body">
-                                        <p>The roles of employees are ambiguously-defined. They are not clear about preciese roles and responsibilities of the employees.<br></p>
-                                    </div>
-                                    <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
-                                </div>
-                            </div>
-                            <div class="complaint">
-                                <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                                <div class="complaint-content">
-                                    <div class="complaint-username-date">
-                                        <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a><span class="complaint-date">4/17/2022</span></div>
-                                        <div><a href="#"><span class="complaint-company">ABC Company</span></a></div>
-                                    </div>
-                                    <div class="complaint-body">
-                                        <p>The roles of employees are ambiguously-defined. They are not clear about preciese roles and responsibilities of the employees.<br></p>
-                                    </div>
-                                    <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="requests">
-                    <h5>Recent Verification Requests</h5>
-                    <div class="complaints-scroll">
-                        <div class="request-content">
-                            <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                            <div class="complaint-content">
-                                <div class="complaint-username-date">
-                                    <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a></div>
-                                </div>
-                                <div class="request-time-wrap"><span class="request-date">4/17/2022</span><span class="request-time">2 hours ago</span></div>
-                            </div>
-                        </div>
-                        <div class="request-content">
-                            <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                            <div class="complaint-content">
-                                <div class="complaint-username-date">
-                                    <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a></div>
-                                </div>
-                                <div class="request-time-wrap"><span class="request-date">4/17/2022</span><span class="request-time">2 hours ago</span></div>
-                            </div>
-                        </div>
-                        <div class="request-content">
-                            <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                            <div class="complaint-content">
-                                <div class="complaint-username-date">
-                                    <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a></div>
-                                </div>
-                                <div class="request-time-wrap"><span class="request-date">4/17/2022</span><span class="request-time">2 hours ago</span></div>
-                            </div>
-                        </div>
-                        <div class="request-content">
-                            <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                            <div class="complaint-content">
-                                <div class="complaint-username-date">
-                                    <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a></div>
-                                </div>
-                                <div class="request-time-wrap"><span class="request-date">4/17/2022</span><span class="request-time">2 hours ago</span></div>
-                            </div>
-                        </div>
-                        <div class="request-content">
-                            <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                            <div class="complaint-content">
-                                <div class="complaint-username-date">
-                                    <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a></div>
-                                </div>
-                                <div class="request-time-wrap"><span class="request-date">4/17/2022</span><span class="request-time">2 hours ago</span></div>
-                            </div>
-                        </div>
-                        <div class="request-content">
-                            <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                            <div class="complaint-content">
-                                <div class="complaint-username-date">
-                                    <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a></div>
-                                </div>
-                                <div class="request-time-wrap"><span class="request-date">4/17/2022</span><span class="request-time">2 hours ago</span></div>
-                            </div>
-                        </div>
-                        <div class="request-content">
-                            <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                            <div class="complaint-content">
-                                <div class="complaint-username-date">
-                                    <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a></div>
-                                </div>
-                                <div class="request-time-wrap"><span class="request-date">4/17/2022</span><span class="request-time">2 hours ago</span></div>
-                            </div>
-                        </div>
-                        <div class="request-content">
-                            <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                            <div class="complaint-content">
-                                <div class="complaint-username-date">
-                                    <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a></div>
-                                </div>
-                                <div class="request-time-wrap"><span class="request-date">4/17/2022</span><span class="request-time">2 hours ago</span></div>
-                            </div>
-                        </div>
-                        <div class="request-content">
-                            <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                            <div class="complaint-content">
-                                <div class="complaint-username-date">
-                                    <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a></div>
-                                </div>
-                                <div class="request-time-wrap"><span class="request-date">4/17/2022</span><span class="request-time">2 hours ago</span></div>
-                            </div>
-                        </div>
-                        <div class="request-content">
-                            <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                            <div class="complaint-content">
-                                <div class="complaint-username-date">
-                                    <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a></div>
-                                </div>
-                                <div class="request-time-wrap"><span class="request-date">4/17/2022</span><span class="request-time">2 hours ago</span></div>
-                            </div>
-                        </div>
-                        <div class="request-content">
-                            <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                            <div class="complaint-content">
-                                <div class="complaint-username-date">
-                                    <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a></div>
-                                </div>
-                                <div class="request-time-wrap"><span class="request-date">4/17/2022</span><span class="request-time">2 hours ago</span></div>
-                            </div>
-                        </div>
-                        <div class="request-content">
-                            <div class="complaint-profile"><img class="img-fluid complaint-profile-image" src="assets/img/LilyKi.png"></div>
-                            <div class="complaint-content">
-                                <div class="complaint-username-date">
-                                    <div><a href="#"><span class="complaint-username">John Lenin&nbsp;</span></a></div>
-                                </div>
-                                <div class="request-time-wrap"><span class="request-date">4/17/2022</span><span class="request-time">2 hours ago</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="nav-item-name"><span>Dashboard</span></div>
+          </div>
+          <div
+            class="nav-item-rest"
+            onclick="window.location = &#39;Citizens.html&#39;;"
+          >
+            <div class="nav-item-indicator-rest"></div>
+            <div class="nav-item-icon">
+              <img
+                class="img-fluid img-nav-item"
+                src="assets/img/CitizenRest.png"
+                tag="Dashboard"
+              />
             </div>
+            <div class="nav-item-name"><span>Citizens</span></div>
+          </div>
+          <div
+            class="nav-item-rest"
+            onclick="window.location = &#39;Companies.html&#39;;"
+          >
+            <div class="nav-item-indicator-rest"></div>
+            <div class="nav-item-icon">
+              <img
+                class="img-fluid img-nav-item"
+                src="assets/img/CompaniesRest.png"
+                tag="Dashboard"
+              />
+            </div>
+            <div class="nav-item-name"><span>Companies</span></div>
+          </div>
+          <div
+            class="nav-item-rest"
+            onclick="window.location = &#39;Complaints.html&#39;;"
+          >
+            <div class="nav-item-indicator-rest"></div>
+            <div class="nav-item-icon">
+              <img
+                class="img-fluid img-nav-item"
+                src="assets/img/ComplaintsRest.png"
+                tag="Dashboard"
+              />
+            </div>
+            <div class="nav-item-name"><span>Complaints</span></div>
+          </div>
         </div>
+        <div class="logo">
+          <img
+            class="img-fluid"
+            id="logo-side"
+            src="assets/img/SLBT%20Logo.png"
+          />
+        </div>
+      </div>
+      <div class="page-content">
+        <div class="greeting-and-settings">
+          <h4>Hello, Lily Pichu</h4>
+          <div>
+            <img
+              class="notif-button"
+              onmouseover="this.src=&#39;NotifActive.png&#39;"
+              onmouseout="this.src=&#39;NotifRest.png&#39;"
+              src="assets/img/NotifRest.png"
+              style="width: 30px; height: 30px"
+            /><img class="profile-button" src="assets/img/LilyKi.png" />
+          </div>
+        </div>
+        <div class="content">
+          <div class="glance">
+            <div class="cards">
+              <div class="card-primary">
+                <div class="card-content">
+                  <span class="card-title"
+                    >Monthly Verification Requests<br /></span
+                  ><span class="card-value">153</span>
+                  <div class="progressbar-container">
+                    <div class="progress-base">
+                      <div class="progress-fill"></div>
+                    </div>
+                    <div><span class="verified-count">138 Verified</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-secondary">
+                <div class="card-content">
+                  <span class="card-title">Monthly Recruits<br /></span
+                  ><span class="card-value">136</span>
+                </div>
+              </div>
+            </div>
+            <div class="complaints">
+              <h5>Recent Complaints</h5>
+              <div class="complaints-scroll">
+                <div class="complaint">
+                  <div class="complaint-profile">
+                    <img
+                      class="img-fluid complaint-profile-image"
+                      src="assets/img/LilyKi.png"
+                    />
+                  </div>
+                  <div class="complaint-content">
+                    <div class="complaint-username-date">
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-username"
+                            >John Lenin&nbsp;</span
+                          ></a
+                        ><span class="complaint-date">4/17/2022</span>
+                      </div>
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-company">ABC Company</span></a
+                        >
+                      </div>
+                    </div>
+                    <div class="complaint-body">
+                      <p>
+                        The roles of employees are ambiguously-defined. They are
+                        not clear about preciese roles and responsibilities of
+                        the employees.<br />
+                      </p>
+                    </div>
+                    <div class="complaint-time-wrap">
+                      <span class="complaint-time">2 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="complaint">
+                  <div class="complaint-profile">
+                    <img
+                      class="img-fluid complaint-profile-image"
+                      src="assets/img/LilyKi.png"
+                    />
+                  </div>
+                  <div class="complaint-content">
+                    <div class="complaint-username-date">
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-username"
+                            >John Lenin&nbsp;</span
+                          ></a
+                        ><span class="complaint-date">4/17/2022</span>
+                      </div>
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-company">ABC Company</span></a
+                        >
+                      </div>
+                    </div>
+                    <div class="complaint-body">
+                      <p>
+                        The roles of employees are ambiguously-defined. They are
+                        not clear about preciese roles and responsibilities of
+                        the employees.<br />
+                      </p>
+                    </div>
+                    <div class="complaint-time-wrap">
+                      <span class="complaint-time">2 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="complaint">
+                  <div class="complaint-profile">
+                    <img
+                      class="img-fluid complaint-profile-image"
+                      src="assets/img/LilyKi.png"
+                    />
+                  </div>
+                  <div class="complaint-content">
+                    <div class="complaint-username-date">
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-username"
+                            >John Lenin&nbsp;</span
+                          ></a
+                        ><span class="complaint-date">4/17/2022</span>
+                      </div>
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-company">ABC Company</span></a
+                        >
+                      </div>
+                    </div>
+                    <div class="complaint-body">
+                      <p>
+                        The roles of employees are ambiguously-defined. They are
+                        not clear about preciese roles and responsibilities of
+                        the employees.<br />
+                      </p>
+                    </div>
+                    <div class="complaint-time-wrap">
+                      <span class="complaint-time">2 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="complaint">
+                  <div class="complaint-profile">
+                    <img
+                      class="img-fluid complaint-profile-image"
+                      src="assets/img/LilyKi.png"
+                    />
+                  </div>
+                  <div class="complaint-content">
+                    <div class="complaint-username-date">
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-username"
+                            >John Lenin&nbsp;</span
+                          ></a
+                        ><span class="complaint-date">4/17/2022</span>
+                      </div>
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-company">ABC Company</span></a
+                        >
+                      </div>
+                    </div>
+                    <div class="complaint-body">
+                      <p>
+                        The roles of employees are ambiguously-defined. They are
+                        not clear about preciese roles and responsibilities of
+                        the employees.<br />
+                      </p>
+                    </div>
+                    <div class="complaint-time-wrap">
+                      <span class="complaint-time">2 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="complaint">
+                  <div class="complaint-profile">
+                    <img
+                      class="img-fluid complaint-profile-image"
+                      src="assets/img/LilyKi.png"
+                    />
+                  </div>
+                  <div class="complaint-content">
+                    <div class="complaint-username-date">
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-username"
+                            >John Lenin&nbsp;</span
+                          ></a
+                        ><span class="complaint-date">4/17/2022</span>
+                      </div>
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-company">ABC Company</span></a
+                        >
+                      </div>
+                    </div>
+                    <div class="complaint-body">
+                      <p>
+                        The roles of employees are ambiguously-defined. They are
+                        not clear about preciese roles and responsibilities of
+                        the employees.<br />
+                      </p>
+                    </div>
+                    <div class="complaint-time-wrap">
+                      <span class="complaint-time">2 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="complaint">
+                  <div class="complaint-profile">
+                    <img
+                      class="img-fluid complaint-profile-image"
+                      src="assets/img/LilyKi.png"
+                    />
+                  </div>
+                  <div class="complaint-content">
+                    <div class="complaint-username-date">
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-username"
+                            >John Lenin&nbsp;</span
+                          ></a
+                        ><span class="complaint-date">4/17/2022</span>
+                      </div>
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-company">ABC Company</span></a
+                        >
+                      </div>
+                    </div>
+                    <div class="complaint-body">
+                      <p>
+                        The roles of employees are ambiguously-defined. They are
+                        not clear about preciese roles and responsibilities of
+                        the employees.<br />
+                      </p>
+                    </div>
+                    <div class="complaint-time-wrap">
+                      <span class="complaint-time">2 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="complaint">
+                  <div class="complaint-profile">
+                    <img
+                      class="img-fluid complaint-profile-image"
+                      src="assets/img/LilyKi.png"
+                    />
+                  </div>
+                  <div class="complaint-content">
+                    <div class="complaint-username-date">
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-username"
+                            >John Lenin&nbsp;</span
+                          ></a
+                        ><span class="complaint-date">4/17/2022</span>
+                      </div>
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-company">ABC Company</span></a
+                        >
+                      </div>
+                    </div>
+                    <div class="complaint-body">
+                      <p>
+                        The roles of employees are ambiguously-defined. They are
+                        not clear about preciese roles and responsibilities of
+                        the employees.<br />
+                      </p>
+                    </div>
+                    <div class="complaint-time-wrap">
+                      <span class="complaint-time">2 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="complaint">
+                  <div class="complaint-profile">
+                    <img
+                      class="img-fluid complaint-profile-image"
+                      src="assets/img/LilyKi.png"
+                    />
+                  </div>
+                  <div class="complaint-content">
+                    <div class="complaint-username-date">
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-username"
+                            >John Lenin&nbsp;</span
+                          ></a
+                        ><span class="complaint-date">4/17/2022</span>
+                      </div>
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-company">ABC Company</span></a
+                        >
+                      </div>
+                    </div>
+                    <div class="complaint-body">
+                      <p>
+                        The roles of employees are ambiguously-defined. They are
+                        not clear about preciese roles and responsibilities of
+                        the employees.<br />
+                      </p>
+                    </div>
+                    <div class="complaint-time-wrap">
+                      <span class="complaint-time">2 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="complaint">
+                  <div class="complaint-profile">
+                    <img
+                      class="img-fluid complaint-profile-image"
+                      src="assets/img/LilyKi.png"
+                    />
+                  </div>
+                  <div class="complaint-content">
+                    <div class="complaint-username-date">
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-username"
+                            >John Lenin&nbsp;</span
+                          ></a
+                        ><span class="complaint-date">4/17/2022</span>
+                      </div>
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-company">ABC Company</span></a
+                        >
+                      </div>
+                    </div>
+                    <div class="complaint-body">
+                      <p>
+                        The roles of employees are ambiguously-defined. They are
+                        not clear about preciese roles and responsibilities of
+                        the employees.<br />
+                      </p>
+                    </div>
+                    <div class="complaint-time-wrap">
+                      <span class="complaint-time">2 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="complaint">
+                  <div class="complaint-profile">
+                    <img
+                      class="img-fluid complaint-profile-image"
+                      src="assets/img/LilyKi.png"
+                    />
+                  </div>
+                  <div class="complaint-content">
+                    <div class="complaint-username-date">
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-username"
+                            >John Lenin&nbsp;</span
+                          ></a
+                        ><span class="complaint-date">4/17/2022</span>
+                      </div>
+                      <div>
+                        <a href="#"
+                          ><span class="complaint-company">ABC Company</span></a
+                        >
+                      </div>
+                    </div>
+                    <div class="complaint-body">
+                      <p>
+                        The roles of employees are ambiguously-defined. They are
+                        not clear about preciese roles and responsibilities of
+                        the employees.<br />
+                      </p>
+                    </div>
+                    <div class="complaint-time-wrap">
+                      <span class="complaint-time">2 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="requests">
+            <h5>Recent Verification Requests</h5>
+            <div class="complaints-scroll">
+              <div class="request-content">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      >
+                    </div>
+                  </div>
+                  <div class="request-time-wrap">
+                    <span class="request-date">4/17/2022</span
+                    ><span class="request-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+              <div class="request-content">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      >
+                    </div>
+                  </div>
+                  <div class="request-time-wrap">
+                    <span class="request-date">4/17/2022</span
+                    ><span class="request-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+              <div class="request-content">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      >
+                    </div>
+                  </div>
+                  <div class="request-time-wrap">
+                    <span class="request-date">4/17/2022</span
+                    ><span class="request-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+              <div class="request-content">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      >
+                    </div>
+                  </div>
+                  <div class="request-time-wrap">
+                    <span class="request-date">4/17/2022</span
+                    ><span class="request-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+              <div class="request-content">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      >
+                    </div>
+                  </div>
+                  <div class="request-time-wrap">
+                    <span class="request-date">4/17/2022</span
+                    ><span class="request-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+              <div class="request-content">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      >
+                    </div>
+                  </div>
+                  <div class="request-time-wrap">
+                    <span class="request-date">4/17/2022</span
+                    ><span class="request-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+              <div class="request-content">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      >
+                    </div>
+                  </div>
+                  <div class="request-time-wrap">
+                    <span class="request-date">4/17/2022</span
+                    ><span class="request-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+              <div class="request-content">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      >
+                    </div>
+                  </div>
+                  <div class="request-time-wrap">
+                    <span class="request-date">4/17/2022</span
+                    ><span class="request-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+              <div class="request-content">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      >
+                    </div>
+                  </div>
+                  <div class="request-time-wrap">
+                    <span class="request-date">4/17/2022</span
+                    ><span class="request-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+              <div class="request-content">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      >
+                    </div>
+                  </div>
+                  <div class="request-time-wrap">
+                    <span class="request-date">4/17/2022</span
+                    ><span class="request-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+              <div class="request-content">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      >
+                    </div>
+                  </div>
+                  <div class="request-time-wrap">
+                    <span class="request-date">4/17/2022</span
+                    ><span class="request-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+              <div class="request-content">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      >
+                    </div>
+                  </div>
+                  <div class="request-time-wrap">
+                    <span class="request-date">4/17/2022</span
+                    ><span class="request-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="loading-screen">
+        <div class="lds-ripple"><div></div><div></div></div>
+        <div>Loading...</div>
     </div>
+    <script src="/Bureau/assets/js/dashboard.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
     <script src="assets/js/SideNav.js"></script>
     <script src="assets/js/viwschart.js"></script>
-</body>
-
+  </body>
 </html>
