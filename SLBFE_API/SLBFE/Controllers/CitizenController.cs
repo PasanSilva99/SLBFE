@@ -83,11 +83,14 @@ namespace SLBFE.Controllers
         /// </summary>
         /// <param name="data">Login Data</param>
         /// <returns></returns>
-        [Route("api/Citizen/Register")]
-        [HttpGet]
+        [Route("api/Citizen/Login")]
+        [HttpPost]
         public int CitizenLogin([FromBody] Models.LoginData data)
         {
-            return 210;
+            var citizens = Models.DataStore.GetCitizens();
+            var isCitizenValid = citizens.Where(citizen => citizen.Email == data.Email && citizen.Password == data.Passwordhash).Any();
+
+            return isCitizenValid ? 1 : 0;
         }
 
         [Route("api/isCitizen")]
