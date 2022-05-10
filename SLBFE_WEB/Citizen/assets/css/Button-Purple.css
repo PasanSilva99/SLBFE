@@ -1,0 +1,18 @@
+.btn-purple {
+  border-radius: 10px;
+  margin-left: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  background: linear-gradient(261.5deg, #7B61FF 0%, #485DA6 100%);
+}
+
+.btn-purple:hover {
+  box-shadow: -5px 5px 20px .25rem rgba(0, 0, 0, 0.1);
+  border-width: 0;
+}
+
+.btn-purple:focus {
+  box-shadow: -5px 5px 20px .25rem rgba(0, 0, 0, 0.2);
+  border-width: 0;
+}
+

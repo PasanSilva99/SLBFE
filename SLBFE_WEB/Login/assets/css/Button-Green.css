@@ -1,0 +1,276 @@
+.register-btn {
+  background: linear-gradient(261.5deg, #36C486 0%, #00A1BA 100%);
+  border-radius: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-width: 0px;
+}
+
+.register-btn:hover {
+  box-shadow: -5px 5px 20px .25rem rgba(0, 0, 0, 0.1);
+}
+
+.register-btn:focus {
+  border-color: #36C486;
+  box-shadow: -5px 5px 20px .25rem rgba(17, 255, 188, 0.2);
+}
+
+@media screen and (max-width: 820px) {
+  .register-btn {
+    width: 80vw;
+  }
+}
+
+.email-container {
+}
+
+.password-container {
+}
+
+@media (min-width: 300px) {
+  #email {
+    width: 78vw;
+  }
+}
+
+@media (min-width: 300px) {
+  #password {
+    width: 78vw;
+  }
+}
+
+@media (min-width: 1400px) {
+  #password {
+    width: 28vw;
+  }
+}
+
+@media (min-width: 1400px) {
+  #email {
+    width: 28vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  #password {
+    width: 33vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  #email {
+    width: 33vw;
+  }
+}
+
+@media (min-width: 992px) {
+  #email {
+    width: 37vw;
+  }
+}
+
+@media (min-width: 992px) {
+  #password {
+    width: 37vw;
+  }
+}
+
+.colum-account-type {
+  width: 100%;
+  height: 100%;
+}
+
+.column-account-selec {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4vw;
+  }
+}
+
+@media (min-width: 992px) {
+  .btn-content {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 768px) {
+  .selection-btn-content {
+    height: 30vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .citizen-select-btn {
+    margin-bottom: 3vw;
+    width: 243px;
+  }
+}
+
+@media (max-width: 768px) {
+  .staff-select-btn {
+    margin-bottom: 3vw;
+    width: 246px;
+  }
+}
+
+@media (max-width: 576px) {
+  .btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .selection-btn-content {
+    height: 36vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .selection-btn-content {
+    height: 62vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .select-account-txt {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .citizen-select-btn {
+    width: 56vw;
+    margin-bottom: 7vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .staff-select-btn {
+    width: 58vw;
+    margin-bottom: 7vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .company-select-btn {
+    width: 59vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .citizen-select-img {
+    width: 3.5rem;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .staff-select-img {
+    width: 3.5rem;
+    margin-top: 10px;
+    margin-left: -25px;
+  }
+}
+
+@media (max-width: 500px) {
+  .company-select-img {
+    width: 3.1rem;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .company-select-txt {
+    font-size: 26px;
+    margin-top: -45px;
+    position: relative;
+    left: -3px;
+    top: 13px;
+  }
+}
+
+@media (max-width: 500px) {
+  .staff-select-txt {
+    font-size: 26px;
+    position: relative;
+    top: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .citizen-select-txt {
+    font-size: 26px;
+    position: relative;
+    top: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 12vw;
+  }
+}
+
+@media (max-width: 970px) {
+  .btn-content {
+    margin-top: 3vw;
+  }
+}
+
+@media (max-width: 970px) {
+  .selection-btn-content {
+    height: 22vw;
+  }
+}
+
+@media (max-width: 970px) {
+  .citizen-select-btn {
+    margin-bottom: 17px;
+  }
+}
+
+@media (max-width: 970px) {
+  .staff-select-btn {
+    margin-bottom: 17px;
+  }
+}
+
+@media (max-width: 800px) {
+  .btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 980px) {
+  .citizen-select-btn {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 980px) {
+  .selection-btn-content {
+    height: 21vw;
+  }
+}
+
+@media (max-width: 980px) {
+  .staff-select-btn {
+    margin-bottom: 15px;
+  }
+}
+

@@ -201,6 +201,13 @@ body {
   box-shadow: -5px 5px 20px .25rem rgba(17, 255, 188, 0.2);
 }
 
+.error{
+  margin-top: -1em;
+  color: crimson;
+  display: block;
+}
+
+
 .eos {
   height: 2px;
   border-radius: 2px;

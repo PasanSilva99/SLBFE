@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>SLBFE Citizen Dashboard</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Button-Green.css">
+    <link rel="stylesheet" href="assets/css/Button-Purple.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+</head>
+
+<body>
+    <div style="height: 100vh;display: flex;">
+        <div class="side-nav">
+            <div class="profile-info">
+                <div class="profile-pic"><img class="img-fluid" id="profileImage" src="assets/img/LilyKi.png" style="border-radius: 100%;"></div>
+                <div class="profile-details"><span id="profileName">Lily Pichu</span><span id="profileDescription">Voice Actor</span></div>
+            </div>
+            <div class="nav-links">
+                <div class="nav-item-rest" onclick="window.location = &#39;index.html&#39;;">
+                    <div class="nav-item-indicator-rest"></div>
+                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/DashboardRest.png" tag="Dashboard"></div>
+                    <div class="nav-item-name"><span>Dashboard</span></div>
+                </div>
+                <div class="nav-item-active">
+                    <div class="nav-item-indicator-active"></div>
+                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/InterviewActive.png" tag="Dashboard"></div>
+                    <div class="nav-item-name"><span>Interviews</span></div>
+                </div>
+                <div class="nav-item-rest" onclick="window.location = &#39;Feedback.html&#39;;">
+                    <div class="nav-item-indicator-rest"></div>
+                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/FeedbackRest.png" tag="Dashboard"></div>
+                    <div class="nav-item-name"><span>Feedback</span></div>
+                </div>
+            </div>
+            <div class="logo"><img class="img-fluid" id="logo-side" src="assets/img/SLBFE.png"></div>
+        </div>
+        <div class="page-content">
+            <div class="greeting-and-settings">
+                <div class="d-flex flex-row">
+                    <div class="hamburger">
+                        <div class="burger-layer"></div>
+                        <div class="burger-layer" onclick="openMenu()"></div>
+                        <div class="burger-layer"></div>
+                    </div>
+                    <h4>Interviews</h4>
+                </div>
+                <div><img class="notif-button" onmouseover="this.src=&#39;NotifActive.png&#39;" onmouseout="this.src=&#39;NotifRest.png&#39;" src="assets/img/NotifRest.png" style="width: 30px;height: 30px;"><img class="profile-button" src="assets/img/LilyKi.png"></div>
+            </div>
+            <div class="content">
+                <div class="interview-list">
+                    <div class="interview">
+                        <div class="interview-profile"><img class="img-fluid interview-profile-image" src="assets/img/hoyoverse.jpg"></div>
+                        <div class="interview-content">
+                            <div class="interview-username-date">
+                                <div><a href="#"><span class="complaint-username">HoYoverse</span></a><span class="interview-date">4/17/2022</span></div>
+                            </div>
+                            <div class="interview-body">
+                                <p>Hello Lily Pichu, I saw your profile and visited your samples on social media and wanted to reach out! You might be a great fit for many of the voice acting positions.&nbsp;We would like to invite you for an interview&nbsp;and I look forward to receiving your reply.<br></p>
+                            </div>
+                            <div class="interview-time-wrap"><span class="interview-time">2 hours ago</span></div>
+                        </div>
+                        <div class="interview-user-actions"><button class="btn btn-primary btn-accept" type="button">Accept</button><button class="btn btn-primary btn-reject" type="button">Reject</button></div>
+                    </div>
+                    <div class="interview">
+                        <div class="interview-profile"><img class="img-fluid interview-profile-image" src="assets/img/hoyoverse.jpg"></div>
+                        <div class="interview-content">
+                            <div class="interview-username-date">
+                                <div><a href="#"><span class="complaint-username">HoYoverse</span></a><span class="interview-date">4/17/2022</span></div>
+                            </div>
+                            <div class="interview-body">
+                                <p>Hello Lily Pichu, I saw your profile and visited your samples on social media and wanted to reach out! You might be a great fit for many of the voice acting positions.&nbsp;We would like to invite you for an interview&nbsp;and I look forward to receiving your reply.<br></p>
+                            </div>
+                            <div class="interview-time-wrap"><span class="interview-time">2 hours ago</span></div>
+                        </div>
+                        <div class="interview-user-actions"><button class="btn btn-primary btn-accept" type="button">Accept</button><button class="btn btn-primary btn-reject" type="button">Reject</button></div>
+                    </div>
+                    <div class="interview">
+                        <div class="interview-profile"><img class="img-fluid interview-profile-image" src="assets/img/hoyoverse.jpg"></div>
+                        <div class="interview-content">
+                            <div class="interview-username-date">
+                                <div><a href="#"><span class="complaint-username">HoYoverse</span></a><span class="interview-date">4/17/2022</span></div>
+                            </div>
+                            <div class="interview-body">
+                                <p>Hello Lily Pichu, I saw your profile and visited your samples on social media and wanted to reach out! You might be a great fit for many of the voice acting positions.&nbsp;We would like to invite you for an interview&nbsp;and I look forward to receiving your reply.<br></p>
+                            </div>
+                            <div class="interview-time-wrap"><span class="interview-time">2 hours ago</span></div>
+                        </div>
+                        <div class="interview-user-actions"><button class="btn btn-primary btn-accept" type="button">Accept</button><button class="btn btn-primary btn-reject" type="button">Reject</button></div>
+                    </div>
+                    <div class="interview">
+                        <div class="interview-profile"><img class="img-fluid interview-profile-image" src="assets/img/hoyoverse.jpg"></div>
+                        <div class="interview-content">
+                            <div class="interview-username-date">
+                                <div><a href="#"><span class="complaint-username">HoYoverse</span></a><span class="interview-date">4/17/2022</span></div>
+                            </div>
+                            <div class="interview-body">
+                                <p>Hello Lily Pichu, I saw your profile and visited your samples on social media and wanted to reach out! You might be a great fit for many of the voice acting positions.&nbsp;We would like to invite you for an interview&nbsp;and I look forward to receiving your reply.<br></p>
+                            </div>
+                            <div class="interview-time-wrap"><span class="interview-time">2 hours ago</span></div>
+                        </div>
+                        <div class="interview-user-actions"><button class="btn btn-primary btn-accept" type="button">Accept</button><button class="btn btn-primary btn-reject" type="button">Reject</button></div>
+                    </div>
+                    <div class="interview">
+                        <div class="interview-profile"><img class="img-fluid interview-profile-image" src="assets/img/hoyoverse.jpg"></div>
+                        <div class="interview-content">
+                            <div class="interview-username-date">
+                                <div><a href="#"><span class="complaint-username">HoYoverse</span></a><span class="interview-date">4/17/2022</span></div>
+                            </div>
+                            <div class="interview-body">
+                                <p>Hello Lily Pichu, I saw your profile and visited your samples on social media and wanted to reach out! You might be a great fit for many of the voice acting positions.&nbsp;We would like to invite you for an interview&nbsp;and I look forward to receiving your reply.<br></p>
+                            </div>
+                            <div class="interview-time-wrap"><span class="interview-time">2 hours ago</span></div>
+                        </div>
+                        <div class="interview-user-actions"><button class="btn btn-primary btn-accept" type="button">Accept</button><button class="btn btn-primary btn-reject" type="button">Reject</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="assets/js/SideNav.js"></script>
+    <script src="assets/js/viwschart.js"></script>
+</body>
+
+</html>
