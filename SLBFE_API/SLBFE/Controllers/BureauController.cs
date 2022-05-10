@@ -88,20 +88,25 @@ namespace SLBFE.Controllers
             Models.DataStore.UpdateOfficer(employeeID, value);
         }
 
-
-
         /// <summary>
         /// Updates the citizen's validation
         /// </summary>
         /// <param name="validationData"></param>
         /// <returns></returns>
         // POST: api/Bureau
+        [Route("api/ValidateUser")]
+        [HttpPost]
         public int Post([FromBody] Models.UserValidation validationData)
         {
             return Models.DataStore.ValidateCitizen(validationData);
         }
-
-
+        
+        [Route("api/isOfficer")]
+        [HttpGet]
+        public int isOfficer(string email)
+        {
+            return Models.DataStore.IsOfficer(email);
+        }
 
         /// <summary>
         /// DELETE Request

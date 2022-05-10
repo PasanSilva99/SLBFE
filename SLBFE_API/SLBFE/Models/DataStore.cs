@@ -21,6 +21,15 @@ namespace SLBFE.Models
         public static string DatabaseName = "SLBFE.db";
 
         /// <summary>
+        /// This will return the saved log file
+        /// </summary>
+        /// <returns></returns>
+        internal static string[] GetLog()
+        {
+            return File.ReadAllLines(LogFilePath);
+        }
+
+        /// <summary>
         /// Path of the database
         /// </summary>
         public static string DatabasePath = Path.Combine("SLBFE_Data", DatabaseName);
@@ -51,11 +60,16 @@ namespace SLBFE.Models
         /// </summary>
         public static void InitializeDatabase()
         {
-
+            // this will create the file if not exists to save the data
             Directory.CreateDirectory("SLBFE_Data");
 
-            if (!File.Exists(DatabasePath))
-                File.Create(DatabasePath);
+            if (!File.Exists(DatabasePath))  // check wether the database file exissts
+                File.Create(DatabasePath);  // if it is not there, Create it. 
+
+            // As for the above lines, the database will be autometically created within the forst run. 
+            // If it fails at any point, Please Leave a message in discord. I will look into it. 
+            // put that message on #project-discussion not in the #resources\
+            // in the Tecxick Study group Server/
 
             using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
             {
@@ -116,15 +130,40 @@ namespace SLBFE.Models
                         "ZipCode TEXT );" +
                     "CREATE TABLE IF NOT EXISTS " +
                     "UserValidation (" +
-                        "NationalID TEXT, " +
-                        "isApproved TEXT, " +
-                        "Changes TEXT, " +
-                        "EmoployeeID TEXT );";
+                        "NationalID TEXT, " +  // Dational ID of the user that needs to be validated
+                        "isApproved TEXT, " +  // Id this user approved?
+                        "Changes TEXT, " +  // Is there any changes that needs to be done?
+                        "EmoployeeID TEXT );" +  // ID of the employee that reviwed this user account
+                    "CREATE TABLE IF NOT EXISTS " +
+                    "Feedback (" +
+                        "ID TEXT, " +  // Auto generated ID for this Feedbaclk
+                        "Email TEXT, " +  // Email of the user that posted this
+                        "Usename TEXT, " +  // User name of the user that posted this
+                        "isComplaint INTEGER, " +  // This ithis a complaint?
+                        "CompanyID TEXT, " +  // Company ID which is related to this feedback
+                        "CompanyName TEXT, " +  // Company Name which is related to this feedback
+                        "SentDate TEXT, " +  // The date that pugblished this feedback
+                        "Content TEXT );"+  // Content of the feedback
+                    "CREATE TABLE IF NOT EXISTS " +
+                    "FeedbackReply (" +
+                        "FeedbackID TEXT, " +  // Which Feedback that this reply belongs to
+                        "Email TEXT, " +  // Email of the user that posted this
+                        "Usename TEXT, " +  // User name of the user that posted this
+                        "SentDate TEXT, " +  // Date thst is this replay added
+                        "Content TEXT );"+  // Content of the reply
+                    "CREATE TABLE IF NOT EXISTS " +
+                    "Interview (" +
+                        "InterviewID TEXT, " +  // Auto generated ID of teh Interview
+                        "CompanyID TEXT, " +  // ID of the company that posted this interview
+                        "CompanyName TEXT, " +  // Name of the company that posted this interview
+                        "UserEmail TEXT, " +  // EMail of the user that should receive this 
+                        "SentDate TEXT, " +  // The date that sent this interview
+                        "State TEXT, " +  // Is accepted or not 
+                        "Content TEXT );";  // Description and any content that is related to this interview post
 
 
                     SQLiteCommand initCommand = new SQLiteCommand(dbScript, con);
                     initCommand.ExecuteNonQuery();
-
 
                     con.Close();
 
@@ -141,6 +180,29 @@ namespace SLBFE.Models
                     Log(ex.ToString());
                 }
             }
+        }
+
+        internal static int IsCitizen(string email)
+        {
+            var list = new List<Citizen>();
+            var citizenlist = GetCitizens();
+
+            if (citizenlist != null)
+            {
+                foreach (var citizen in citizenlist)
+                {
+                    var cit = citizen;
+                    cit.Password = "";
+                    list.Add(cit);
+                }
+
+                return list.Where(c => c.Email == email).ToList().Count();
+            }
+            else
+            {
+                return 0;
+            }
+
         }
 
         #region Bureau Functions
@@ -513,6 +575,29 @@ namespace SLBFE.Models
             // The is an un identified Error
             Log("Unrecognized Error in the user validation data");
             return 0;
+        }
+
+        internal static int IsOfficer(string email)
+        {
+            var list = new List<Bureau>();
+            var officerlist = GetBureaus();
+
+            if (officerlist != null)
+            {
+                foreach (var officers in officerlist)
+                {
+                    var officer = officers;
+                    officer.Password = "";
+                    list.Add(officer);
+                }
+
+                return list.Where(b => b.Email == email).ToList().Count();
+            }
+            else
+            {
+                return 0;
+            }
+
         }
 
         #endregion
@@ -1050,6 +1135,31 @@ namespace SLBFE.Models
             }
         }
         #endregion
+
+        internal static int IsCommpany(string email)
+        {
+            var list = new List<Commpany>();
+            var commpanylist = GetCommpany();
+
+            if (commpanylist != null)
+            {
+                foreach (var commpanies in commpanylist)
+                {
+                    var commpany = commpanies;
+                    commpany.Password = "";
+                    list.Add(commpany);
+                }
+
+                return list.Where(c => c.Email == email).ToList().Count();
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
+
 
         #region Company Detail Update
         public static int UpdateCompany(string BRNumber, Commpany company)

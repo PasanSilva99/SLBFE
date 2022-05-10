@@ -551,6 +551,13 @@
             <param name="value">Officer data as an single Officer object</param>
             <param name="employeeID">Officer data as an single Officer object</param>
         </member>
+        <member name="M:SLBFE.Controllers.BureauController.Post(SLBFE.Models.UserValidation)">
+            <summary>
+            Updates the citizen's validation
+            </summary>
+            <param name="validationData"></param>
+            <returns></returns>
+        </member>
         <member name="M:SLBFE.Controllers.BureauController.Delete(System.String,System.String)">
             <summary>
             DELETE Request
@@ -562,6 +569,13 @@
             <summary>
             This Controller contains the functions for the Citizens. 
             </summary>
+        </member>
+        <member name="M:SLBFE.Controllers.CitizenController.ViewLog">
+            <summary>
+            This is intended for debugging purposes. 
+            This will return the saved log of this server
+            </summary>
+            <returns>Complete Log File</returns>
         </member>
         <member name="M:SLBFE.Controllers.CitizenController.Get">
             <summary>
@@ -777,6 +791,12 @@
             Database File Name
             </summary>
         </member>
+        <member name="M:SLBFE.Models.DataStore.GetLog">
+            <summary>
+            This will return the saved log file
+            </summary>
+            <returns></returns>
+        </member>
         <member name="F:SLBFE.Models.DataStore.DatabasePath">
             <summary>
             Path of the database
@@ -838,7 +858,7 @@
             <summary>
             Updates the validation request of the citizen
             </summary>
-            <param name="validationData"></param>
+            <param name="nationalID"></param>
             <returns></returns>
         </member>
         <member name="M:SLBFE.Models.DataStore.GetCitizens">
@@ -910,7 +930,7 @@
             This handles tha data from the login page
             </summary>
         </member>
-        <member name="P:SLBFE.Models.LoginData.Username">
+        <member name="P:SLBFE.Models.LoginData.Email">
             <summary>
             Username of the user
             </summary>

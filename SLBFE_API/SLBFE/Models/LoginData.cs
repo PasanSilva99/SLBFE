@@ -13,7 +13,7 @@ namespace SLBFE.Models
         /// <summary>
         /// Username of the user
         /// </summary>
-        public string Username { get; set; }
+        public string Email { get; set; }
         
         /// <summary>
         /// Password has of the user entered
