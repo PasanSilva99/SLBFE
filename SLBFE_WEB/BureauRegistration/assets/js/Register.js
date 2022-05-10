@@ -1,5 +1,6 @@
 //This gets the phone input to assign the country selection
 var input = document.querySelector("#phone");
+
 // This will set the country flags and countri codes inside the input element
 // Used geoIpLookpu functions to autometically select the Country using IP
 var phone = intlTelInput(input, {
@@ -323,7 +324,10 @@ function RegisterUser() {
 
     var request = new XMLHttpRequest();
 
-    request.open("POST", "https://localhost:44367/api/Bureau");
+
+    request.open("POST", "http://20.211.42.249:59413/api/Bureau");
+
+
 
     if (
       isMandatoryAvailable &&
@@ -339,7 +343,10 @@ function RegisterUser() {
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
           var validateRequest = new XMLHttpRequest();
   
-          validateRequest.open('GET', 'https://localhost:44367/api/Bureau');
+
+          validateRequest.open('GET', 'http://20.211.42.249:59413/api/Bureau');
+
+
           
           validateRequest.onload = function() {
             var response = validateRequest.response;
