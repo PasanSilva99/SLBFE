@@ -48,7 +48,7 @@ function LoginUser(){
       
         var isCitizenRequest = new XMLHttpRequest();  
 
-        isCitizenRequest.open('GET', 'http://20.211.42.249:59413/api/isCitizen?' + "email="+loginData.Email);
+        isCitizenRequest.open('GET', 'http://20.92.239.229:59413/api/isCitizen?' + "email="+loginData.Email);
         
         // after loading this request
         isCitizenRequest.onload = function() {
@@ -115,7 +115,7 @@ function LoginUser(){
       
         var isCommpanyRequest = new XMLHttpRequest();  
 
-        isCommpanyRequest.open('GET', 'http://20.211.42.249:59413/api/isCommpany?' + "email="+loginData.Email);
+        isCommpanyRequest.open('GET', 'http://20.92.239.229:59413/api/isCommpany?' + "email="+loginData.Email);
         
         // after loading this request
         isCommpanyRequest.onload = function() {
@@ -148,7 +148,7 @@ function LoginUser(){
 function validateCitizen(loginData){
   //Checking the password of the citizen
   var validateCitizen = new XMLHttpRequest();
-  validateCitizen.open('POST', 'http://20.211.42.249:59413/api/Citizen/Login');
+  validateCitizen.open('POST', 'http://20.92.239.229:59413/api/Citizen/Login');
 
   
   // Set the headers as JSON 
@@ -173,7 +173,7 @@ function validateCitizen(loginData){
 function validateOfficer(loginData){
   //Checking the password of the citizen
   var validateOfficer = new XMLHttpRequest();
-  validateOfficer.open('POST', 'http://20.211.42.249:59413/api/Citizen/Login');
+  validateOfficer.open('POST', 'http://20.92.239.229:59413/api/Citizen/Login');
 
   
   // Set the headers as JSON 
@@ -198,7 +198,7 @@ function validateOfficer(loginData){
 function validateCommpany(loginData){
   //Checking the password of the citizen
   var validateCommpany = new XMLHttpRequest();
-  validateCommpany.open('POST', 'http://20.211.42.249:59413/api/Citizen/Login');
+  validateCommpany.open('POST', 'http://20.92.239.229:59413/api/Citizen/Login');
 
   
   // Set the headers as JSON 
