@@ -12,6 +12,18 @@ namespace SLBFE.Controllers
     /// </summary>
     public class CitizenController : ApiController
     {
+        /// <summary>
+        /// This is intended for debugging purposes. 
+        /// This will return the saved log of this server
+        /// </summary>
+        /// <returns>Complete Log File</returns>
+        [Route("api/ViewLog")]
+        [HttpGet]
+        public string[] ViewLog()
+        {
+            return Models.DataStore.GetLog();
+        }
+
         //// GET: api/Citizen
         //public IEnumerable<string> Get()
         //{
@@ -27,14 +39,62 @@ namespace SLBFE.Controllers
             var list = new List<Models.Citizen>();
             var citizenlist = Models.DataStore.GetCitizens();
 
-            foreach (var citizen in citizenlist)
+            if (citizenlist != null)
             {
-                var cit = citizen;
-                cit.Password = "";
-                list.Add(cit);
-            }
+                foreach (var citizen in citizenlist)
+                {
+                    var cit = citizen;
+                    cit.Password = "";
+                    list.Add(cit);
+                }
 
-            return list;
+                return list;
+            }
+            else
+            {
+                return new List<Models.Citizen>();
+            }
+        }
+
+        public List<Models.Citizen> Get(string nationalID)
+        {
+            var list = new List<Models.Citizen>();
+            var citizenlist = Models.DataStore.GetCitizens();
+
+            if (citizenlist != null)
+            {
+                foreach (var citizen in citizenlist)
+                {
+                    var cit = citizen;
+                    cit.Password = "";
+                    list.Add(cit);
+                }
+
+                return list.Where(c => c.NationalID == nationalID).ToList();
+            }
+            else
+            {
+                return new List<Models.Citizen>();
+            }
+        }
+
+        /// <summary>
+        /// Validates the user 
+        /// </summary>
+        /// <param name="data">Login Data</param>
+        /// <returns></returns>
+        [Route("api/Citizen/Register")]
+        [HttpGet]
+        public int CitizenLogin([FromBody] Models.LoginData data)
+        {
+            return 210;
+        }
+
+        [Route("api/isCitizen")]
+        [HttpGet]
+        public int isCitizen(string email)
+        {
+            return Models.DataStore.IsCitizen(email);
         }
 
         /// <summary>
@@ -42,9 +102,10 @@ namespace SLBFE.Controllers
         /// Register new Citizen
         /// </summary>
         /// <param name="value">Citizen Data as an Single Citizen Object</param>
-        public void Post([FromBody] Models.Citizen value)
+        public int Post([FromBody] Models.Citizen value)
         {
             Models.DataStore.RegisterCitizen(value);
+            return 200;
         }
 
         /// <summary>

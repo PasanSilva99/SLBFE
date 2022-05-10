@@ -531,11 +531,32 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SLBFE.Controllers.BureauController.Get(System.String)">
+            <summary>
+            Returns the Officer Details According to the NationalID 
+            </summary>
+            <param name="nationalID"></param>
+            <returns></returns>
+        </member>
         <member name="M:SLBFE.Controllers.BureauController.Post(SLBFE.Models.Bureau)">
             <summary>
             POST Request
             </summary>
             <param name="value">Officer data as an single Officer object</param>
+        </member>
+        <member name="M:SLBFE.Controllers.BureauController.Post(System.String,SLBFE.Models.Bureau)">
+            <summary>
+            POST Request
+            </summary>
+            <param name="value">Officer data as an single Officer object</param>
+            <param name="employeeID">Officer data as an single Officer object</param>
+        </member>
+        <member name="M:SLBFE.Controllers.BureauController.Post(SLBFE.Models.UserValidation)">
+            <summary>
+            Updates the citizen's validation
+            </summary>
+            <param name="validationData"></param>
+            <returns></returns>
         </member>
         <member name="M:SLBFE.Controllers.BureauController.Delete(System.String,System.String)">
             <summary>
@@ -549,10 +570,24 @@
             This Controller contains the functions for the Citizens. 
             </summary>
         </member>
+        <member name="M:SLBFE.Controllers.CitizenController.ViewLog">
+            <summary>
+            This is intended for debugging purposes. 
+            This will return the saved log of this server
+            </summary>
+            <returns>Complete Log File</returns>
+        </member>
         <member name="M:SLBFE.Controllers.CitizenController.Get">
             <summary>
             Gets a list of available Citizens
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLBFE.Controllers.CitizenController.CitizenLogin(SLBFE.Models.LoginData)">
+            <summary>
+            Validates the user 
+            </summary>
+            <param name="data">Login Data</param>
             <returns></returns>
         </member>
         <member name="M:SLBFE.Controllers.CitizenController.Post(SLBFE.Models.Citizen)">
@@ -562,6 +597,14 @@
             </summary>
             <param name="value">Citizen Data as an Single Citizen Object</param>
         </member>
+        <member name="M:SLBFE.Controllers.CitizenController.Post(System.String,SLBFE.Models.Citizen)">
+            <summary>
+            POST Request 
+            Register new Citizen
+            </summary>
+            <param name="value">Citizen Data as an Single Citizen Object</param>
+            <param name="nationalID">National ID number of the Citizen that needs to be updated</param>
+        </member>
         <member name="M:SLBFE.Controllers.CitizenController.Delete(System.String,System.String)">
             <summary>
             DELETE Requst
@@ -569,6 +612,32 @@
             </summary>
             <param name="nationalID">National ID of the Citizen that needs to be deleted</param>
             <param name="requestedBy">The Officer that deleted the account</param>
+        </member>
+        <member name="M:SLBFE.Controllers.CommpanyController.Get">
+            <summary>
+            Gets a list of available Commpany
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLBFE.Controllers.CommpanyController.Post(SLBFE.Models.Commpany)">
+            <summary>
+            POST Request
+            </summary>
+            <param name="value">commpany data as an single commpany object</param>
+        </member>
+        <member name="M:SLBFE.Controllers.CommpanyController.Post(System.String,SLBFE.Models.Commpany)">
+            <summary>
+            POST Request
+            </summary>
+            <param name="value">commpany data as an single commpany object</param>
+            <param name="BRNumber">commpany data as an single commpany object</param>
+        </member>
+        <member name="M:SLBFE.Controllers.CommpanyController.Delete(System.String,System.String)">
+            <summary>
+            DELETE Request
+            </summary>
+            <param name="BRNumber">Commpany of the officer that need to deleted</param>
+            <param name="requestedBY">The Commpany that deleted the account</param>
         </member>
         <member name="T:SLBFE.Controllers.HomeController">
             <summary>
@@ -592,7 +661,7 @@
             Employee ID of the user
             </summary>
         </member>
-        <member name="P:SLBFE.Models.Bureau.FilePathEmolyeeIDPhoto">
+        <member name="P:SLBFE.Models.Bureau.FilePathEmployeeIDPhoto">
             <summary>
             File Path of the EmployeeID photo
             </summary>
@@ -627,9 +696,89 @@
             File path of the users CV
             </summary>
         </member>
+        <member name="P:SLBFE.Models.Citizen.FilePathBirthCertificate">
+            <summary>
+            File path of the users CV
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Citizen.FilePathPassport">
+            <summary>
+            File path of the users CV
+            </summary>
+        </member>
         <member name="P:SLBFE.Models.Citizen.FilePathQualifications">
             <summary>
             File Path of the users other qualification documents Default is an Empty List of String
+            </summary>
+        </member>
+        <member name="T:SLBFE.Models.Commpany">
+            <summary>
+            This is the General Company Class(like Structures)
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Commpany.BRNumber">
+            <summary>
+            Commpany Registeration Number
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Commpany.FilePathBR">
+            <summary>
+            Commpany Registeration Docs
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Commpany.BusinessName">
+            <summary>
+            Commpany Name
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Commpany.BusinessCategory">
+            <summary>
+            Commpany Category
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Commpany.Email">
+            <summary>
+            Commpany Email
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Commpany.PhoneNumber">
+            <summary>
+            Commpany Phone Number
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Commpany.Password">
+            <summary>
+            Commpany Password
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Commpany.AddressL1">
+            <summary>
+            Commpany Address first Line
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Commpany.AddressL2">
+            <summary>
+            Commpany Address secound Line
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Commpany.StateProvince">
+            <summary>
+            Commpany State or Province
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Commpany.City">
+            <summary>
+            Commpany City
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.Commpany.ZipCode">
+            <summary>
+            Commpany Zip Code
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.CommpanyD.BRNumber">
+            <summary>
+            Commpany Registeration Number
             </summary>
         </member>
         <member name="T:SLBFE.Models.DataStore">
@@ -641,6 +790,12 @@
             <summary>
             Database File Name
             </summary>
+        </member>
+        <member name="M:SLBFE.Models.DataStore.GetLog">
+            <summary>
+            This will return the saved log file
+            </summary>
+            <returns></returns>
         </member>
         <member name="F:SLBFE.Models.DataStore.DatabasePath">
             <summary>
@@ -676,12 +831,34 @@
             <param name="officer">Office details as an object</param>
             <returns>Number of rows affected or -1 if there an error with the data -2 if there is an error on the database</returns>
         </member>
+        <member name="M:SLBFE.Models.DataStore.UpdateOfficer(System.String,SLBFE.Models.Bureau)">
+            <summary>
+            Update the officer in the system
+            </summary>
+            <param name="employeeID"> Officer details as an object</param> 
+            <param name="officer">Number of rows affected or -1 if there is an error with the data -2 if there is an error on the database </param>
+            <returns></returns>
+        </member>
         <member name="M:SLBFE.Models.DataStore.DeleteOfficer(System.String,System.String)">
             <summary>
             Deletes the bureau officer profile from the database
             </summary>
             <param name="nationalID">National ID of the User</param>
             <param name="requestedBy">Employee ID of the Officer that os requested this</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLBFE.Models.DataStore.ValidateCitizen(SLBFE.Models.UserValidation)">
+            <summary>
+            Updates the validation request of the citizen
+            </summary>
+            <param name="validationData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SLBFE.Models.DataStore.ValidateCitizen(System.String)">
+            <summary>
+            Updates the validation request of the citizen
+            </summary>
+            <param name="nationalID"></param>
             <returns></returns>
         </member>
         <member name="M:SLBFE.Models.DataStore.GetCitizens">
@@ -697,6 +874,14 @@
             <param name="citizen">Citizens details as an object</param>
             <returns>Number of rows affected or -1 if there is an error with the data -2 if there is an error on the database</returns>
         </member>
+        <member name="M:SLBFE.Models.DataStore.UpdateCitizen(System.String,SLBFE.Models.Citizen)">
+            <summary>
+            Updates a Cizien in the system
+            </summary>
+            <param name="citizen">Citizens details as an object</param>
+            <param name="nationalID">National ID number of the Citizen that needs to be updated</param>
+            <returns>Number of rows affected or -1 if there is an error with the data -2 if there is an error on the database</returns>
+        </member>
         <member name="M:SLBFE.Models.DataStore.DeleteCitizen(System.String,System.String)">
             <summary>
             Deletes the citizen profile from the database
@@ -704,6 +889,19 @@
             <param name="nationalID">National ID of the User</param>
             <param name="requestedBy">Employee ID of the Officer that os requested this</param>
             <returns></returns>
+        </member>
+        <member name="M:SLBFE.Models.DataStore.RegisterCommpany(SLBFE.Models.Commpany)">
+            <summary>
+            Registers a new Commpanyr to the System
+            </summary>
+            <param name="Commpany">Commpany details as an object</param>
+            <returns>Number of rows affected or -1 if there an error with the data -2 if there is an error on the database</returns>
+        </member>
+        <member name="M:SLBFE.Models.DataStore.GetCommpany">
+            <summary>
+            Get all Commpanies from the database
+            </summary>
+            <returns> Return all Commpanies as a list of Commpanies</returns>
         </member>
         <member name="T:SLBFE.Models.Location">
             <summary>
@@ -725,6 +923,31 @@
         <member name="P:SLBFE.Models.Location.Longitude">
             <summary>
             Longitude Value as float
+            </summary>
+        </member>
+        <member name="T:SLBFE.Models.LoginData">
+            <summary>
+            This handles tha data from the login page
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.LoginData.Email">
+            <summary>
+            Username of the user
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.LoginData.Passwordhash">
+            <summary>
+            Password has of the user entered
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.LoginData.IPAddress">
+            <summary>
+            IP address of the user
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.LoginData.Country">
+            <summary>
+            Detected country of the user
             </summary>
         </member>
         <member name="T:SLBFE.Models.User">
@@ -790,6 +1013,31 @@
         <member name="P:SLBFE.Models.User.ZipCode">
             <summary>
             Zip code of the user
+            </summary>
+        </member>
+        <member name="T:SLBFE.Models.UserValidation">
+            <summary>
+            The user validation Data object
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.UserValidation.NationalID">
+            <summary>
+            National ID of the user
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.UserValidation.IsApproved">
+            <summary>
+            Is this account approoved?
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.UserValidation.Changes">
+            <summary>
+            Is there any changes to be made?
+            </summary>
+        </member>
+        <member name="P:SLBFE.Models.UserValidation.EmployeeID">
+            <summary>
+            Who checked this account
             </summary>
         </member>
     </members>

@@ -1,0 +1,118 @@
+.select-account-txt {
+  font-family: Artifika, serif;
+  font-size: 1.5rem;
+}
+
+.citizen-select-btn {
+  width: 213px;
+  height: 81px;
+  background: linear-gradient(255.41deg, #36C486 0%, #00A1BA 100%);
+  box-shadow: -5px 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.citizen-select-img {
+  width: 4rem;
+  margin-left: 10px;
+  margin-top: 8px;
+}
+
+.citizen-select-txt {
+  color: white;
+  margin-left: 13px;
+  font-size: 29px;
+  font-family: Artifika, serif;
+}
+
+.selection-btn-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 15vw;
+  margin-top: 5vw;
+}
+
+.selection-heading-top {
+  width: 100%;
+  text-align: center;
+}
+
+.btn-content {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.citizen-select-btn:hover {
+  background: linear-gradient(255.41deg, #409771 0%, #00A1BA 100%);
+  box-shadow: -5px 6px 20px rgba(185, 185, 185, 0.7);
+  cursor: pointer;
+}
+
+.staff-select-btn {
+  width: 213px;
+  height: 81px;
+  box-shadow: -5px 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  background: linear-gradient(255.41deg, #00A1BA 0%, #485DA6 100%);
+}
+
+.company-select-btn {
+  width: 246px;
+  height: 81px;
+  box-shadow: -5px 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  background: linear-gradient(253.23deg, #485DA6 -7.3%, #813D93 88.43%);
+}
+
+.staff-select-btn:hover {
+  cursor: pointer;
+  background: linear-gradient(255.41deg, #07889C 0%, #485DA6 100%);
+  border-radius: 20px;
+}
+
+.company-select-btn:hover {
+  box-shadow: -5px 6px 20px rgba(185, 185, 185, 0.7);
+  cursor: pointer;
+  background: linear-gradient(253.23deg, #485DA6 -7.3%, #5D246B 88.43%);
+}
+
+.staff-select-img {
+  width: 4rem;
+  margin-left: 10px;
+  margin-top: 8px;
+}
+
+.company-select-img {
+  width: 4rem;
+  margin-left: 10px;
+  margin-top: 8px;
+}
+
+.staff-select-txt {
+  color: white;
+  margin-left: 13px;
+  font-size: 29px;
+  font-family: Artifika, serif;
+}
+
+.company-select-txt {
+  color: white;
+  margin-left: 13px;
+  font-size: 29px;
+  font-family: Artifika, serif;
+}
+
+.top-reset-txt {
+  font-family: artifika;
+  font-size: 43px;
+}
+
+@media (max-width: 500px) {
+  .top-reset-txt {
+    font-size: 30px;
+  }
+}
+

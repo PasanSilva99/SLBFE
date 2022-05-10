@@ -184,7 +184,7 @@ body {
   justify-content: right;
 }
 
-.register-btn {
+.register-btn, .scroll-btn{
   background: linear-gradient(261.5deg, #36C486 0%, #00A1BA 100%);
   border-radius: 20px;
   padding-left: 25px;
@@ -192,11 +192,11 @@ body {
   border-width: 0px;
 }
 
-.register-btn:hover {
+.register-btn:hover, .scroll-btn:hover {
   box-shadow: -5px 5px 20px .25rem rgba(0, 0, 0, 0.1);
 }
 
-.register-btn:focus {
+.register-btn:focus, .scroll-btn:focus {
   border-color: #36C486;
   box-shadow: -5px 5px 20px .25rem rgba(17, 255, 188, 0.2);
 }
@@ -207,6 +207,12 @@ body {
   background-color: #0000000d;
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+.error{
+  margin-top: -1em;
+  color: crimson;
+  display: block;
 }
 
 #map {

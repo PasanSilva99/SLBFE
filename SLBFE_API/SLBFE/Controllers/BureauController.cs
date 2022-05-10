@@ -37,12 +37,39 @@ namespace SLBFE.Controllers
             return list;
 
         }
+        
+        /// <summary>
+        /// Returns the Officer Details According to the NationalID 
+        /// </summary>
+        /// <param name="nationalID"></param>
+        /// <returns></returns>
+        public List<Models.Bureau> Get(string nationalID)
+        {
+            var list = new List<Models.Bureau>();
+            var bureaulist = Models.DataStore.GetBureaus();
+
+            if (bureaulist != null)
+            {
+                foreach (var burea in bureaulist)
+                {
+                    var bur = burea;
+                    bur.Password = "";
+                    list.Add(bur);
+                }
+
+                return list.Where(b => b.NationalID == nationalID).ToList();
+            }
+            else
+            {
+                return new List<Models.Bureau>();
+            }
+        }
 
         /// <summary>
         /// POST Request
         /// </summary>
         /// <param name="value">Officer data as an single Officer object</param>
-        
+
         // POST: api/Bureau
         public void Post([FromBody]Models.Bureau value)
         {
@@ -61,6 +88,22 @@ namespace SLBFE.Controllers
             Models.DataStore.UpdateOfficer(employeeID, value);
         }
 
+        /// <summary>
+        /// Updates the citizen's validation
+        /// </summary>
+        /// <param name="validationData"></param>
+        /// <returns></returns>
+        // POST: api/Bureau
+        public int Post([FromBody] Models.UserValidation validationData)
+        {
+            return Models.DataStore.ValidateCitizen(validationData);
+        }
+        [Route("api/isOfficer")]
+        [HttpGet]
+        public int isOfficer(string email)
+        {
+            return Models.DataStore.IsOfficer(email);
+        }
 
         /// <summary>
         /// DELETE Request
