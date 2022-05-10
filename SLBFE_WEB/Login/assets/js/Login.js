@@ -207,7 +207,7 @@ function validateCommpany(loginData){
   validateCommpany.onreadystatechange = function() { // Call a function when the state changes.
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         setCookie("commpany",loginData.Email,1);
-        window.location.href = "/Commpany";
+        window.location.href = "/Company";
       }
       else{
         console.log("Password is incorrect!");
