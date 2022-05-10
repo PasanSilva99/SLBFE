@@ -53,26 +53,24 @@ function LoginUser(){
         // after loading this request
         isCitizenRequest.onload = function() {
 
-          // Lets try to look and see wether the user is successfullyt registred in the server
-          var response = isCitizenRequest.response;
+            // Lets try to look and see wether the user is successfullyt registred in the server
+            var response = isCitizenRequest.response;
 
-          var parsedData = JSON.parse(response);
-          console.log(parsedData);
+            var parsedData = JSON.parse(response);
+            console.log(parsedData);
 
-          // This request will return with the user object of there is a user with that
-          // National ID
-          // so, if there is more than 0 that means a object is returned from the server
-          // If that happens, redirect the user to dashboard
-          if (parsedData> 0){
-            console.log("is citizen!");
-          }
-        };
-
-
+            // This request will return with the user object of there is a user with that
+            // National ID
+            // so, if there is more than 0 that means a object is returned from the server
+            // If that happens, redirect the user to dashboard
+            if (parsedData> 0){
+              console.log("is citizen!");
+              validateCitizen(loginData); //Calling the validateCitizen function to check the password validity
+            };
+          } 
         isCitizenRequest.send();
-       
       }
-      else {
+        else {
         console.log("Data is not ready!");
       }
 
@@ -97,7 +95,10 @@ function LoginUser(){
           // so, if there is more than 0 that means a object is returned from the server
           // If that happens, redirect the user to dashboard
           if (parsedData> 0){
-            console.log("is citizen!");
+            console.log("is bureau officer!");
+            setCookie("officer",Email.value,1);
+            
+            
           }
         };
 
@@ -128,7 +129,8 @@ function LoginUser(){
           // so, if there is more than 0 that means a object is returned from the server
           // If that happens, redirect the user to dashboard
           if (parsedData> 0){
-            console.log("is citizen!");
+            console.log("is a commpany!");
+            setCookie("commpany",Email.value,1);
           }
         };
 
@@ -138,10 +140,29 @@ function LoginUser(){
       else {
         console.log("Data is not ready!");
       }
+}
 
+function validateCitizen(loginData){
+  //Checking the password of the citizen
+  var validateCitizen = new XMLHttpRequest();
+  validateCitizen.open('POST', 'http://20.211.42.249:59413/api/Citizen/Login');
 
-      
+  
+  // Set the headers as JSON 
+  validateCitizen.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  
+  validateCitizen.onreadystatechange = function() { // Call a function when the state changes.
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        setCookie("citizen",Email.value,1);
+        window.location.href = "/Citizen";
+      }
+      else{
+        console.log("Password is incorrect!");
+      }  
 
+    }
+  // This will send the newCitizen as JOSON Object in the body of the request
+  validateCitizen.send(JSON.stringify(loginData));
 
 }
 
