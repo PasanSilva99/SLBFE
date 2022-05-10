@@ -36,6 +36,29 @@ namespace SLBFE.Controllers
             return list;
         }
 
+        public List<Models.Commpany> Get(string email)
+        {
+            var list = new List<Models.Commpany>();
+            var companylist = Models.DataStore.GetCommpany();
+
+            if (companylist != null)
+            {
+                foreach (var company in companylist)
+                {
+                    var comp = company;
+                    comp.Password = "";
+                    list.Add(comp);
+                }
+
+                return list.Where(c => c.Email == email).ToList();
+            }
+            else
+            {
+                return new List<Models.Commpany>();
+            }
+        }
+
+
         /// <summary>
         /// POST Request
         /// </summary>
