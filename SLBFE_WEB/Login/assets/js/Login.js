@@ -42,17 +42,20 @@ function LoginUser(){
 
       });
 
+
+      //Checking whether entered citizen is registered or not
       if(isEmailAvaialable && isPasswordAvailable){
       
-        var validateRequest = new XMLHttpRequest();  
+        var isCitizenRequest = new XMLHttpRequest();  
 
-        validateRequest.open('GET', 'http://20.211.42.249:59413/api/isCitizen?' + "email="+loginData.Email);
+        isCitizenRequest.open('GET', 'http://20.211.42.249:59413/api/isCitizen?' + "email="+loginData.Email);
         
         // after loading this request
-        validateRequest.onload = function() {
+        isCitizenRequest.onload = function() {
 
           // Lets try to look and see wether the user is successfullyt registred in the server
-          var response = validateRequest.response;
+          var response = isCitizenRequest.response;
+
           var parsedData = JSON.parse(response);
           console.log(parsedData);
 
@@ -65,12 +68,78 @@ function LoginUser(){
           }
         };
 
-        validateRequest.send();
+
+        isCitizenRequest.send();
+       
+      }
+      else {
+        console.log("Data is not ready!");
+      }
+
+
+      //Checking whether entered officer is registered or not
+      if(isEmailAvaialable && isPasswordAvailable){
+      
+        var isOfficerRequest = new XMLHttpRequest();  
+
+        isOfficerRequest.open('GET', 'http://20.211.42.249:59413/api/isOfficer?' + "email="+loginData.Email);
+        
+        // after loading this request
+        isOfficerRequest.onload = function() {
+
+          // Lets try to look and see wether the user is successfullyt registred in the server
+          var response = isOfficerRequest.response;
+          var parsedData = JSON.parse(response);
+          console.log(parsedData);
+
+          // This request will return with the user object of there is a user with that
+          // National ID
+          // so, if there is more than 0 that means a object is returned from the server
+          // If that happens, redirect the user to dashboard
+          if (parsedData> 0){
+            console.log("is citizen!");
+          }
+        };
+
+        isOfficerRequest.send();
         
       }
       else {
         console.log("Data is not ready!");
       }
+
+      //Checking whether entered commpany is registered or not
+      if(isEmailAvaialable && isPasswordAvailable){
+      
+        var isCommpanyRequest = new XMLHttpRequest();  
+
+        isCommpanyRequest.open('GET', 'http://20.211.42.249:59413/api/isCommpany?' + "email="+loginData.Email);
+        
+        // after loading this request
+        isCommpanyRequest.onload = function() {
+
+          // Lets try to look and see wether the user is successfullyt registred in the server
+          var response = isCommpanyRequest.response;
+          var parsedData = JSON.parse(response);
+          console.log(parsedData);
+
+          // This request will return with the user object of there is a user with that
+          // National ID
+          // so, if there is more than 0 that means a object is returned from the server
+          // If that happens, redirect the user to dashboard
+          if (parsedData> 0){
+            console.log("is citizen!");
+          }
+        };
+
+        isCommpanyRequest.send();
+        
+      }
+      else {
+        console.log("Data is not ready!");
+      }
+
+
       
 
 
