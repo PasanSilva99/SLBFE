@@ -2,8 +2,8 @@ function getUser(){
     document.getElementById("user-interface").style.display = "none";
     document.getElementById("loading-screen").style.display = "flex";
 
-    //let userEmail = getCookie("user");
-    let userEmail = "";
+    let userEmail = getCookie("commpany");
+
 
     // if the userCookie Exists
     if(userEmail != null && userEmail != "")
@@ -47,15 +47,14 @@ function getUser(){
 }
 
 var ProfileName = document.getElementById("profileName");
-var Greeting = document.getElementById("greeting");
+
 
 // Lets load the user details in to the dashboard 
 function LoadUserToView(user){
     console.log(user);
     // Combine the name to get the full name
-    let username = user.FirstName + " " + user.LastName;
+    let username = user.BusinessName;
     ProfileName.innerHTML = username;
-    Greeting.innerHTML = "Hello, " + username;
 }
 
 getUser();
