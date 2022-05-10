@@ -56,6 +56,9 @@ function LoadUserToView(user){
     let username = user.FirstName + " " + user.LastName;
     ProfileName.innerHTML = username;
     Greeting.innerHTML = "Hello, " + username;
+
+
+
 }
 
 getUser();
