@@ -72,7 +72,7 @@ namespace SLBFE.Controllers
 
 
         /// <summary>
-        /// POST Request
+        /// POST Request 
         /// </summary>
         /// <param name="value">commpany data as an single commpany object</param>
         /// <param name="BRNumber">commpany data as an single commpany object</param>
