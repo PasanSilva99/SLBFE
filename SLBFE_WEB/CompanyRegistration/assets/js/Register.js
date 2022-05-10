@@ -110,21 +110,6 @@ function validatePhone(elementID, errorID) {
   return false;
 }
 
-function validateLocation() {
-  var latI = document.getElementById("lat");
-  var lngI = document.getElementById("lng");
-
-  var errorV = document.getElementsByClassName("locError")[0];
-
-  if (latI.value == null || latI.value == "" || lngI.value == null || lngI.value == "") {
-    errorV.innerHTML = "Please Select your Location";
-    errorV.style.display = "block";
-  } else {
-    errorV.style.display = "none";
-    return true;
-  }
-  return false;
-}
 
 
 
@@ -189,10 +174,8 @@ function RegisterCompany() {
   var StateProvince = document.getElementById("stateProvince");
   var City = document.getElementById("city");
   var ZipCode = document.getElementById("postalCode");
-  var Latitudes = document.getElementById("lat");
-  var Longitudes = document.getElementById("lng");
   var BR = document.getElementById("br");
-  
+  var bcat = document.getElementById("bcategory");
 
   if (
     isNullOrEmpty(BusinessName, "bnError", "businessname") &&
@@ -201,24 +184,21 @@ function RegisterCompany() {
     isNullOrEmpty(StateProvince, "spError", "State/ Province") &&
     isNullOrEmpty(City, "ctError", "City") &&
     isNullOrEmpty(ZipCode, "zipError", "Zip Code") &&
-    isNullOrEmpty(BR, "brError", "Bsr") &&
-    validateLocation()
+    isNullOrEmpty(BR, "brError", "BR") 
+    
   ) {
     newCompany.BusinessName = BusinessName.value;
-    newCompany.BusinessRegistrationNumber = BusinessRegistrationNumber.value;
+    newCompany.BusinessCategory = bcat.value;
+    newCompany.BRNumber = BusinessRegistrationNumber.value;
     newCompany.AddressL1 = AddressL1.value;
     newCompany.StateProvince = StateProvince.value;
-    newCompany.City = City.value;
     newCompany.ZipCode = ZipCode.value;
     newCompany.City = City.value;
-    newCompany.BR = BR.value;
+    newCompany.FilePathBR = BR.value;
 
+    isMandatoryAvailable = true;
     
-    var Location = new Object();
-    Location.Longitudes= Longitudes.value;
-    Location.Latitudes = Latitudes.value;
-
-    newCompany.MapLocation = Location;
+  
     
   } else {
     console.log("Missing Mandatory Data");
@@ -250,8 +230,8 @@ function RegisterCompany() {
 
   var businessnum = document.getElementById("brnumber");
 
-  if (validateBusinessnumber("brnummber", "brnError")) {
-    newCompany.Businessnumber = Businessnumber.value;
+  if (isNullOrEmpty(businessnum, "brnError","Business Registration number")) {
+    newCompany.BRNumber = businessnum.value;
     isBusinessnumberAvaialable = true;
   } else {
     console.log("Missing Business Registration number");
@@ -263,22 +243,11 @@ function RegisterCompany() {
   // optinal
   var AddressL2 = document.getElementById("addressL2");
   newCompany.AddressL2 = filterEmpty(AddressL2.value);
-  var CurrentProfession = document.getElementById("currenProfession");
-  newCompany.CurrentProfession = filterEmpty(CurrentProfession.value);
-  var Affiliation = document.getElementById("affiliation");
-  newCompany.Affiliation = filterEmpty(Affiliation.value);
-
+ 
   
 
   
-  // filenames Array
-  var QualFileNames = [];
-  console.log(FilesFullNames);
-  for (let i = 0; i < FilesFullNames.length; i++) {
-    // filer only the file names
-    var filename = FilesFullNames[i].name;
-    QualFileNames.push(filename);
-  }
+  
 
   
 
@@ -292,7 +261,7 @@ function RegisterCompany() {
 
   var request = new XMLHttpRequest();
 
-  request.open("POST", "http://20.211.42.249:59413/api/Company");
+  request.open("POST", "http://20.92.239.229:59413/api/Commpany");
 
 
 
@@ -308,27 +277,35 @@ function RegisterCompany() {
 
     request.onreadystatechange = function() { // Call a function when the state changes.
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        console.log("registartion ok");
         var validateRequest = new XMLHttpRequest();
 
-        validateRequest.open('GET', 'https://localhost:44367/api/Companyhttp://20.211.42.249:59413/api/Company');
+
+        validateRequest.open('GET', 'http://20.92.239.229:59413/api/Commpany?'+ "email="+newCompamy.Email);
         
         validateRequest.onload = function() {
+          console.log("conform user");
           var response = validateRequest.response;
           var parsedData = JSON.parse(response);
           console.log(parsedData);
+          console.log("requestok");
+
 
           if (parsedData.length > 0){
-            window.location.replace("/Company/Dashobard");
+            window.location.replace("/Company");
           }
           else{
             alert("Server Error! Could Not Register. Please try again in few minutes.");
           }
         };
 
-        validateRequest.send("brnumber="+newCompany.BusinessRegistrationNumber);
+        validateRequest.send();
       }
   }
+  
 
+  }else{
+    console.log("missing inputs");
   }
 }
 
