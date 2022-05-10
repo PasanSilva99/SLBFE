@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>SLBFE Company Dashboard</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+</head>
+
+<body>
+    <div style="display: flex;height: 100vh;">
+        <div class="side-nav">
+            <div class="profile-info">
+                <div class="profile-pic"><img class="img-fluid" id="profileImage" src="assets/img/companyLogo.png" style="border-radius: 100%;"></div>
+                <div class="profile-details"><span id="profileName">ABC 7 Chicago</span><span id="profileDescription">Television station<br></span></div>
+            </div>
+            <div class="nav-links">
+                <div class="nav-item-rest" onclick="window.location = &#39;Dashbord.html&#39;;">
+                    <div class="nav-item-indicator-rest"></div>
+                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/DashboardRest.png" tag="Dashboard"></div>
+                    <div class="nav-item-name"><span>Dashboard</span></div>
+                </div>
+                <div class="nav-item-active" onclick="window.location = &#39;Citizens.html&#39;;">
+                    <div class="nav-item-indicator-active"></div>
+                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/CitizenActive.png" tag="Dashboard"></div>
+                    <div class="nav-item-name"><span>Citizens</span></div>
+                </div>
+                <div class="nav-item-rest" onclick="window.location = &#39;Complains.html&#39;;">
+                    <div class="nav-item-indicator-rest"></div>
+                    <div class="nav-item-icon"><img class="img-fluid img-nav-item" src="assets/img/ComplaintsRest.png" tag="Dashboard"></div>
+                    <div class="nav-item-name"><span>Complaints</span></div>
+                </div>
+            </div>
+            <div class="logo"><img class="img-fluid" id="logo-side" src="assets/img/SLBT%20Logo.png"></div>
+        </div>
+        <div class="page-content">
+            <div class="greeting-and-settings">
+                <div class="d-flex flex-row">
+                    <div class="hamburger">
+                        <div class="burger-layer"></div>
+                        <div class="burger-layer" onclick="openMenu()"></div>
+                        <div class="burger-layer"></div>
+                    </div>
+                    <h5>Search Citizens<br></h5>
+                </div>
+                <div class="d-xxl-flex align-items-xxl-center">
+                    <div class="d-xxl-flex align-items-xxl-center search-bar"><input type="text" class="search-box" placeholder="Search By National ID / Name/ Email"><img class="search-icon" src="assets/img/SearchRest.png" style="width: 25px;height: 25px;" onmouseover="this.src=SearchActive.png&#39;" onmouseout="this.src=&#39;SearchRest.png&#39;"></div><button class="btn btn-primary btn-purple" type="button">Add Filter</button><button class="btn btn-primary register-btn" type="button">Show Bookmarked Users</button>
+                </div>
+                <div><img class="notif-button" onmouseover="this.src=&#39;NotifActive.png&#39;" onmouseout="this.src=&#39;NotifRest.png&#39;" src="assets/img/NotifRest.png" style="width: 30px;height: 30px;"><img class="profile-button" src="assets/img/LilyKi.png"></div>
+            </div>
+            <div class="complaints" style="height: 100vh;">
+                <div class="complaints-scroll">
+                    <div class="complaint">
+                        <div class="citizen-profile"><img class="img-fluid citizen-profile-image" src="assets/img/LilyKi.png"></div>
+                        <div class="complaint-content">
+                            <div class="complaint-username-date">
+                                <div><a href="#"><span class="complaint-username">Marcus Westervelt</span></a></div>
+                            </div>
+                            <div class="complaint-body" style="display: flex;flex-direction: column;"><span class="complaint-date">marcus@gmail.com</span><span class="complaint-date">+94 70 284 2847</span><span class="complaint-date">4/17/2022</span></div>
+                            <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
+                        </div>
+                    </div>
+                    <div class="complaint">
+                        <div class="citizen-profile"><img class="img-fluid citizen-profile-image" src="assets/img/LilyKi.png"></div>
+                        <div class="complaint-content">
+                            <div class="complaint-username-date">
+                                <div><a href="#"><span class="complaint-username">Marcus Westervelt</span></a></div>
+                            </div>
+                            <div class="complaint-body" style="display: flex;flex-direction: column;"><span class="complaint-date">marcus@gmail.com</span><span class="complaint-date">+94 70 284 2847</span><span class="complaint-date">4/17/2022</span></div>
+                            <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
+                        </div>
+                    </div>
+                    <div class="complaint">
+                        <div class="citizen-profile"><img class="img-fluid citizen-profile-image" src="assets/img/LilyKi.png"></div>
+                        <div class="complaint-content">
+                            <div class="complaint-username-date">
+                                <div><a href="#"><span class="complaint-username">Marcus Westervelt</span></a></div>
+                            </div>
+                            <div class="complaint-body" style="display: flex;flex-direction: column;"><span class="complaint-date">marcus@gmail.com</span><span class="complaint-date">+94 70 284 2847</span><span class="complaint-date">4/17/2022</span></div>
+                            <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
+                        </div>
+                    </div>
+                    <div class="complaint">
+                        <div class="citizen-profile"><img class="img-fluid citizen-profile-image" src="assets/img/LilyKi.png"></div>
+                        <div class="complaint-content">
+                            <div class="complaint-username-date">
+                                <div><a href="#"><span class="complaint-username">Marcus Westervelt</span></a></div>
+                            </div>
+                            <div class="complaint-body" style="display: flex;flex-direction: column;"><span class="complaint-date">marcus@gmail.com</span><span class="complaint-date">+94 70 284 2847</span><span class="complaint-date">4/17/2022</span></div>
+                            <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
+                        </div>
+                    </div>
+                    <div class="complaint">
+                        <div class="citizen-profile"><img class="img-fluid citizen-profile-image" src="assets/img/LilyKi.png"></div>
+                        <div class="complaint-content">
+                            <div class="complaint-username-date">
+                                <div><a href="#"><span class="complaint-username">Marcus Westervelt</span></a></div>
+                            </div>
+                            <div class="complaint-body" style="display: flex;flex-direction: column;"><span class="complaint-date">marcus@gmail.com</span><span class="complaint-date">+94 70 284 2847</span><span class="complaint-date">4/17/2022</span></div>
+                            <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
+                        </div>
+                    </div>
+                    <div class="complaint">
+                        <div class="citizen-profile"><img class="img-fluid citizen-profile-image" src="assets/img/LilyKi.png"></div>
+                        <div class="complaint-content">
+                            <div class="complaint-username-date">
+                                <div><a href="#"><span class="complaint-username">Marcus Westervelt</span></a></div>
+                            </div>
+                            <div class="complaint-body" style="display: flex;flex-direction: column;"><span class="complaint-date">marcus@gmail.com</span><span class="complaint-date">+94 70 284 2847</span><span class="complaint-date">4/17/2022</span></div>
+                            <div class="complaint-time-wrap"><span class="complaint-time">2 hours ago</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" type="module"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+
+</html>
