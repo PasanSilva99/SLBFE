@@ -60,7 +60,10 @@ function GenerateView(complaint){
         let complaintTime = document.createElement("div");
         complaintTime.classList = "complaint-time-wrap";
 
-            let time = 
+            let time = moment(complaint.date).fromNow();
+            let lbl_complaintTime = document.createElement("span");
+            
+
 }
 
 function GetComplaints(userEmail){
