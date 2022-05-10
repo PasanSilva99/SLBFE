@@ -64,9 +64,10 @@ namespace SLBFE.Controllers
         /// </summary>
         /// <param name="value">commpany data as an single commpany object</param>
         // POST: api/Commpany
-        public void Post([FromBody] Models.Commpany value)
+        public int Post([FromBody] Models.Commpany value)
         {
             Models.DataStore.RegisterCommpany(value);
+            return 200;
         }
 
 
@@ -77,9 +78,10 @@ namespace SLBFE.Controllers
         /// <param name="BRNumber">commpany data as an single commpany object</param>
 
         // POST: api/commpany
-        public void Post(string BRNumber, [FromBody] Models.Commpany value)
+        public int Post(string BRNumber, [FromBody] Models.Commpany value)
         {
             Models.DataStore.UpdateCompany(BRNumber, value);
+            return 200;
         }
 
         [Route("api/isCommpany")]
@@ -96,9 +98,10 @@ namespace SLBFE.Controllers
         /// <param name="BRNumber">Commpany of the officer that need to deleted</param>
         /// <param name="requestedBY">The Commpany that deleted the account</param>
         // DELETE: api/Commpany/5
-        public void Delete(string BRNumber, string requestedBY)
+        public int Delete(string BRNumber, string requestedBY)
         {
             Models.DataStore.DeleteCompany(BRNumber, requestedBY);
+            return 200;
         }
     }
 }
