@@ -56,6 +56,11 @@
   flex-direction: column;
   margin-top: 26px;
 }
+.error{
+  margin-top: -1em;
+  color: crimson;
+  display: block;
+}
 
 .login-btn {
   background: linear-gradient(261.5deg, #36C486 0%, #00A1BA 100%);

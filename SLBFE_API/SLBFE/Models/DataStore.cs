@@ -547,6 +547,29 @@ namespace SLBFE.Models
             return 0;
         }
 
+        internal static int IsOfficer(string email)
+        {
+            var list = new List<Bureau>();
+            var officerlist = GetBureaus();
+
+            if (officerlist != null)
+            {
+                foreach (var officers in officerlist)
+                {
+                    var officer = officers;
+                    officer.Password = "";
+                    list.Add(officer);
+                }
+
+                return list.Where(b => b.Email == email).ToList().Count();
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
         #endregion
 
         #region Citizen Functions
@@ -1082,6 +1105,31 @@ namespace SLBFE.Models
             }
         }
         #endregion
+
+        internal static int IsCommpany(string email)
+        {
+            var list = new List<Commpany>();
+            var commpanylist = GetCommpany();
+
+            if (commpanylist != null)
+            {
+                foreach (var commpanies in commpanylist)
+                {
+                    var commpany = commpanies;
+                    commpany.Password = "";
+                    list.Add(commpany);
+                }
+
+                return list.Where(c => c.Email == email).ToList().Count();
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
+
 
         #region Company Detail Update
         public static int UpdateCompany(string BRNumber, Commpany company)

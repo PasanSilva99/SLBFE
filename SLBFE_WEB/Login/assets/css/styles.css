@@ -42,6 +42,12 @@ body {
   padding-bottom: 10px;
 }
 
+.error{
+  margin-top: -1em;
+  color: crimson;
+  display: block;
+}
+
 .nav-active {
   color: rgb(191, 0, 255);
   border-bottom: rgb(191, 0, 255) solid !important;
