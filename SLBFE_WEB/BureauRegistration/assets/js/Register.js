@@ -325,7 +325,7 @@ function RegisterUser() {
     var request = new XMLHttpRequest();
 
 
-    request.open("POST", "http://20.211.42.249:59413/api/Bureau");
+    request.open("POST", "http://20.92.239.229:59413/api/Bureau");
 
 
 
@@ -344,7 +344,7 @@ function RegisterUser() {
           var validateRequest = new XMLHttpRequest();
   
 
-          validateRequest.open('GET', 'http://20.211.42.249:59413/api/Bureau');
+          validateRequest.open('GET', 'http://20.92.239.229:59413/api/Bureau');
 
 
           
