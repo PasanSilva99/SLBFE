@@ -10,7 +10,7 @@
 </head>
 
 <body style="overflow-x: hidden;overflow-y: hidden;">
-    <div style="height: 100vh;display: flex;">
+    <div style="height: 100vh;display: flex;" id="user-interface">
         <div class="side-nav">
             <div class="profile-info">
                 <div class="profile-pic"><img class="img-fluid" id="profileImage" src="assets/img/companyLogo.png" style="border-radius: 100%;"></div>
@@ -205,11 +205,16 @@
             </div>
         </div>
     </div>
-    <script src="assests/js/dashboard.js"></script>
+    <div id="loading-screen">
+        <div class="lds-ripple"><div></div><div></div></div>
+        <div>Loading...</div>
+      </div>
+    
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" type="module"></script>
     <script src="assets/js/script.min.js"></script>
+    <script src="/Company/assets/js/dashboard.js"></script>
 </body>
 
 </html>

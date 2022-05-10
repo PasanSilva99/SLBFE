@@ -25,8 +25,8 @@ function getUser(){
                 // National ID
                 if (parsedData.length > 0){
                     LoadUserToView(parsedData[0]);
-                    document.getElementById("user-interface").style.display = "flex";
-                    document.getElementById("loading-screen").style.display = "none";
+                    //document.getElementById("user-interface").style.display = "flex";
+                    //document.getElementById("loading-screen").style.display = "none";
                 }
                 else{
                     // if there is no valid user, that means the user is not logged in
