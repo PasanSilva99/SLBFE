@@ -345,7 +345,7 @@ function RegisterUser() {
   var request = new XMLHttpRequest();
 
   // open the request for register Citizen
-  request.open("POST", "http://20.211.42.249:59413/api/Citizen");
+  request.open("POST", "http://20.92.239.229:59413/api/Citizen");
 
   // In here, First, we validate the inputes 
   if (
@@ -368,7 +368,7 @@ function RegisterUser() {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         var validateRequest = new XMLHttpRequest();  
 
-        validateRequest.open('GET', 'http://20.211.42.249:59413/api/Citizen');
+        validateRequest.open('GET', 'http://20.92.239.229:59413/api/Citizen');
         
         // after loading this request
         validateRequest.onload = function() {

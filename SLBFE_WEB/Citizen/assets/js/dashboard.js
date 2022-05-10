@@ -1,14 +1,16 @@
 function getUser(){
-    //let userNID = getCookie("user");
-    var userNID = ""; // Untill the login page ready
+    document.getElementById("user-interface").style.display = "none";
+    document.getElementById("loading-screen").style.display = "flex";
 
+    //let userEmail = getCookie("user");
+    let userEmail = "pasananuththara19@gmail.com";
     // if the userCookie Exists
-    if(userNID != null && userNID != "")
+    if(userEmail != null && userEmail != "")
     {
     var userRequest = new XMLHttpRequest();
 
     // api/Citizen?nationalID=NID to get the user from the API
-    userRequest.open('GET', 'http://20.211.42.249:59413/api/Citizen');
+    userRequest.open('GET', 'http://20.92.239.229:59413/api/FindCitizen?'+ "email="+userEmail);
 
     // this will trigger when the request is loaded
     userRequest.onload = 
@@ -22,22 +24,24 @@ function getUser(){
           // National ID
           if (parsedData.length > 0){
             LoadUserToView(parsedData[0]);
+            document.getElementById("user-interface").style.display = "flex";
+            document.getElementById("loading-screen").style.display = "none";
           }
           else{
             // if there is no valid user, that means the user is not logged in
             alert("Error! Could Not Load User. Please try again in few minutes.");
             window.location.href = "/Login";
+
           }
         }
-
-    // Now lets send the Request with the NID
-    userRequest.send("nationalID="+userNID);
     }
     else{
         // if there is no valid user, that means the user is not logged in
         alert("Please Login First");
         window.location.href = "/Login";
     }
+
+    userRequest.send();
 
 }
 
