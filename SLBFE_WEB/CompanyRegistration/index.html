@@ -38,7 +38,7 @@
                     />
                     <p class="error bnError">Error</p>
                 </div>
-                <div><span class="input-header">Business Category</span><select class="form-select form-control">
+                <div><span class="input-header">Business Category</span><select class="form-select form-control" id="bcategory">
                         <optgroup label="Automotive">
                             <option value="Auto Accessories">Auto Accessories</option>
                             <option value="Auto Dealers – New ">Auto Dealers – New </option>
@@ -189,15 +189,15 @@
                     placeholder="Eg. 343"
                     style="overflow: hidden"
                      required
-                     onfocusout="isNullOrEmpty('this', 'brnError');"
+                     onfocusout="isNullOrEmpty(this, 'brnError');"
                      />
                      <p class="error brnError">Error</p>
                     </div>
                 <div style="margin-top: 1em;"><span class="input-header">Upload your BR<br></span>
                     <input class="form-control" 
                     id="br"
-                    type="image"
-                    accept="image/*">
+                    type="file"
+                    accept="image/*"
                     onfocusout="isNullOrEmpty(this, 'brError', 'Bsr');"
                 />
                 <p class="error brError">Error</p>
@@ -308,34 +308,10 @@
                     />
                     <p class="error zipError">Error</p>
                     </div>
-                </div><span class="input-header">Select Your Location</span>
-                <div id="map"></div>
-                <div 
-                style="background: rgba(255,255,255,0.38);
-                border-radius: 0 0 20px 20px;
-                margin-top: -1.5em;
-                padding-top: 1.5em;
-                margin-bottom: 1.5em;">
-                    <p id="error_geoLocation" style="display: none;">
-                        * Failed to detect your location. Please use the map to select your location.<br>
-                        </p>
-                        <p class="error locError">Error</p>
-                   
-                <button 
-                class="btn btn-primary" 
-                id="updateMap" type="button"
-                 style="width: 95%;margin-bottom: 10px;"
-                 >
-                 Pan to my location
-                </button>
-                 
-                <input style="display: none" id="lat" />
-                <input style="display: none" id="lng" />
-
                 </div>
                 <div class="btn-section">
                     <button class="btn btn-primary register-btn"
-                     type="submit" 
+                     type="button" 
                      onclick="RegisterCompany()"
                      style="margin-top: 1em;">Register
                     </button>
@@ -343,9 +319,12 @@
             </form>
         </div>
     </div>
+    <script src="/assets/js/ManageCookies.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/ASelectLocation.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdpLV8mBOzYfllyjkE_egd7p9DKh85ZFw&callback=initMap&v=weekly"></script>
     <script src="assets/js/intlTelInput.min.js"></script>
     <script src="assets/js/Register.js"></script>
 </body>
