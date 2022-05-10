@@ -3,7 +3,7 @@ function getUser(){
     document.getElementById("loading-screen").style.display = "flex";
 
     //let userEmail = getCookie("user");
-    let userEmail = "pasananuththara19@gmail.com";
+    let userEmail = "sandarudsilva@gmail.com";
 
     // if the userCookie Exists
     if(userEmail != null && userEmail != "")
@@ -11,7 +11,7 @@ function getUser(){
         var userRequest = new XMLHttpRequest();
 
         // api/Citizen?nationalID=NID to get the user from the API
-        userRequest.open('GET', 'http://20.92.239.229:59413/api/FindCitizen?'+ "email="+userEmail);
+        userRequest.open('GET', 'http://20.92.239.229:59413/api/FindOfficer?'+ "email="+userEmail);
 
         // this will trigger when the request is loaded
         userRequest.onload = 
@@ -56,9 +56,6 @@ function LoadUserToView(user){
     let username = user.FirstName + " " + user.LastName;
     ProfileName.innerHTML = username;
     Greeting.innerHTML = "Hello, " + username;
-
-
-
 }
 
 getUser();
