@@ -40,6 +40,11 @@ namespace SLBFE.Models
         /// </summary>
         public static string LogFilePath = Path.Combine("SLBFE_Data", "api_log.txt");
 
+        internal static int NewComplaint(Complaint value)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Logs the input into debug and to text file
         /// </summary>
@@ -54,6 +59,7 @@ namespace SLBFE.Models
             Debug.WriteLine(logString);
             // [5/2/2022 6:53:21 PM] >> text to log 
         }
+
 
         /// <summary>
         /// This initialize the database
@@ -138,7 +144,7 @@ namespace SLBFE.Models
                     "Feedback (" +
                         "ID TEXT, " +  // Auto generated ID for this Feedbaclk
                         "Email TEXT, " +  // Email of the user that posted this
-                        "Usename TEXT, " +  // User name of the user that posted this
+                        "Username TEXT, " +  // User name of the user that posted this
                         "isComplaint INTEGER, " +  // This ithis a complaint?
                         "CompanyID TEXT, " +  // Company ID which is related to this feedback
                         "CompanyName TEXT, " +  // Company Name which is related to this feedback
@@ -148,7 +154,7 @@ namespace SLBFE.Models
                     "FeedbackReply (" +
                         "FeedbackID TEXT, " +  // Which Feedback that this reply belongs to
                         "Email TEXT, " +  // Email of the user that posted this
-                        "Usename TEXT, " +  // User name of the user that posted this
+                        "Username TEXT, " +  // User name of the user that posted this
                         "SentDate TEXT, " +  // Date thst is this replay added
                         "Content TEXT );"+  // Content of the reply
                     "CREATE TABLE IF NOT EXISTS " +
@@ -1272,10 +1278,78 @@ namespace SLBFE.Models
             Log("Uncaught Error on company deletion");
             return -2;
         }
+
+
         #endregion
 
         #endregion
 
+        #region Complaints Functions
 
+        internal static List<Complaint> GetComplaints()
+        {
+            var feedbackList = new List<Complaint>();
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand selectCommand = new SQLiteCommand();
+                    selectCommand.CommandText = "SELECT * FROM Feedback";
+                    selectCommand.Connection = con;
+
+                    var reader = selectCommand.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        feedbackList.Add(
+                             new Complaint()
+                             {
+                                 ComplaintID = reader.GetString(0),
+                                 Email = reader.GetString(1),
+                                 Username = reader.GetString(2),
+                                 isComplaint = reader.GetInt32(3) == 0 ? false :true,
+                                 CompanyID = reader.GetString(4),
+                                 CompanyName = reader.GetString(5),
+                                 SentDate = DateTime.Parse(reader.GetString(6)),
+                                 Content = reader.GetString(7)
+                             });
+                    }
+
+
+                    return feedbackList;
+
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    Log("Complaints Get Request Failed! (Database)");
+                    Log(ex.ToString());
+                }
+
+                Log("Uncaught Error on Fetching Complaints!");
+                return null;
+            }
+        }
+
+
+        internal static int ReplyComplaint(string id, ComplaintReply value)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static int DeleteComplaint(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static int DeleteComplaintReply(string id, string replyID)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

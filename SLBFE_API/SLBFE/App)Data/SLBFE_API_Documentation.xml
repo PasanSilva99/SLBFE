@@ -538,6 +538,13 @@
             <param name="nationalID"></param>
             <returns></returns>
         </member>
+        <member name="M:SLBFE.Controllers.BureauController.GetOfficerFromEmail(System.String)">
+            <summary>
+            Returns the officer that belongs to entered email
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
         <member name="M:SLBFE.Controllers.BureauController.Post(SLBFE.Models.Bureau)">
             <summary>
             POST Request
@@ -581,6 +588,13 @@
             <summary>
             Gets a list of available Citizens
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLBFE.Controllers.CitizenController.GetCirizenFromEmail(System.String)">
+            <summary>
+            Retuns the citizen that belongs this email
+            </summary>
+            <param name="email">Email of the citizen</param>
             <returns></returns>
         </member>
         <member name="M:SLBFE.Controllers.CitizenController.CitizenLogin(SLBFE.Models.LoginData)">
@@ -627,7 +641,7 @@
         </member>
         <member name="M:SLBFE.Controllers.CommpanyController.Post(System.String,SLBFE.Models.Commpany)">
             <summary>
-            POST Request
+            POST Request 
             </summary>
             <param name="value">commpany data as an single commpany object</param>
             <param name="BRNumber">commpany data as an single commpany object</param>
