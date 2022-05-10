@@ -96,6 +96,7 @@ function LoginUser(){
           // If that happens, redirect the user to dashboard
           if (parsedData> 0){
             console.log("is bureau officer!");
+            validateOfficer(loginData); //Calling the validateOfficer function to check the password validity
             setCookie("officer",Email.value,1);
             
             
@@ -130,6 +131,7 @@ function LoginUser(){
           // If that happens, redirect the user to dashboard
           if (parsedData> 0){
             console.log("is a commpany!");
+            validateCommpany(loginData); //Calling the validateCommpany function to check the password validity
             setCookie("commpany",Email.value,1);
           }
         };
@@ -142,6 +144,7 @@ function LoginUser(){
       }
 }
 
+//This function check the validity of the citizen's password
 function validateCitizen(loginData){
   //Checking the password of the citizen
   var validateCitizen = new XMLHttpRequest();
@@ -163,6 +166,56 @@ function validateCitizen(loginData){
     }
   // This will send the newCitizen as JOSON Object in the body of the request
   validateCitizen.send(JSON.stringify(loginData));
+
+}
+
+//This function check the validity of the bureau officer's password
+function validateOfficer(loginData){
+  //Checking the password of the citizen
+  var validateOfficer = new XMLHttpRequest();
+  validateOfficer.open('POST', 'http://20.211.42.249:59413/api/Citizen/Login');
+
+  
+  // Set the headers as JSON 
+  validateOfficer.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  
+  validateOfficer.onreadystatechange = function() { // Call a function when the state changes.
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        setCookie("officer",Email.value,1);
+        window.location.href = "/Bureau";
+      }
+      else{
+        console.log("Password is incorrect!");
+      }  
+
+    }
+  // This will send the newCitizen as JOSON Object in the body of the request
+  validateOfficer.send(JSON.stringify(loginData));
+
+}
+
+//This function check the validity of the bureau commpany's password
+function validateCommpany(loginData){
+  //Checking the password of the citizen
+  var validateCommpany = new XMLHttpRequest();
+  validateCommpany.open('POST', 'http://20.211.42.249:59413/api/Citizen/Login');
+
+  
+  // Set the headers as JSON 
+  validateCommpany.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  
+  validateCommpany.onreadystatechange = function() { // Call a function when the state changes.
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        setCookie("commpany",Email.value,1);
+        window.location.href = "/Commpany";
+      }
+      else{
+        console.log("Password is incorrect!");
+      }  
+
+    }
+  // This will send the newCitizen as JOSON Object in the body of the request
+  validateCommpany.send(JSON.stringify(loginData));
 
 }
 
