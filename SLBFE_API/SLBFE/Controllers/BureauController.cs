@@ -98,6 +98,12 @@ namespace SLBFE.Controllers
         {
             return Models.DataStore.ValidateCitizen(validationData);
         }
+        [Route("api/isOfficer")]
+        [HttpGet]
+        public int isOfficer(string email)
+        {
+            return Models.DataStore.IsOfficer(email);
+        }
 
         /// <summary>
         /// DELETE Request

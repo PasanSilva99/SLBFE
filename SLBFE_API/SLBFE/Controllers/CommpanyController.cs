@@ -59,6 +59,13 @@ namespace SLBFE.Controllers
             Models.DataStore.UpdateCompany(BRNumber, value);
         }
 
+        [Route("api/isCommpany")]
+        [HttpGet]
+        public int isCommpany(string email)
+        {
+            return Models.DataStore.IsCommpany(email);
+        }
+
 
         /// <summary>
         /// DELETE Request
