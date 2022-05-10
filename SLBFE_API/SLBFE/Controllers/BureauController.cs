@@ -65,6 +65,36 @@ namespace SLBFE.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Returns the officer that belongs to entered email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [Route("api/FindOfficer")]
+        [HttpGet]
+        public List<Models.Bureau> GetOfficerFromEmail(string email)
+        {
+            var list = new List<Models.Bureau>();
+            var officerlist = Models.DataStore.GetBureaus();
+
+            if (officerlist != null)
+            {
+                foreach (var officer in officerlist)
+                {
+                    var offi = officer;
+                    offi.Password = "";
+                    list.Add(offi);
+                }
+
+                return list.Where(b => b.Email == email).ToList();
+            }
+            else
+            {
+                return new List<Models.Bureau>();
+            }
+        }
+
         /// <summary>
         /// POST Request
         /// </summary>
