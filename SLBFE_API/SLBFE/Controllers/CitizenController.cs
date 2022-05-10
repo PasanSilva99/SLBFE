@@ -79,6 +79,35 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
+        /// Retuns the citizen that belongs this email
+        /// </summary>
+        /// <param name="email">Email of the citizen</param>
+        /// <returns></returns>
+        [Route("api/FindCitizen")]
+        [HttpGet]
+        public List<Models.Citizen> GetCirizenFromEmail(string email)
+        {
+            var list = new List<Models.Citizen>();
+            var citizenlist = Models.DataStore.GetCitizens();
+
+            if (citizenlist != null)
+            {
+                foreach (var citizen in citizenlist)
+                {
+                    var cit = citizen;
+                    cit.Password = "";
+                    list.Add(cit);
+                }
+
+                return list.Where(c => c.Email == email).ToList();
+            }
+            else
+            {
+                return new List<Models.Citizen>();
+            }
+        }
+
+        /// <summary>
         /// Validates the user 
         /// </summary>
         /// <param name="data">Login Data</param>
