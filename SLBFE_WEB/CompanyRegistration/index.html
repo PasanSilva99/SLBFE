@@ -28,7 +28,16 @@
         <div class="top-nav"><a class="top-nav-link" href="#">Log In</a><a class="top-nav-link nav-active" href="#">Sign Up</a></div>
         <div class="input-section">
             <form id="registration-form">
-                <div><span class="input-header">Business Name</span><input class="form-control" type="email" placeholder="Eg. someone@example.com" required=""></div>
+                <div><span class="input-header">Business Name</span>
+                    <input class="form-control" 
+                    type="text" 
+                    id="bname"
+                    placeholder="Eg. apple" 
+                    required
+                    onfocusout="isNullOrEmpty(this, 'bnError', 'businessname');"
+                    />
+                    <p class="error bnError">Error</p>
+                </div>
                 <div><span class="input-header">Business Category</span><select class="form-select form-control">
                         <optgroup label="Automotive">
                             <option value="Auto Accessories">Auto Accessories</option>
@@ -173,25 +182,164 @@
                             <option value=""></option>
                         </optgroup>
                     </select></div>
-                <div><span class="input-header">Business Registration Number</span><input class="form-control" type="email" placeholder="Eg. someone@example.com" required=""></div>
-                <div style="margin-top: 1em;"><span class="input-header">Upload your BR<br></span><input class="form-control" type="file" accept="image/*"></div>
-                <div class="d-flex d-xl-flex flex-column justify-content-xl-start"><span class="input-header">Phone Number</span><input class="form-control" type="text" id="phone" placeholder="Eg. 12 489 3456" style="overflow: hidden;" required=""></div>
-                <div class="d-flex d-xl-flex flex-column justify-content-xl-start" style="margin-top: 1.5em;"><span class="input-header">Email Address&nbsp;</span><input class="form-control" type="email" placeholder="Eg. someone@example.com" style="overflow: hidden;" required=""></div>
-                <div class=".input-group"><span class="input-header">Create a new password</span><input class="form-control" type="password" placeholder="Create a new Password" required=""></div>
-                <div class=".input-group"><span class="input-header">Retype your password</span><input class="form-control" type="password" placeholder="Retype Your Password" required=""></div>
-                <div class="eos"></div><span class="input-header">Address</span>
-                <div style="margin-top: 1em;"><span class="input-header">Address Line 1<br></span><input class="form-control" type="text" placeholder="Eg. No.110, Oak Road" required=""></div>
-                <div style="margin-top: 1em;"><span class="input-header">Address Line 2<br></span><input class="form-control" type="text" placeholder="Eg. Maple Street" required=""></div>
-                <div style="margin-top: 1em;"><span class="input-header">State/ Province<br></span><input class="form-control" type="text" placeholder="Eg. Western Province/ Missouri" required=""></div>
+                <div><span class="input-header">Business Registration Number</span>
+                    <input class="form-control" 
+                    type="text" 
+                    id="brnumber"
+                    placeholder="Eg. 343"
+                    style="overflow: hidden"
+                     required
+                     onfocusout="isNullOrEmpty('this', 'brnError');"
+                     />
+                     <p class="error brnError">Error</p>
+                    </div>
+                <div style="margin-top: 1em;"><span class="input-header">Upload your BR<br></span>
+                    <input class="form-control" 
+                    id="br"
+                    type="image"
+                    accept="image/*">
+                    onfocusout="isNullOrEmpty(this, 'brError', 'Bsr');"
+                />
+                <p class="error brError">Error</p>
+                </div>
+                <div class="d-flex d-xl-lex flex-column justify-content-xl-start">
+                    <span class="input-header">Phone Number</span>
+                    <input class="form-control" 
+                    type="text"
+                     id="phone" 
+                    placeholder="Eg. 82 489 3956" 
+                    style="overflow: hidden;" 
+                    required
+                    onfocusout="validatePhone('phone', 'phError');"
+                    />
+                    <p class="error phError" style="margin-top: 10px">Error</p>
+                </div>
+                <div class="d-flex d-xl-flex flex-column justify-content-xl-start" style="margin-top: 1.5em;"><span class="input-header">Email Address&nbsp;</span>
+                    <input 
+                    id="email"
+                    class="form-control"
+                     type="email" 
+                     placeholder="Eg. someone@example.com"
+                      style="overflow: hidden;"
+                       required
+                       onfocusout="validateEmail(this, 'emError');"
+                    />
+                    <p class="error emError">Error</p>
+
+                    </div>
+                <div class=".input-group"><span class="input-header">Create a new password</span>
+                    <input class="form-control" 
+                    id="password"
+                    type="password" 
+                    placeholder="Create a new Password" 
+                    required
+                    oninput="validatePass();"
+                    onfocusout="isNullOrEmpty(this, 'psError', 'Password');"
+                    />
+                    <p class="error psError">Error</p>
+                </div>
+                <div class=".input-group"><span class="input-header">Retype your password</span>
+                    <input class="form-control" 
+                    id="rePassword"
+                    type="password"
+                     placeholder="Retype Your Password"
+                    required
+                    oninput="validatePass();"
+              onfocusout="isNullOrEmpty(this, 'rpsError', 'Password');"
+              />
+              <p class="error rpsError">Error</p>
+                </div>
+                <div class="eos"></div>
+                <span class="input-header">Address</span>
+                <div style="margin-top: 1em;">
+                    <span class="input-header">Address Line 1<br></span>
+                    <input 
+                    id="addressL1"
+                    class="form-control" 
+                    type="text" 
+                    placeholder="Eg. No.140, Alwis Road" 
+                    required
+                    onfocusout="isNullOrEmpty(this, 'adrError', 'Address');"
+                    />
+                </div>
+                <p class="error adrError">Error</p>
+                <div style="margin-top: 1em;"><span class="input-header">Address Line 2<br></span>
+                    <input 
+                    id="addressL2"
+                    class="form-control" 
+                    type="text"
+                     placeholder="Eg. Maple Street"
+                    />
+
+                    </div>
+                <div style="margin-top: 1em;"><span class="input-header">State/ Province<br></span>
+                    <input
+                    class="form-control" 
+                    id="stateProvince"
+                    type="text"
+                     placeholder="Eg. Western Province/ Missouri" 
+                     required
+                     onfocusout="isNullOrEmpty(this, 'spError', 'State/ Province');"
+                     />
+                     <p class="error spError">Error</p>
+                    </div>
                 <div class="registration-name">
-                    <div class="firstName"><span class="input-header">City</span><input class="form-control" type="text" id="firstName-2" placeholder="AAA City" required=""></div>
-                    <div class="lastName"><span class="input-header">Zip/ Postal Code</span><input class="form-control" type="text" id="lastName-2" placeholder="12345" required=""></div>
+                    <div class="firstName">
+                        <span class="input-header">City</span>
+                        <input
+                         class="form-control"
+                         type="text"
+                          id="city" 
+                         placeholder="AAA City"
+                          required
+                          onfocusout="isNullOrEmpty(this, 'ctError', 'City');"
+                        />
+                        <p class="error ctError">Error</p>
+                        </div>
+                    <div class="lastName">
+                        <span class="input-header">Zip/ Postal Code</span>
+                        <input 
+                        class="form-control" 
+                        type="text" 
+                        id="postalCode" 
+                        placeholder="12345" 
+                        required
+                        onfocusout="isNullOrEmpty(this, 'zipError', 'Zip Code');"
+                    />
+                    <p class="error zipError">Error</p>
+                    </div>
                 </div><span class="input-header">Select Your Location</span>
                 <div id="map"></div>
-                <div style="background: rgba(255,255,255,0.38);border-radius: 0 0 20px 20px;margin-top: -1.5em;padding-top: 1.5em;margin-bottom: 1.5em;">
-                    <p id="error_geoLocation" style="display: none;">* Failed to detect your location. Please use the map to select your location.<br></p><button class="btn btn-primary" id="updateMap" type="button" style="width: 95%;margin-bottom: 10px;">Pan to my location</button>
+                <div 
+                style="background: rgba(255,255,255,0.38);
+                border-radius: 0 0 20px 20px;
+                margin-top: -1.5em;
+                padding-top: 1.5em;
+                margin-bottom: 1.5em;">
+                    <p id="error_geoLocation" style="display: none;">
+                        * Failed to detect your location. Please use the map to select your location.<br>
+                        </p>
+                        <p class="error locError">Error</p>
+                   
+                <button 
+                class="btn btn-primary" 
+                id="updateMap" type="button"
+                 style="width: 95%;margin-bottom: 10px;"
+                 >
+                 Pan to my location
+                </button>
+                 
+                <input style="display: none" id="lat" />
+                <input style="display: none" id="lng" />
+
                 </div>
-                <div class="btn-section"><button class="btn btn-primary register-btn" type="submit" style="margin-top: 1em;">Register</button></div>
+                <div class="btn-section">
+                    <button class="btn btn-primary register-btn"
+                     type="submit" 
+                     onclick="RegisterCompany()"
+                     style="margin-top: 1em;">Register
+                    </button>
+                </div>
             </form>
         </div>
     </div>
