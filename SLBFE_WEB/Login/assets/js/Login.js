@@ -80,7 +80,7 @@ function LoginUser(){
       
         var isOfficerRequest = new XMLHttpRequest();  
 
-        isOfficerRequest.open('GET', 'http://20.211.42.249:59413/api/isOfficer?' + "email="+loginData.Email);
+        isOfficerRequest.open('GET', 'http://20.92.239.229:59413/api/isOfficer?' + "email="+loginData.Email);
         
         // after loading this request
         isOfficerRequest.onload = function() {
@@ -156,7 +156,7 @@ function validateCitizen(loginData){
   
   validateCitizen.onreadystatechange = function() { // Call a function when the state changes.
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        setCookie("citizen",Email.value,1);
+        setCookie("citizen",loginData.Email,1);
         window.location.href = "/Citizen";
       }
       else{
@@ -181,7 +181,7 @@ function validateOfficer(loginData){
   
   validateOfficer.onreadystatechange = function() { // Call a function when the state changes.
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        setCookie("officer",Email.value,1);
+        setCookie("officer",loginData.Email,1);
         window.location.href = "/Bureau";
       }
       else{
@@ -206,7 +206,7 @@ function validateCommpany(loginData){
   
   validateCommpany.onreadystatechange = function() { // Call a function when the state changes.
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        setCookie("commpany",Email.value,1);
+        setCookie("commpany",loginData.Email,1);
         window.location.href = "/Commpany";
       }
       else{
