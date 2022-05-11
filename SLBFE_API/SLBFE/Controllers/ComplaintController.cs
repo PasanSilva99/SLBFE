@@ -27,11 +27,19 @@ namespace SLBFE.Controllers
         /// </summary>
         /// <param name="page">Page Number</param>
         /// <returns>10 objects that bel;ongs to that page</returns>
-        [Route("api/Complaint/Page")]
+        [Route("api/Complaint/Page/{page:int}")]
         [HttpGet]
         public List<Models.Complaint> GetComplaints(int page)
         {
+            // This will make 1 as 0
+            // Page 1 is actually 0 in array index
+            page = page - 1; 
             var complaintList = Models.DataStore.GetComplaints();
+
+            if(page < 0)
+            {
+                return new List<Models.Complaint>();
+            }
 
             if (complaintList.Count < page * 10)
             {
@@ -63,7 +71,7 @@ namespace SLBFE.Controllers
         /// This will return the complaints as a list
         /// where the email is equal
         /// </summary>
-        /// <param name="email">Email of the User/ Company</param>
+        /// <param name="email">Email of the User</param>
         /// <returns></returns>
         // GET: api/Complaint/email.sample.com
         public List<Models.Complaint> GetComplaintsFor(string email)
@@ -77,14 +85,24 @@ namespace SLBFE.Controllers
         /// where the email is equal
         /// And 10 for a page
         /// </summary>
-        /// <param name="email">Email of the User/ Company</param>
+        /// <param name="email">Email of the User</param>
+        /// <param name="page">Page Number</param>
         /// <returns></returns>
         // GET: api/Complaint/email.sample.com
         [Route("api/Complaints/{email}/{page}")]
         [HttpGet]
         public List<Models.Complaint> GetComplaintsFor(string email, int page)
         {
-            var complaints = Models.DataStore.GetComplaints();
+            var complaints = Models.DataStore.GetComplaints().Where(c => c.Email == email).ToList();
+
+            // This will make 1 as 0
+            // Page 1 is actually 0 in array index
+            page = page - 1;
+
+            if (page < 0)
+            {
+                return new List<Models.Complaint>();
+            }
 
             if (complaints.Count < page * 10)
             {
@@ -103,11 +121,66 @@ namespace SLBFE.Controllers
                 var index = page*10;
                 var valuesLeft = listCount - index; //count 56/ Requested page 5 = 50 / 56-50 = 50
 
-                return complaints.Where(c => c.Email == email).ToList().GetRange(page * 10, valuesLeft);
+                return complaints.GetRange(page * 10, valuesLeft);
             }
             else
             {
                 return complaints.Where(c => c.Email == email).ToList().GetRange(page * 10, 10);
+            }
+        }
+
+        /// <summary>
+        /// This will return the complaints as a list
+        /// where the email is equal
+        /// </summary>
+        /// <param name="email">Email of the User</param>
+        /// <returns></returns>
+        // GET: api/Complaint/email.sample.com
+        [Route("api/Company/Complaints")]
+        [HttpGet]
+        public List<Models.Complaint> GetComplaintsForCompany(string email)
+        {
+            var complaints = Models.DataStore.GetComplaints();
+            return complaints.Where(c => c.CompanyID == email).ToList();
+        }
+
+        /// <summary>
+        /// This will return the complaints as a list
+        /// where the email is equal
+        /// And 10 for a page
+        /// </summary>
+        /// <param name="email">Email of the User</param>
+        /// <param name="page">Page Number</param>
+        /// <returns></returns>
+        // GET: api/Complaint/email.sample.com
+        [Route("api/Company/Complaints/{email}/{page}")]
+        [HttpGet]
+        public List<Models.Complaint> GetComplaintsForCompany(string email, int page)
+        {
+            var complaints = Models.DataStore.GetComplaints().Where(c => c.CompanyID == email).ToList();
+
+            if (complaints.Count < page * 10)
+            {
+                // if it is no values on the page
+                // send an empty list
+                // this can be detected by the client and show no complaintas left
+                return new List<Models.Complaint>();
+            }
+            else if (complaints.Count < page * 10 + 10)
+            {
+                // this means there are no values for 10 from this page
+                // to avoid the index out of range error, 
+                // we will get how many values left fitst
+
+                var listCount = complaints.Count;
+                var index = page * 10;
+                var valuesLeft = listCount - index; //count 56/ Requested page 5 = 50 / 56-50 = 50
+
+                return complaints.GetRange(page * 10, valuesLeft);
+            }
+            else
+            {
+                return complaints.GetRange(page * 10, 10);
             }
         }
 
