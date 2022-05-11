@@ -714,11 +714,18 @@
             <param name="value">Complaint Object</param>
             <returns>Status 1 for success 0 for failed</returns>
         </member>
-        <member name="M:SLBFE.Controllers.ComplaintController.NewReply(System.String,SLBFE.Models.ComplaintReply)">
+        <member name="M:SLBFE.Controllers.ComplaintController.GetReplies(System.String)">
+            <summary>
+            Gets the replies for Feedback
+            </summary>
+            <param name="complaintID">Complaint ID</param>
+            <returns>All the replies that is related the complaint</returns>
+            
+        </member>
+        <member name="M:SLBFE.Controllers.ComplaintController.NewReply(SLBFE.Models.ComplaintReply)">
             <summary>
             Reply for the complaint
             </summary>
-            <param name="id">Complaint ID</param>
             <param name="value"></param>
             <returns>0 - Failed, 1 - Success, -1 - Failed due to DB Error, -2 Failed due to input data or db connection error</returns>
         </member>
@@ -929,6 +936,11 @@
             Object for the complaint Reply
             </summary>
         </member>
+        <member name="P:SLBFE.Models.ComplaintReply.ReplyID">
+            <summary>
+            ID of the Complaint that related to reply
+            </summary>
+        </member>
         <member name="P:SLBFE.Models.ComplaintReply.FeedbackID">
             <summary>
             ID of the Complaint that related to reply
@@ -1083,11 +1095,10 @@
             <param name="complaint">Complaint Object</param>
             <returns>0 - Failed, 1 - Successs, -1 - Error in DB, -2 Error in Object or Connection</returns>
         </member>
-        <member name="M:SLBFE.Models.DataStore.ReplyComplaint(System.String,SLBFE.Models.ComplaintReply)">
+        <member name="M:SLBFE.Models.DataStore.ReplyComplaint(SLBFE.Models.ComplaintReply)">
             <summary>
             This will save the reply for the complaint
             </summary>
-            <param name="id">Complaint ID</param>
             <param name="reply">Reply Object</param>
             <returns>0 - Failed, 1 - Success, -1 - Failed due to DB Error, -2 Failed due to input data or db connection error</returns>
         </member>

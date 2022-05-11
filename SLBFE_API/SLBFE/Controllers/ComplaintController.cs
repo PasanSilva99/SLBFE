@@ -196,16 +196,29 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
+        /// Gets the replies for Feedback
+        /// </summary>
+        /// <param name="complaintID">Complaint ID</param>
+        /// <returns>All the replies that is related the complaint</returns>
+        /// 
+        [Route("api/Complaint/Replies/{complaintID}")]
+        [HttpGet]
+        public List<Models.ComplaintReply> GetReplies(string complaintID)
+        {
+            return Models.DataStore.GetComplaintReplies(complaintID);
+        }
+
+        /// <summary>
         /// Reply for the complaint
         /// </summary>
-        /// <param name="id">Complaint ID</param>
         /// <param name="value"></param>
         /// <returns>0 - Failed, 1 - Success, -1 - Failed due to DB Error, -2 Failed due to input data or db connection error</returns>
         // PUT: api/Complaint/5
-        [Route("api/Complaint/Reply/{id}")]
-        public int NewReply(string id, [FromBody]Models.ComplaintReply value)
+        [Route("api/Complaint/Reply/")]
+        [HttpPost]
+        public int NewReply([FromBody]Models.ComplaintReply value)
         {
-            return Models.DataStore.ReplyComplaint(id, value);
+            return Models.DataStore.ReplyComplaint(value);
         }
 
         /// <summary>
