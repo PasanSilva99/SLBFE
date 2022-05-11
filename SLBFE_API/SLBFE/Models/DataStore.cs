@@ -1394,10 +1394,9 @@ namespace SLBFE.Models
         /// <summary>
         /// This will save the reply for the complaint
         /// </summary>
-        /// <param name="id">Complaint ID</param>
         /// <param name="reply">Reply Object</param>
         /// <returns>0 - Failed, 1 - Success, -1 - Failed due to DB Error, -2 Failed due to input data or db connection error</returns>
-        internal static int ReplyComplaint(string id, ComplaintReply reply)
+        internal static int ReplyComplaint(ComplaintReply reply)
         {
             using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
             {
@@ -1417,7 +1416,7 @@ namespace SLBFE.Models
 
                     insertCommand.Connection = con;
 
-                    insertCommand.Parameters.AddWithValue("@replyId", reply.FeedbackID);
+                    insertCommand.Parameters.AddWithValue("@replyId", reply.ReplyID);
                     insertCommand.Parameters.AddWithValue("@feedbackId", reply.FeedbackID);
                     insertCommand.Parameters.AddWithValue("@email", reply.Email);
                     insertCommand.Parameters.AddWithValue("@userame", reply.Username);

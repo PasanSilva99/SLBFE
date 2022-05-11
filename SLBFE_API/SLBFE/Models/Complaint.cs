@@ -60,6 +60,11 @@ namespace SLBFE.Models
         /// <summary>
         /// ID of the Complaint that related to reply
         /// </summary>
+        public string ReplyID { get; set; }
+
+        /// <summary>
+        /// ID of the Complaint that related to reply
+        /// </summary>
         public string FeedbackID { get; set; }
 
         /// <summary>
