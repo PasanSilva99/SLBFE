@@ -16,12 +16,12 @@ namespace SLBFE.Controllers
         private const string SLBFEPath = "SLBFE_Data";
 
         /// <summary>
-        /// 
+        /// Get files for related to the specific email
         /// </summary>
         /// <param name="email"></param>
         /// <param name="path"></param>
         /// <param name="filename"></param>
-        /// <returns></returns>
+        /// <returns>Returns file path, filename and its data if exist</returns>
         // GET: api/Files/5
         [Route("api/ReadFile")]
         [HttpGet]
@@ -45,7 +45,7 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Saving the file with users email as the filename
         /// </summary>
         /// <param name="email"></param>
         /// <param name="foldername"></param>
@@ -74,7 +74,7 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Delete the related file that mentioned
         /// </summary>
         /// <param name="email"></param>
         /// <param name="path"></param>
@@ -124,7 +124,7 @@ namespace SLBFE.Controllers
         string[] KnownFilePaths = new string[] { "ProfilePic", "Birthcertificate", "CV", "Passport", "Qualification", "EmployeeID", "BR" };
 
         /// <summary>
-        /// 
+        /// Here delete the user directory
         /// </summary>
         /// <param name="email"></param>
         [Route("api/DeleteUserFiles/{email}")]
