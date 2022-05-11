@@ -93,7 +93,7 @@ namespace SLBFE.Controllers
 
 
         /// <summary>
-        /// POST Request
+        /// Registering a new company 
         /// </summary>
         /// <param name="value">Commpany Data as an Single Commpany Object</param>
         // POST: api/Commpany
@@ -105,7 +105,7 @@ namespace SLBFE.Controllers
 
 
         /// <summary>
-        /// POST Request 
+        /// Upadting a existing company in the system  
         /// </summary>
         /// <param name="value">Commpany Data as an Single Commpany Object</param>
         /// <param name="BRNumber">Commpany Data as an Single Commpany Object</param>
@@ -132,7 +132,7 @@ namespace SLBFE.Controllers
 
 
         /// <summary>
-        /// DELETE Request
+        /// Deleting a company from the system
         /// </summary>
         /// <param name="BRNumber">Commpany of the Officer that Need to Deleted</param>
         /// <param name="requestedBY">The Commpany that Deleted the Account</param>

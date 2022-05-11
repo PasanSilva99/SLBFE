@@ -96,7 +96,7 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
-        /// POST Request
+        /// Registering a new bureau officer
         /// </summary>
         /// <param name="value">Officer data as an single Officer object</param>
 
@@ -107,7 +107,7 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
-        /// POST Request
+        /// Updating the existing bureau officer
         /// </summary>
         /// <param name="value">Officer data as an single Officer object</param>
         /// <param name="employeeID">Officer data as an single Officer object</param>
@@ -145,7 +145,7 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
-        /// DELETE Request
+        /// Delete the existing bureau officer in the system
         /// </summary>
         /// <param name="nationalID">NationalID of the Officer that Needs to Delete</param>
         /// <param name="requestedBy">The officer that deleted the account</param>

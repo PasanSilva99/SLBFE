@@ -141,7 +141,7 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
-        /// POST Request 
+        /// Registering a new citizen for the system
         /// Register new Citizen
         /// </summary>
         /// <param name="value">Citizen Data as an Single Citizen Object</param>
@@ -152,7 +152,7 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
-        /// POST Request 
+        /// Updating the existing user in the system 
         /// Register new Citizen
         /// </summary>
         /// <param name="value">Citizen Data as an Single Citizen Object</param>
@@ -163,7 +163,7 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
-        /// DELETE Requst
+        /// Delete the existing citizen in the system
         /// Delete a Citizen from the database
         /// </summary>
         /// <param name="nationalID">National ID of the Citizen that needs to be deleted</param>
