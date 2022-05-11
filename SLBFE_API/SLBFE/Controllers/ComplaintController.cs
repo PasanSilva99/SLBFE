@@ -198,10 +198,11 @@ namespace SLBFE.Controllers
         /// <summary>
         /// Reply for the complaint
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Complaint ID</param>
         /// <param name="value"></param>
         /// <returns>0 - Failed, 1 - Success, -1 - Failed due to DB Error, -2 Failed due to input data or db connection error</returns>
         // PUT: api/Complaint/5
+        [Route("api/Complaint/Reply/{id}")]
         public int NewReply(string id, [FromBody]Models.ComplaintReply value)
         {
             return Models.DataStore.ReplyComplaint(id, value);
