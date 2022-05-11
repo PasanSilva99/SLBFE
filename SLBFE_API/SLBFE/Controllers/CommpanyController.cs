@@ -44,9 +44,9 @@ namespace SLBFE.Controllers
         public List<Models.Commpany> Get(string email)
         {
             var list = new List<Models.Commpany>();
-            var companylist = Models.DataStore.GetCommpany();
+            var companylist = Models.DataStore.GetCommpany(); // create list for adding data belongs company email
 
-            if (companylist != null)
+            if (companylist != null) 
             {
                 foreach (var company in companylist)
                 {
@@ -55,7 +55,7 @@ namespace SLBFE.Controllers
                     list.Add(comp);
                 }
 
-                return list.Where(c => c.Email == email).ToList();
+                return list.Where(c => c.Email == email).ToList(); // find every thing belongs emali which givens.
             }
             else
             {
@@ -74,16 +74,17 @@ namespace SLBFE.Controllers
         {
             var citizenList = Models.DataStore.GetCitizens();
 
-            var matchedList = new List<Models.Citizen>();
+            var matchedList = new List<Models.Citizen>(); // create list for store matched citizens
 
             if (citizenList != null && citizenList.Count > 0)
             {
                 foreach (var citizen in citizenList)
                 {
-                    var qualifications = citizen.Qualifications;
-                    if (quary != null && qualifications.Where(q => q.Contains(quary)).Any())
+                    var qualifications = citizen.Qualifications; // store citizen qualifaction to qualifaction veriable  wich come form the citizen models
+
+                    if (quary != null && qualifications.Where(q => q.Contains(quary)).Any()) // matching string comming form para to  qualifications veiabel values
                     {
-                        matchedList.Add(citizen);
+                        matchedList.Add(citizen); 
                     }
                 }
             }
