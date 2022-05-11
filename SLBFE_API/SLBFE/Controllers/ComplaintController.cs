@@ -31,7 +31,15 @@ namespace SLBFE.Controllers
         [HttpGet]
         public List<Models.Complaint> GetComplaints(int page)
         {
+            // This will make 1 as 0
+            // Page 1 is actually 0 in array index
+            page = page - 1; 
             var complaintList = Models.DataStore.GetComplaints();
+
+            if(page < 0)
+            {
+                return new List<Models.Complaint>();
+            }
 
             if (complaintList.Count < page * 10)
             {
@@ -85,7 +93,16 @@ namespace SLBFE.Controllers
         [HttpGet]
         public List<Models.Complaint> GetComplaintsFor(string email, int page)
         {
-            var complaints = Models.DataStore.GetComplaints();
+            var complaints = Models.DataStore.GetComplaints().Where(c => c.Email == email).ToList();
+
+            // This will make 1 as 0
+            // Page 1 is actually 0 in array index
+            page = page - 1;
+
+            if (page < 0)
+            {
+                return new List<Models.Complaint>();
+            }
 
             if (complaints.Count < page * 10)
             {
@@ -104,7 +121,7 @@ namespace SLBFE.Controllers
                 var index = page*10;
                 var valuesLeft = listCount - index; //count 56/ Requested page 5 = 50 / 56-50 = 50
 
-                return complaints.Where(c => c.Email == email).ToList().GetRange(page * 10, valuesLeft);
+                return complaints.GetRange(page * 10, valuesLeft);
             }
             else
             {
@@ -140,7 +157,7 @@ namespace SLBFE.Controllers
         [HttpGet]
         public List<Models.Complaint> GetComplaintsForCompany(string email, int page)
         {
-            var complaints = Models.DataStore.GetComplaints();
+            var complaints = Models.DataStore.GetComplaints().Where(c => c.CompanyID == email).ToList();
 
             if (complaints.Count < page * 10)
             {
@@ -159,11 +176,11 @@ namespace SLBFE.Controllers
                 var index = page * 10;
                 var valuesLeft = listCount - index; //count 56/ Requested page 5 = 50 / 56-50 = 50
 
-                return complaints.Where(c => c.CompanyID == email).ToList().GetRange(page * 10, valuesLeft);
+                return complaints.GetRange(page * 10, valuesLeft);
             }
             else
             {
-                return complaints.Where(c => c.CompanyID == email).ToList().GetRange(page * 10, 10);
+                return complaints.GetRange(page * 10, 10);
             }
         }
 
