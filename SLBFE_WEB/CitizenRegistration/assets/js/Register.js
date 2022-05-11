@@ -341,36 +341,51 @@ function RegisterUser() {
 
   console.log(newCitizen);
 
+  // create teh request 
   var request = new XMLHttpRequest();
 
-  request.open("POST", "https://localhost:44367/api/Citizen");
+  // open the request for register Citizen
+  request.open("POST", "http://20.92.239.229:59413/api/Citizen");
 
-
-
-
+  // In here, First, we validate the inputes 
   if (
     isMandatoryAvailable &&
     isEmailAvaialable &&
     isNIDAvailable &&
     isPhoneAvilable
   ) {
+
+    // Just a feedback for debugging purposes
     console.log("Request Sent");
+
+    // Set the headers as JSON 
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+    // This will send the newCitizen as JOSON Object in the body of the request
     request.send(JSON.stringify(newCitizen));
 
     request.onreadystatechange = function() { // Call a function when the state changes.
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        var validateRequest = new XMLHttpRequest();
+        var validateRequest = new XMLHttpRequest();  
 
-        validateRequest.open('GET', 'https://localhost:44367/api/Citizen');
+        validateRequest.open('GET', 'http://20.92.239.229:59413/api/Citizen');
         
+        // after loading this request
         validateRequest.onload = function() {
+
+          // Lets try to look and see wether the user is successfullyt registred in the server
           var response = validateRequest.response;
           var parsedData = JSON.parse(response);
           console.log(parsedData);
 
+          // This request will return with the user object of there is a user with that
+          // National ID
+          // so, if there is more than 0 that means a object is returned from the server
+          // If that happens, redirect the user to dashboard
           if (parsedData.length > 0){
-            window.location.replace("/Citizen/Dashobard");
+            setCookie("user", parsedData[0].Email, 1);
+            window.location.replace("/Citizen");
+
           }
           else{
             alert("Server Error! Could Not Register. Please try again in few minutes.");

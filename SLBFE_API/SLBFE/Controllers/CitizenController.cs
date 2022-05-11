@@ -12,6 +12,18 @@ namespace SLBFE.Controllers
     /// </summary>
     public class CitizenController : ApiController
     {
+        /// <summary>
+        /// This is intended for debugging purposes. 
+        /// This will return the saved log of this server
+        /// </summary>
+        /// <returns>Complete Log File</returns>
+        [Route("api/ViewLog")]
+        [HttpGet]
+        public string[] ViewLog()
+        {
+            return Models.DataStore.GetLog();
+        }
+
         //// GET: api/Citizen
         //public IEnumerable<string> Get()
         //{
@@ -67,15 +79,54 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
+        /// Retuns the citizen that belongs this email
+        /// </summary>
+        /// <param name="email">Email of the citizen</param>
+        /// <returns></returns>
+        [Route("api/FindCitizen")]
+        [HttpGet]
+        public List<Models.Citizen> GetCirizenFromEmail(string email)
+        {
+            var list = new List<Models.Citizen>();
+            var citizenlist = Models.DataStore.GetCitizens();
+
+            if (citizenlist != null)
+            {
+                foreach (var citizen in citizenlist)
+                {
+                    var cit = citizen;
+                    cit.Password = "";
+                    list.Add(cit);
+                }
+
+                return list.Where(c => c.Email == email).ToList();
+            }
+            else
+            {
+                return new List<Models.Citizen>();
+            }
+        }
+
+        /// <summary>
         /// Validates the user 
         /// </summary>
         /// <param name="data">Login Data</param>
         /// <returns></returns>
-        [Route("api/Citizen/Register")]
-        [HttpGet]
+        [Route("api/Citizen/Login")]
+        [HttpPost]
         public int CitizenLogin([FromBody] Models.LoginData data)
         {
-            return 210;
+            var citizens = Models.DataStore.GetCitizens();
+            var isCitizenValid = citizens.Where(citizen => citizen.Email == data.Email && citizen.Password == data.Passwordhash).Any();
+
+            return isCitizenValid ? 1 : 0;
+        }
+
+        [Route("api/isCitizen")]
+        [HttpGet]
+        public int isCitizen(string email)
+        {
+            return Models.DataStore.IsCitizen(email);
         }
 
         /// <summary>

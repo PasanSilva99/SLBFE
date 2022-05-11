@@ -36,14 +36,26 @@ namespace SLBFE.Controllers
             return list;
         }
 
-        /// <summary>
-        /// POST Request
-        /// </summary>
-        /// <param name="value">commpany data as an single commpany object</param>
-        // POST: api/Commpany
-        public void Post([FromBody] Models.Commpany value)
+        public List<Models.Commpany> Get(string email)
         {
-            Models.DataStore.RegisterCommpany(value);
+            var list = new List<Models.Commpany>();
+            var companylist = Models.DataStore.GetCommpany();
+
+            if (companylist != null)
+            {
+                foreach (var company in companylist)
+                {
+                    var comp = company;
+                    comp.Password = "";
+                    list.Add(comp);
+                }
+
+                return list.Where(c => c.Email == email).ToList();
+            }
+            else
+            {
+                return new List<Models.Commpany>();
+            }
         }
 
 
@@ -51,12 +63,32 @@ namespace SLBFE.Controllers
         /// POST Request
         /// </summary>
         /// <param name="value">commpany data as an single commpany object</param>
+        // POST: api/Commpany
+        public int Post([FromBody] Models.Commpany value)
+        {
+            Models.DataStore.RegisterCommpany(value);
+            return 200;
+        }
+
+
+        /// <summary>
+        /// POST Request 
+        /// </summary>
+        /// <param name="value">commpany data as an single commpany object</param>
         /// <param name="BRNumber">commpany data as an single commpany object</param>
 
         // POST: api/commpany
-        public void Post(string BRNumber, [FromBody] Models.Commpany value)
+        public int Post(string BRNumber, [FromBody] Models.Commpany value)
         {
             Models.DataStore.UpdateCompany(BRNumber, value);
+            return 200;
+        }
+
+        [Route("api/isCommpany")]
+        [HttpGet]
+        public int isCommpany(string email)
+        {
+            return Models.DataStore.IsCommpany(email);
         }
 
 
@@ -66,9 +98,10 @@ namespace SLBFE.Controllers
         /// <param name="BRNumber">Commpany of the officer that need to deleted</param>
         /// <param name="requestedBY">The Commpany that deleted the account</param>
         // DELETE: api/Commpany/5
-        public void Delete(string BRNumber, string requestedBY)
+        public int Delete(string BRNumber, string requestedBY)
         {
             Models.DataStore.DeleteCompany(BRNumber, requestedBY);
+            return 200;
         }
     }
 }

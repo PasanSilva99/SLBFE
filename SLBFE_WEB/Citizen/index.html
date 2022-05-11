@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>SLBFE Citizen Dashboard</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/Button-Green.css" />
+    <link rel="stylesheet" href="assets/css/Button-Purple.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/untitled.css" />
+  </head>
+
+  <body>
+    <div style="height: 100vh; display: flex" id="user-interface">
+      <div class="side-nav">
+        <div class="profile-info">
+          <div class="profile-pic">
+            <img
+              class="img-fluid"
+              id="profileImage"
+              src="assets/img/LilyKi.png"
+              style="border-radius: 100%"
+            />
+          </div>
+          <div class="profile-details">
+            <span id="profileName">Lily Pichu</span
+            ><span id="profileDescription">Voice Actor</span>
+          </div>
+        </div>
+        <div class="nav-links">
+          <div class="nav-item-active">
+            <div class="nav-item-indicator-active"></div>
+            <div class="nav-item-icon">
+              <img
+                class="img-fluid img-nav-item"
+                src="assets/img/DashboardActive.png"
+                tag="Dashboard"
+              />
+            </div>
+            <div class="nav-item-name"><span>Dashboard</span></div>
+          </div>
+          <div
+            class="nav-item-rest"
+            onclick="window.location ='Interviews.html';"
+          >
+            <div class="nav-item-indicator-rest"></div>
+            <div class="nav-item-icon">
+              <img
+                class="img-fluid img-nav-item"
+                src="assets/img/InterviewRest.png"
+                tag="Dashboard"
+              />
+            </div>
+            <div class="nav-item-name"><span>Interviews</span></div>
+          </div>
+          <div
+            class="nav-item-rest"
+            onclick="window.location = 'Feedback.html';"
+          >
+            <div class="nav-item-indicator-rest"></div>
+            <div class="nav-item-icon">
+              <img
+                class="img-fluid img-nav-item"
+                src="assets/img/FeedbackRest.png"
+                tag="Dashboard"
+              />
+            </div>
+            <div class="nav-item-name"><span>Feedback</span></div>
+          </div>
+        </div>
+        <div class="logo">
+          <img class="img-fluid" id="logo-side" src="assets/img/SLBFE.png" />
+        </div>
+      </div>
+      <div class="page-content">
+        <div class="greeting-and-settings">
+          <div class="d-flex flex-row">
+            <div class="hamburger">
+              <div class="burger-layer"></div>
+              <div class="burger-layer" onclick="openMenu()"></div>
+              <div class="burger-layer"></div>
+            </div>
+            <h4 id="greeting">Hello, Lily Pichu<br /></h4>
+          </div>
+          <div>
+            <img
+              class="notif-button"
+              onmouseover="this.src='assets/img/NotifActive.png';"
+              onmouseout="this.src='assets/img/NotifRest.png';"
+              src="assets/img/NotifRest.png"
+              style="width: 30px; height: 30px"
+            /><img class="profile-button" src="assets/img/LilyKi.png" />
+          </div>
+        </div>
+        <div class="content">
+          <div class="glance">
+            <div class="cards">
+              <div class="card-primary">
+                <div class="card-content">
+                  <span class="card-title">Company Reviews<br /></span
+                  ><span class="card-value">10</span>
+                </div>
+              </div>
+              <div class="card-secondary">
+                <div class="card-content">
+                  <span class="card-title">Selected for Interview<br /></span
+                  ><span class="card-value">04</span>
+                </div>
+              </div>
+            </div>
+            <div class="chart">
+              <div class="chart-description">
+                <h5>2.6k Profile Views in the last 30 days<br /></h5>
+                <span
+                  >Here shows how many companies view your profile<br /><br
+                /></span>
+              </div>
+              <canvas id="views-chart" class="chart-content"></canvas>
+            </div>
+          </div>
+          <div class="complaints">
+            <h5>Complaints &amp; Feedback</h5>
+            <div class="complaints-scroll" id="complaints-scroll">
+              <div class="complaint">
+                <div class="complaint-profile">
+                  <img
+                    class="img-fluid complaint-profile-image"
+                    src="assets/img/LilyKi.png"
+                  />
+                </div>
+                <div class="complaint-content">
+                  <div class="complaint-username-date">
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-username"
+                          >John Lenin&nbsp;</span
+                        ></a
+                      ><span class="complaint-date">4/17/2022</span>
+                    </div>
+                    <div>
+                      <a href="#"
+                        ><span class="complaint-company">ABC Company</span></a
+                      >
+                    </div>
+                  </div>
+                  <div class="complaint-body">
+                    <p>
+                      The roles of employees are ambiguously-defined. They are
+                      not clear about preciese roles and responsibilities of the
+                      employees.<br />
+                    </p>
+                  </div>
+                  <div class="complaint-time-wrap">
+                    <span class="complaint-time">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="loading-screen">
+      <div class="lds-ripple"><div></div><div></div></div>
+      <div>Loading...</div>
+    </div>
+    <script src="/assets/js/ManageCookies.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="assets/js/SideNav.js"></script>
+    <script src="assets/js/viwschart.js"></script>
+    <script src="/Citizen/assets/js/complaint.js"></script>
+    <script src="/Citizen/assets/js/dashboard.js"></script>
+    
+  </body>
+</html>

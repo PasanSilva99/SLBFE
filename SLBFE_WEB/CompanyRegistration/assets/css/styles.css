@@ -1,3 +1,9 @@
+.error{
+  margin-top: -1em;
+  color: crimson;
+  display: block;
+}
+
 body {
   background: linear-gradient(107.54deg, rgba(109, 50, 124, 0.2) 0%, rgba(0, 161, 186, 0.2) 46.67%, rgba(54, 196, 134, 0.2) 100%), #fff;
   overflow: hidden;

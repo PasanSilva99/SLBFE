@@ -21,6 +21,15 @@ namespace SLBFE.Models
         public static string DatabaseName = "SLBFE.db";
 
         /// <summary>
+        /// This will return the saved log file
+        /// </summary>
+        /// <returns></returns>
+        internal static string[] GetLog()
+        {
+            return File.ReadAllLines(LogFilePath);
+        }
+
+        /// <summary>
         /// Path of the database
         /// </summary>
         public static string DatabasePath = Path.Combine("SLBFE_Data", DatabaseName);
@@ -30,6 +39,11 @@ namespace SLBFE.Models
         /// Physical log to the API requests and actions
         /// </summary>
         public static string LogFilePath = Path.Combine("SLBFE_Data", "api_log.txt");
+
+        internal static int NewComplaint(Complaint value)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Logs the input into debug and to text file
@@ -46,16 +60,22 @@ namespace SLBFE.Models
             // [5/2/2022 6:53:21 PM] >> text to log 
         }
 
+
         /// <summary>
         /// This initialize the database
         /// </summary>
         public static void InitializeDatabase()
         {
-
+            // this will create the file if not exists to save the data
             Directory.CreateDirectory("SLBFE_Data");
 
-            if (!File.Exists(DatabasePath))
-                File.Create(DatabasePath);
+            if (!File.Exists(DatabasePath))  // check wether the database file exissts
+                File.Create(DatabasePath);  // if it is not there, Create it. 
+
+            // As for the above lines, the database will be autometically created within the forst run. 
+            // If it fails at any point, Please Leave a message in discord. I will look into it. 
+            // put that message on #project-discussion not in the #resources\
+            // in the Tecxick Study group Server/
 
             using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
             {
@@ -113,12 +133,43 @@ namespace SLBFE.Models
                         "AddressL2 TEXT, " +
                         "StateProvince TEXT, " +
                         "City TEXT, " +
-                        "ZipCode TEXT );";
+                        "ZipCode TEXT );" +
+                    "CREATE TABLE IF NOT EXISTS " +
+                    "UserValidation (" +
+                        "NationalID TEXT, " +  // Dational ID of the user that needs to be validated
+                        "isApproved TEXT, " +  // Id this user approved?
+                        "Changes TEXT, " +  // Is there any changes that needs to be done?
+                        "EmoployeeID TEXT );" +  // ID of the employee that reviwed this user account
+                    "CREATE TABLE IF NOT EXISTS " +
+                    "Feedback (" +
+                        "ID TEXT, " +  // Auto generated ID for this Feedbaclk
+                        "Email TEXT, " +  // Email of the user that posted this
+                        "Username TEXT, " +  // User name of the user that posted this
+                        "isComplaint INTEGER, " +  // This ithis a complaint?
+                        "CompanyID TEXT, " +  // Company ID which is related to this feedback
+                        "CompanyName TEXT, " +  // Company Name which is related to this feedback
+                        "SentDate TEXT, " +  // The date that pugblished this feedback
+                        "Content TEXT );"+  // Content of the feedback
+                    "CREATE TABLE IF NOT EXISTS " +
+                    "FeedbackReply (" +
+                        "FeedbackID TEXT, " +  // Which Feedback that this reply belongs to
+                        "Email TEXT, " +  // Email of the user that posted this
+                        "Username TEXT, " +  // User name of the user that posted this
+                        "SentDate TEXT, " +  // Date thst is this replay added
+                        "Content TEXT );"+  // Content of the reply
+                    "CREATE TABLE IF NOT EXISTS " +
+                    "Interview (" +
+                        "InterviewID TEXT, " +  // Auto generated ID of teh Interview
+                        "CompanyID TEXT, " +  // ID of the company that posted this interview
+                        "CompanyName TEXT, " +  // Name of the company that posted this interview
+                        "UserEmail TEXT, " +  // EMail of the user that should receive this 
+                        "SentDate TEXT, " +  // The date that sent this interview
+                        "State TEXT, " +  // Is accepted or not 
+                        "Content TEXT );";  // Description and any content that is related to this interview post
 
 
                     SQLiteCommand initCommand = new SQLiteCommand(dbScript, con);
                     initCommand.ExecuteNonQuery();
-
 
                     con.Close();
 
@@ -137,6 +188,30 @@ namespace SLBFE.Models
             }
         }
 
+        internal static int IsCitizen(string email)
+        {
+            var list = new List<Citizen>();
+            var citizenlist = GetCitizens();
+
+            if (citizenlist != null)
+            {
+                foreach (var citizen in citizenlist)
+                {
+                    var cit = citizen;
+                    cit.Password = "";
+                    list.Add(cit);
+                }
+
+                return list.Where(c => c.Email == email).ToList().Count();
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
+        #region Bureau Functions
 
         /// <summary>
         /// Get all Bureau Officers from the database
@@ -392,6 +467,150 @@ namespace SLBFE.Models
         }
 
         /// <summary>
+        /// Updates the validation request of the citizen
+        /// </summary>
+        /// <param name="validationData"></param>
+        /// <returns></returns>
+        public static int ValidateCitizen(UserValidation validationData)
+        {
+            Log($"Validation Request Update For {validationData.NationalID}");
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                con.Open();
+                string insertQuarry = "" +
+                    "UPDATE " +
+                        "UserValidation " +
+                    "SET " +
+                        "isApproved=@isapproved, " +
+                        "@Changes=changes, " +
+                        "EmoployeeID=@employeeID " +
+                    "WHERE " +
+                        "NationalID=@nationalID;";
+
+                SQLiteCommand insertCommand = new SQLiteCommand(insertQuarry, con);
+                insertCommand.Parameters.AddWithValue("@nationalID", validationData.NationalID);
+                insertCommand.Parameters.AddWithValue("@isapproved", validationData.IsApproved ? 1 : 0);
+                insertCommand.Parameters.AddWithValue("@changes", validationData.Changes);
+                insertCommand.Parameters.AddWithValue("@employeeID", validationData.EmployeeID);
+
+                var affRows = insertCommand.ExecuteNonQuery();
+
+                if (affRows > 0)
+                {
+                    Log($"Validation Request Update For {validationData.NationalID} Saved Successfully");
+                    return 1;
+                }
+            }
+
+
+            // The is an un identified Error
+            Log("Unrecognized Error in the user validation data");
+            return 0;
+        }
+
+        /// <summary>
+        /// Updates the validation request of the citizen
+        /// </summary>
+        /// <param name="nationalID"></param>
+        /// <returns></returns>
+        private static int ValidateCitizen(string nationalID)
+        {
+            Log($"Validation Request Update For {nationalID}");
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                con.Open();
+                string insertQuarry = "" +
+                    "UPDATE " +
+                        "UserValidation " +
+                    "SET " +
+                        "isApproved=@isapproved, " +
+                        "@Changes=changes, " +
+                        "EmoployeeID=@employeeID " +
+                    "WHERE " +
+                        "NationalID=@nationalID;";
+
+                SQLiteCommand insertCommand = new SQLiteCommand(insertQuarry, con);
+                insertCommand.Parameters.AddWithValue("@nationalID", nationalID);
+                insertCommand.Parameters.AddWithValue("@isapproved", 0);
+                insertCommand.Parameters.AddWithValue("@changes", "");
+                insertCommand.Parameters.AddWithValue("@employeeID", "");
+
+                var affRows = insertCommand.ExecuteNonQuery();
+
+                if (affRows > 0)
+                {
+                    Log($"Validation Request Update For {nationalID} Saved Successfully");
+                    return 1;
+                }
+            }
+
+
+            // The is an un identified Error
+            Log("Unrecognized Error in the user validation data");
+            return 0;
+        }
+
+        private static int DeleteValidationRequest(string nationalID, string employeeID)
+        {
+            Log($"Validate Request Data Deletion Requested for account {nationalID} by {employeeID}");
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                con.Open();
+                string insertQuarry = "" +
+                    "DELETE FROM " +
+                        "UserValidation " +
+                    "WHERE " +
+                        "NationalID=@nationalID;";
+
+                SQLiteCommand insertCommand = new SQLiteCommand(insertQuarry, con);
+                insertCommand.Parameters.AddWithValue("@nationalID", nationalID);
+
+                var affRows = insertCommand.ExecuteNonQuery();
+
+                if (affRows > 0)
+                {
+                    Log($"Successfully Deleted Validation Data for {nationalID} as requested by {employeeID}");
+                    return 1;
+                }
+            }
+
+
+            // The is an un identified Error
+            Log("Unrecognized Error in the user validation data");
+            return 0;
+        }
+
+        internal static int IsOfficer(string email)
+        {
+            var list = new List<Bureau>();
+            var officerlist = GetBureaus();
+
+            if (officerlist != null)
+            {
+                foreach (var officers in officerlist)
+                {
+                    var officer = officers;
+                    officer.Password = "";
+                    list.Add(officer);
+                }
+
+                return list.Where(b => b.Email == email).ToList().Count();
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
+        #endregion
+
+        #region Citizen Functions
+
+        /// <summary>
         /// Get all Citizens from the database
         /// </summary>
         /// <returns>Retuns all the users as a list of Citizens</returns>
@@ -568,6 +787,9 @@ namespace SLBFE.Models
                     if (affRows > 0)  // if it is an successfull registration
                     {
                         Log($"Successfully Registred User {citizen.Email}");
+
+                        NewValidationRequest(citizen.NationalID);
+
                     }
 
                     return affRows > 0 ? affRows : -1;  // if affected rows is larger than 0 return the affected rows number else return -1 in indicate it is an error
@@ -694,6 +916,7 @@ namespace SLBFE.Models
                     if (affRows > 0)  // if it is an successfull registration
                     {
                         Log($"Successfully Updated User {citizen.Email}");
+                        ValidateCitizen(citizen.NationalID);
                     }
 
                     return affRows > 0 ? affRows : -1;  // if affected rows is larger than 0 return the affected rows number else return -1 in indicate it is an error
@@ -739,6 +962,7 @@ namespace SLBFE.Models
                     if (affRows > 0)  // if it is an successfull deletion
                     {
                         Log($"Successfully Deleted User {nationalID} for the Request by {requestedBy}");
+                        DeleteValidationRequest(nationalID, requestedBy);
                     }
 
                     return affRows > 0 ? affRows : -1;
@@ -760,6 +984,33 @@ namespace SLBFE.Models
             return -2;
         }
 
+        private static bool NewValidationRequest(string nationalID)
+        {
+            Log($"New Validation Request For {nationalID}");
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                con.Open();
+                string insertQuarry = "INSERT INTO UserValidation VALUES(@nationalID, @isapproved, @changes, @employeeID)";
+                SQLiteCommand insertCommand = new SQLiteCommand(insertQuarry, con);
+                insertCommand.Parameters.AddWithValue("@nationalID", nationalID);
+                insertCommand.Parameters.AddWithValue("@isapproved", 0);
+                insertCommand.Parameters.AddWithValue("@changes", "");
+                insertCommand.Parameters.AddWithValue("@employeeID", "");
+
+                var affRows = insertCommand.ExecuteNonQuery();
+
+                if (affRows > 0)
+                {
+                    Log($"New Validation Request For {nationalID} Saved Successfully");
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        #endregion
 
         #region Commpany DB Functions
 
@@ -891,6 +1142,31 @@ namespace SLBFE.Models
         }
         #endregion
 
+        internal static int IsCommpany(string email)
+        {
+            var list = new List<Commpany>();
+            var commpanylist = GetCommpany();
+
+            if (commpanylist != null)
+            {
+                foreach (var commpanies in commpanylist)
+                {
+                    var commpany = commpanies;
+                    commpany.Password = "";
+                    list.Add(commpany);
+                }
+
+                return list.Where(c => c.Email == email).ToList().Count();
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
+
+
         #region Company Detail Update
         public static int UpdateCompany(string BRNumber, Commpany company)
         {
@@ -1002,10 +1278,78 @@ namespace SLBFE.Models
             Log("Uncaught Error on company deletion");
             return -2;
         }
+
+
         #endregion
 
         #endregion
 
+        #region Complaints Functions
 
+        internal static List<Complaint> GetComplaints()
+        {
+            var feedbackList = new List<Complaint>();
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand selectCommand = new SQLiteCommand();
+                    selectCommand.CommandText = "SELECT * FROM Feedback";
+                    selectCommand.Connection = con;
+
+                    var reader = selectCommand.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        feedbackList.Add(
+                             new Complaint()
+                             {
+                                 ComplaintID = reader.GetString(0),
+                                 Email = reader.GetString(1),
+                                 Username = reader.GetString(2),
+                                 isComplaint = reader.GetInt32(3) == 0 ? false :true,
+                                 CompanyID = reader.GetString(4),
+                                 CompanyName = reader.GetString(5),
+                                 SentDate = DateTime.Parse(reader.GetString(6)),
+                                 Content = reader.GetString(7)
+                             });
+                    }
+
+
+                    return feedbackList;
+
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    Log("Complaints Get Request Failed! (Database)");
+                    Log(ex.ToString());
+                }
+
+                Log("Uncaught Error on Fetching Complaints!");
+                return null;
+            }
+        }
+
+
+        internal static int ReplyComplaint(string id, ComplaintReply value)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static int DeleteComplaint(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static int DeleteComplaintReply(string id, string replyID)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

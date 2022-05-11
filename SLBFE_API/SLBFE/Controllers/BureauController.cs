@@ -118,14 +118,14 @@ namespace SLBFE.Controllers
             Models.DataStore.UpdateOfficer(employeeID, value);
         }
 
-
-
         /// <summary>
         /// Updates the Citizen's Validation
         /// </summary>
         /// <param name="validationData"></param>
         /// <returns>Returns the Validated Citizen</returns>
         // POST: api/Bureau
+        [Route("api/ValidateUser")]
+        [HttpPost]
         public int Post([FromBody] Models.UserValidation validationData)
         {
             return Models.DataStore.ValidateCitizen(validationData);
