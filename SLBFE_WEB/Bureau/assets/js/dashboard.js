@@ -3,7 +3,9 @@ function getUser(){
     document.getElementById("loading-screen").style.display = "flex";
 
     //let userEmail = getCookie("user");
+    //let userEmail = getCookie("officer");
     let userEmail = "sandarudsilva@gmail.com";
+
 
     // if the userCookie Exists
     if(userEmail != null && userEmail != "")
