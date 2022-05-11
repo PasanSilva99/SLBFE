@@ -26,7 +26,7 @@ namespace SLBFE.Controllers
         /// Gets complaint as 10 for a page
         /// </summary>
         /// <param name="page">Page Number</param>
-        /// <returns>10 objects that bel;ongs to that page</returns>
+        /// <returns>10 objects that belongs to that page</returns>
         [Route("api/Complaint/Page/{page:int}")]
         [HttpGet]
         public List<Models.Complaint> GetComplaints(int page)
@@ -72,7 +72,7 @@ namespace SLBFE.Controllers
         /// where the email is equal
         /// </summary>
         /// <param name="email">Email of the User</param>
-        /// <returns></returns>
+        /// <returns>Returns a list of complaint list</returns>
         // GET: api/Complaint/email.sample.com
         public List<Models.Complaint> GetComplaintsFor(string email)
         {
@@ -87,7 +87,7 @@ namespace SLBFE.Controllers
         /// </summary>
         /// <param name="email">Email of the User</param>
         /// <param name="page">Page Number</param>
-        /// <returns></returns>
+        /// <returns>Returns a complaint list </returns>
         // GET: api/Complaint/email.sample.com
         [Route("api/Complaints/{email}/{page}")]
         [HttpGet]
@@ -130,11 +130,11 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
-        /// This will return the complaints as a list
+        /// This will return the complaints for company as a list
         /// where the email is equal
         /// </summary>
         /// <param name="email">Email of the User</param>
-        /// <returns></returns>
+        /// <returns>Returns a list of complaints</returns>
         // GET: api/Complaint/email.sample.com
         [Route("api/Company/Complaints")]
         [HttpGet]
@@ -151,7 +151,7 @@ namespace SLBFE.Controllers
         /// </summary>
         /// <param name="email">Email of the User</param>
         /// <param name="page">Page Number</param>
-        /// <returns></returns>
+        /// <returns>Returns a list of complaints for page</returns>
         // GET: api/Complaint/email.sample.com
         [Route("api/Company/Complaints/{email}/{page}")]
         [HttpGet]
