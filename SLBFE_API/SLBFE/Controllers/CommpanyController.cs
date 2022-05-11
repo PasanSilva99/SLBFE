@@ -58,6 +58,43 @@ namespace SLBFE.Controllers
             }
         }
 
+        /// <summary>
+        /// Search Citizen by qualifications
+        /// </summary>
+        /// <param name="quary">Qualification quary</param>
+        /// <returns></returns>
+        [Route("api/SearchCitizen")]
+        [HttpGet]
+        public List<Models.Citizen> SearchCitizens(string quary)
+        {
+            var citizenList = Models.DataStore.GetCitizens();
+
+            var matchedList = new List<Models.Citizen>();
+
+            if (citizenList != null && citizenList.Count > 0)
+            {
+                foreach(var citizen in citizenList)
+                {
+                    var qualifications = citizen.Qualifications;
+                    foreach (var qualification in qualifications)
+                    {
+                        if (string.IsNullOrEmpty(qualification))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (qualification.ToLower().Trim().Contains(quary.ToLower().Trim()))
+                            {
+                                matchedList.Add(citizen);
+                            }
+                        }
+                    }
+                }
+            }
+            return matchedList;
+        }
+
 
         /// <summary>
         /// POST Request
