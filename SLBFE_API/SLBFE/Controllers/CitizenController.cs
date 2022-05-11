@@ -33,7 +33,7 @@ namespace SLBFE.Controllers
         /// <summary>
         /// Gets a list of available Citizens
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns a List of Available Citizens</returns>
         public List<Models.Citizen> Get()
         {
             var list = new List<Models.Citizen>();
@@ -56,6 +56,11 @@ namespace SLBFE.Controllers
             }
         }
 
+        /// <summary>
+        /// Find the Citizens According to the NationalID
+        /// </summary>
+        /// <param name="nationalID"></param>
+        /// <returns>Return the Citizen Details that Relate with the Given NationalID </returns>
         public List<Models.Citizen> Get(string nationalID)
         {
             var list = new List<Models.Citizen>();
@@ -79,10 +84,10 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
-        /// Retuns the citizen that belongs this email
+        /// Find the Citizen that Belongs this Email
         /// </summary>
         /// <param name="email">Email of the citizen</param>
-        /// <returns></returns>
+        /// <returns>Return the Citizen Details that Relate with the Given Email </returns>
         [Route("api/FindCitizen")]
         [HttpGet]
         public List<Models.Citizen> GetCirizenFromEmail(string email)
@@ -108,10 +113,10 @@ namespace SLBFE.Controllers
         }
 
         /// <summary>
-        /// Validates the user 
+        /// Validates the Citizen Login
         /// </summary>
         /// <param name="data">Login Data</param>
-        /// <returns></returns>
+        /// <returns>Returns Whether Citizen is Vaild or Invalid  </returns>
         [Route("api/Citizen/Login")]
         [HttpPost]
         public int CitizenLogin([FromBody] Models.LoginData data)
@@ -122,6 +127,12 @@ namespace SLBFE.Controllers
             return isCitizenValid ? 1 : 0;
         }
 
+        
+        /// <summary>
+        /// Checks Whether the Citizen is a Citizen
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>Returns the User is a Citizen or not</returns>
         [Route("api/isCitizen")]
         [HttpGet]
         public int isCitizen(string email)
