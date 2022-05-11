@@ -28,9 +28,9 @@ namespace SLBFE.Controllers
 
             foreach (var commpany in commpanyList)
             {
-                var comp = commpany;
+                var comp = commpany; 
                 comp.Password = "";
-                list.Add(comp);
+                list.Add(comp); // set company name and things to company list
             }
 
             return list;
@@ -78,22 +78,12 @@ namespace SLBFE.Controllers
 
             if (citizenList != null && citizenList.Count > 0)
             {
-                foreach(var citizen in citizenList)
+                foreach (var citizen in citizenList)
                 {
                     var qualifications = citizen.Qualifications;
-                    foreach (var qualification in qualifications)
+                    if (quary != null && qualifications.Where(q => q.Contains(quary)).Any())
                     {
-                        if (string.IsNullOrEmpty(qualification))
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            if (qualification.ToLower().Trim().Contains(quary.ToLower().Trim()))
-                            {
-                                matchedList.Add(citizen);
-                            }
-                        }
+                        matchedList.Add(citizen);
                     }
                 }
             }
