@@ -17,9 +17,9 @@ namespace SLBFE.Controllers
 
 
         /// <summary>
-        /// Gets a list of available Commpany
+        /// Gets a List of Available Commpanies
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns a List of Companies in the System</returns>
         // GET: api/Commpany/5
         public List<Models.Commpany> Get()
         {
@@ -36,6 +36,11 @@ namespace SLBFE.Controllers
             return list;
         }
 
+        /// <summary>
+        /// Get a Company Belongs to Entered Email 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>Return the Related Company Belongs to that Entered Email If Exist</returns>
         public List<Models.Commpany> Get(string email)
         {
             var list = new List<Models.Commpany>();
@@ -62,7 +67,7 @@ namespace SLBFE.Controllers
         /// <summary>
         /// POST Request
         /// </summary>
-        /// <param name="value">commpany data as an single commpany object</param>
+        /// <param name="value">Commpany Data as an Single Commpany Object</param>
         // POST: api/Commpany
         public int Post([FromBody] Models.Commpany value)
         {
@@ -74,8 +79,8 @@ namespace SLBFE.Controllers
         /// <summary>
         /// POST Request 
         /// </summary>
-        /// <param name="value">commpany data as an single commpany object</param>
-        /// <param name="BRNumber">commpany data as an single commpany object</param>
+        /// <param name="value">Commpany Data as an Single Commpany Object</param>
+        /// <param name="BRNumber">Commpany Data as an Single Commpany Object</param>
 
         // POST: api/commpany
         public int Post(string BRNumber, [FromBody] Models.Commpany value)
@@ -83,6 +88,12 @@ namespace SLBFE.Controllers
             Models.DataStore.UpdateCompany(BRNumber, value);
             return 200;
         }
+
+        /// <summary>
+        /// Check Whether Entered Company is a Company 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>Return the Company is that Exist </returns>
 
         [Route("api/isCommpany")]
         [HttpGet]
@@ -95,8 +106,8 @@ namespace SLBFE.Controllers
         /// <summary>
         /// DELETE Request
         /// </summary>
-        /// <param name="BRNumber">Commpany of the officer that need to deleted</param>
-        /// <param name="requestedBY">The Commpany that deleted the account</param>
+        /// <param name="BRNumber">Commpany of the Officer that Need to Deleted</param>
+        /// <param name="requestedBY">The Commpany that Deleted the Account</param>
         // DELETE: api/Commpany/5
         public int Delete(string BRNumber, string requestedBY)
         {
