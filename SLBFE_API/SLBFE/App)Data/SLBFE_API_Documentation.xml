@@ -714,6 +714,14 @@
             <param name="value">Complaint Object</param>
             <returns>Status 1 for success 0 for failed</returns>
         </member>
+        <member name="M:SLBFE.Controllers.ComplaintController.GetReplies(System.String)">
+            <summary>
+            Gets the replies for Feedback
+            </summary>
+            <param name="complaintID">Complaint ID</param>
+            <returns>All the replies that is related the complaint</returns>
+            
+        </member>
         <member name="M:SLBFE.Controllers.ComplaintController.NewReply(SLBFE.Models.ComplaintReply)">
             <summary>
             Reply for the complaint

@@ -1330,6 +1330,53 @@ namespace SLBFE.Models
             }
         }
 
+        internal static List<ComplaintReply> GetComplaintReplies(string complaintID)
+        {
+            var feedbackReplyList = new List<ComplaintReply>();
+
+            using (SQLiteConnection con = new SQLiteConnection($"Data Source={DatabasePath}; Version=3;"))
+            {
+                try
+                {
+                    con.Open();
+                    SQLiteCommand selectCommand = new SQLiteCommand();
+                    selectCommand.CommandText = "SELECT * FROM FeedbackReply WHERE FeedbackID=@feedbackID";
+                    selectCommand.Connection = con;
+                    selectCommand.Parameters.AddWithValue("@feedbackID", complaintID);
+
+                    var reader = selectCommand.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        feedbackReplyList.Add(
+                             new ComplaintReply()
+                             {
+                                 ReplyID = reader.GetString(0),
+                                 FeedbackID = reader.GetString(1),
+                                 Email = reader.GetString(2),
+                                 Username = reader.GetString(3),
+                                 SentDate = DateTime.Parse(reader.GetString(4)),
+                                 Content = reader.GetString(5)
+                             });
+                    }
+
+
+                    return feedbackReplyList;
+
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    Log("Complaint Replies Get Request Failed! (Database)");
+                    Log(ex.ToString());
+                }
+
+                Log("Uncaught Error on Fetching Complaint Replies!");
+                return new List<ComplaintReply>();
+            }
+        }
+
         /// <summary>
         /// Adds new complaint to the database 
         /// </summary>
